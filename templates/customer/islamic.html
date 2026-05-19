@@ -96,6 +96,37 @@
     max-width:520px;margin:0 auto 16px;backdrop-filter:blur(10px);
 }
 
+.city-search-wrap{position:relative;margin-bottom:10px}
+.city-search-input{
+    width:100%;padding:10px 38px 10px 14px;
+    background:rgba(255,255,255,.06);border:1px solid var(--iborder);
+    border-radius:11px;color:#e8dfc8;font-size:13px;outline:none;
+    transition:border-color .25s,background .25s;
+}
+.city-search-input::placeholder{color:#7a6a50}
+.city-search-input:focus{border-color:var(--igold);background:rgba(255,255,255,.09)}
+.city-search-icon{position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:15px;pointer-events:none;color:#9a8060}
+.city-dropdown{
+    position:absolute;top:calc(100% + 4px);left:0;right:0;z-index:200;
+    background:#13260f;border:1px solid var(--iborder);border-radius:11px;
+    max-height:200px;overflow-y:auto;display:none;
+    box-shadow:0 8px 32px rgba(0,0,0,.6);
+}
+.city-dropdown.open{display:block}
+.city-option{
+    padding:10px 14px;cursor:pointer;font-size:13px;color:#d4c99a;
+    border-bottom:1px solid rgba(255,255,255,.04);transition:background .15s;
+}
+.city-option:last-child{border-bottom:none}
+.city-option:hover,.city-option.highlighted{background:rgba(201,168,76,.12);color:#fff}
+.city-option .co-coords{font-size:10px;color:#7a6a50;margin-top:1px}
+.city-use-location{
+    display:flex;align-items:center;gap:7px;width:100%;
+    background:rgba(26,122,74,.12);border:1px solid rgba(26,122,74,.25);
+    border-radius:9px;color:#6ee7a0;font-size:12px;font-weight:600;
+    padding:8px 12px;cursor:pointer;margin-bottom:8px;transition:all .25s;
+}
+.city-use-location:hover{background:rgba(26,122,74,.22);border-color:var(--ig)}
 .loc-bar{
     text-align:center;padding:10px 14px;border-radius:10px;
     margin-bottom:16px;font-size:12px;
@@ -247,7 +278,24 @@
 
 <div id="tab-prayer" class="tab-panel active">
     <div class="card">
-        <div class="loc-bar" id="loc-bar">📡 Requesting your location…</div>
+        <button class="city-use-location" id="gps-btn" onclick="useGPS()">
+            <span>📡</span> Use My Current Location (GPS)
+        </button>
+        <div class="city-search-wrap" id="city-search-wrap">
+            <input
+                type="text"
+                class="city-search-input"
+                id="city-input"
+                placeholder="Search Ethiopian city…"
+                autocomplete="off"
+                oninput="filterCities(this.value)"
+                onkeydown="cityKeyNav(event)"
+                onfocus="openDropdown()"
+            >
+            <span class="city-search-icon">🔍</span>
+            <div class="city-dropdown" id="city-dropdown"></div>
+        </div>
+        <div class="loc-bar" id="loc-bar">📍 Addis Ababa (default)</div>
         <div class="clock-wrap">
             <div class="clock-big" id="clock-now">--:--:--</div>
             <div class="clock-date"  id="clock-date">--</div>
@@ -350,6 +398,10 @@ const RAMADAN_ACTIVE = {{ 'true' if ramadan_active else 'false' }};
 
 const DEFAULT_LAT = 8.9806;
 const DEFAULT_LNG = 38.7578;
+
+const CITIES = {{ cities | tojson }};
+let _cityHighlight = -1;
+let _cityFiltered  = [];
 
 let _times  = null;
 let _qbear  = null;
@@ -492,22 +544,116 @@ function loadQibla(lat, lng) {
         });
 }
 
-function startLocation() {
-    loadPrayerTimes(DEFAULT_LAT, DEFAULT_LNG);
-    loadQibla(DEFAULT_LAT, DEFAULT_LNG);
-    _lat = DEFAULT_LAT; _lng = DEFAULT_LNG;
+function filterCities(q) {
+    _cityHighlight = -1;
+    q = q.trim().toLowerCase();
+    _cityFiltered = q.length === 0
+        ? CITIES.slice(0, 30)
+        : CITIES.filter(c => c.name.toLowerCase().includes(q));
+    renderDropdown();
+}
 
-    if (!navigator.geolocation) return;
+function renderDropdown() {
+    const dd = document.getElementById('city-dropdown');
+    if (_cityFiltered.length === 0) { dd.classList.remove('open'); return; }
+    dd.innerHTML = _cityFiltered.map((c, i) =>
+        `<div class="city-option ${i===_cityHighlight?'highlighted':''}"
+            onmousedown="selectCity(${i})"
+            onmouseover="hoverCity(${i})">
+            ${c.name}
+            <div class="co-coords">${c.lat.toFixed(4)}°N, ${c.lng.toFixed(4)}°E</div>
+        </div>`
+    ).join('');
+    dd.classList.add('open');
+}
+
+function openDropdown() {
+    if (_cityFiltered.length === 0) filterCities('');
+    else renderDropdown();
+}
+
+function closeDropdown() {
+    document.getElementById('city-dropdown').classList.remove('open');
+}
+
+function hoverCity(i) {
+    _cityHighlight = i;
+    renderDropdown();
+}
+
+function selectCity(i) {
+    const c = _cityFiltered[i];
+    if (!c) return;
+    document.getElementById('city-input').value = c.name;
+    closeDropdown();
+    _lat = c.lat; _lng = c.lng;
+    const bar = document.getElementById('loc-bar');
+    bar.className = 'loc-bar ok';
+    bar.textContent = `📍 ${c.name}`;
+    loadPrayerTimes(c.lat, c.lng);
+    loadQibla(c.lat, c.lng);
+    if (_calData) loadCalendar();
+}
+
+function cityKeyNav(e) {
+    const dd = document.getElementById('city-dropdown');
+    if (!dd.classList.contains('open')) { if (e.key==='Enter'||e.key==='ArrowDown') { openDropdown(); } return; }
+    if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        _cityHighlight = Math.min(_cityHighlight + 1, _cityFiltered.length - 1);
+        renderDropdown();
+        dd.querySelectorAll('.city-option')[_cityHighlight]?.scrollIntoView({block:'nearest'});
+    } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        _cityHighlight = Math.max(_cityHighlight - 1, 0);
+        renderDropdown();
+        dd.querySelectorAll('.city-option')[_cityHighlight]?.scrollIntoView({block:'nearest'});
+    } else if (e.key === 'Enter') {
+        e.preventDefault();
+        if (_cityHighlight >= 0) selectCity(_cityHighlight);
+        else if (_cityFiltered.length > 0) selectCity(0);
+    } else if (e.key === 'Escape') {
+        closeDropdown();
+    }
+}
+
+document.addEventListener('click', e => {
+    if (!document.getElementById('city-search-wrap').contains(e.target)) closeDropdown();
+});
+
+function useGPS() {
+    const btn = document.getElementById('gps-btn');
+    btn.textContent = '📡 Requesting GPS…';
+    btn.disabled = true;
+    if (!navigator.geolocation) {
+        btn.textContent = '⚠️ GPS not supported';
+        btn.disabled = false;
+        return;
+    }
     navigator.geolocation.getCurrentPosition(
         pos => {
             _lat = pos.coords.latitude;
             _lng = pos.coords.longitude;
+            document.getElementById('city-input').value = '';
+            closeDropdown();
+            btn.textContent = '✅ Using GPS location';
+            setTimeout(() => { btn.textContent = '📡 Use My Current Location (GPS)'; btn.disabled = false; }, 3000);
             loadPrayerTimes(_lat, _lng);
             loadQibla(_lat, _lng);
+            if (_calData) loadCalendar();
         },
-        () => {},
+        () => {
+            btn.textContent = '⚠️ Location denied — showing default';
+            btn.disabled = false;
+        },
         { enableHighAccuracy:true, timeout:10000, maximumAge:60000 }
     );
+}
+
+function startLocation() {
+    _lat = DEFAULT_LAT; _lng = DEFAULT_LNG;
+    loadPrayerTimes(DEFAULT_LAT, DEFAULT_LNG);
+    loadQibla(DEFAULT_LAT, DEFAULT_LNG);
 }
 
 async function requestAzan() {

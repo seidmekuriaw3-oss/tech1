@@ -18848,3 +18848,222 @@ NameError: name 'WHATSAPP_NUMBER' is not defined
 2026-05-17 01:56:39,310 - app - WARNING - 404 Error: http://localhost:5000/api/admin/ads
 2026-05-19 11:26:17,798 - app - WARNING - 404 Error: http://90d8f153-31c1-489b-8e45-a7fe6fa5b24f-00-95ju2chdoa31.spock.replit.dev/static/images/logo.svg
 2026-05-19 11:26:19,625 - app - WARNING - 404 Error: http://90d8f153-31c1-489b-8e45-a7fe6fa5b24f-00-95ju2chdoa31.spock.replit.dev/static/images/logo.svg
+2026-05-19 11:56:30,585 - app - ERROR - Exception on /islamic [GET]
+Traceback (most recent call last):
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/routes/islamic_routes.py", line 195, in islamic_suite
+    seen.add(k)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/templating.py", line 151, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/templating.py", line 132, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/home/runner/workspace/templates/customer/islamic.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/home/runner/workspace/templates/base.html", line 1301, in top-level template code
+    {% block extra_js %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/templates/customer/islamic.html", line 402, in block 'extra_js'
+    const CITIES = {{ cities | tojson }};
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/jinja2/filters.py", line 1721, in do_tojson
+    return htmlsafe_json_dumps(value, dumps=dumps, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/jinja2/utils.py", line 669, in htmlsafe_json_dumps
+    dumps(obj, **kwargs)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/json/provider.py", line 180, in dumps
+    return json.dumps(obj, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nix/store/6334pjf6w2q623rgvwi499qaiym1p6yv-python3-3.11.14/lib/python3.11/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "/nix/store/6334pjf6w2q623rgvwi499qaiym1p6yv-python3-3.11.14/lib/python3.11/json/encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nix/store/6334pjf6w2q623rgvwi499qaiym1p6yv-python3-3.11.14/lib/python3.11/json/encoder.py", line 258, in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/json/provider.py", line 120, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type Undefined is not JSON serializable
+2026-05-19 11:56:30,595 - app - ERROR - 500 Error: http://90d8f153-31c1-489b-8e45-a7fe6fa5b24f-00-95ju2chdoa31.spock.replit.dev/islamic - 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.
+2026-05-19 11:56:30,596 - app - ERROR - Traceback (most recent call last):
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/routes/islamic_routes.py", line 195, in islamic_suite
+    seen.add(k)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/templating.py", line 151, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/templating.py", line 132, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/home/runner/workspace/templates/customer/islamic.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/home/runner/workspace/templates/base.html", line 1301, in top-level template code
+    {% block extra_js %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/templates/customer/islamic.html", line 402, in block 'extra_js'
+    const CITIES = {{ cities | tojson }};
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/jinja2/filters.py", line 1721, in do_tojson
+    return htmlsafe_json_dumps(value, dumps=dumps, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/jinja2/utils.py", line 669, in htmlsafe_json_dumps
+    dumps(obj, **kwargs)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/json/provider.py", line 180, in dumps
+    return json.dumps(obj, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nix/store/6334pjf6w2q623rgvwi499qaiym1p6yv-python3-3.11.14/lib/python3.11/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "/nix/store/6334pjf6w2q623rgvwi499qaiym1p6yv-python3-3.11.14/lib/python3.11/json/encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nix/store/6334pjf6w2q623rgvwi499qaiym1p6yv-python3-3.11.14/lib/python3.11/json/encoder.py", line 258, in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/json/provider.py", line 120, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type Undefined is not JSON serializable
+
+2026-05-19 11:56:30,928 - app - ERROR - Exception on /islamic [GET]
+Traceback (most recent call last):
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/routes/islamic_routes.py", line 195, in islamic_suite
+    seen.add(k)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/templating.py", line 151, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/templating.py", line 132, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/home/runner/workspace/templates/customer/islamic.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/home/runner/workspace/templates/base.html", line 1301, in top-level template code
+    {% block extra_js %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/templates/customer/islamic.html", line 402, in block 'extra_js'
+    const CITIES = {{ cities | tojson }};
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/jinja2/filters.py", line 1721, in do_tojson
+    return htmlsafe_json_dumps(value, dumps=dumps, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/jinja2/utils.py", line 669, in htmlsafe_json_dumps
+    dumps(obj, **kwargs)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/json/provider.py", line 180, in dumps
+    return json.dumps(obj, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nix/store/6334pjf6w2q623rgvwi499qaiym1p6yv-python3-3.11.14/lib/python3.11/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "/nix/store/6334pjf6w2q623rgvwi499qaiym1p6yv-python3-3.11.14/lib/python3.11/json/encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nix/store/6334pjf6w2q623rgvwi499qaiym1p6yv-python3-3.11.14/lib/python3.11/json/encoder.py", line 258, in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/json/provider.py", line 120, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type Undefined is not JSON serializable
+2026-05-19 11:56:30,929 - app - ERROR - 500 Error: http://90d8f153-31c1-489b-8e45-a7fe6fa5b24f-00-95ju2chdoa31.spock.replit.dev/islamic - 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.
+2026-05-19 11:56:30,929 - app - ERROR - Traceback (most recent call last):
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/routes/islamic_routes.py", line 195, in islamic_suite
+    seen.add(k)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/templating.py", line 151, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/templating.py", line 132, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/home/runner/workspace/templates/customer/islamic.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/home/runner/workspace/templates/base.html", line 1301, in top-level template code
+    {% block extra_js %}{% endblock %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/templates/customer/islamic.html", line 402, in block 'extra_js'
+    const CITIES = {{ cities | tojson }};
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/jinja2/filters.py", line 1721, in do_tojson
+    return htmlsafe_json_dumps(value, dumps=dumps, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/jinja2/utils.py", line 669, in htmlsafe_json_dumps
+    dumps(obj, **kwargs)
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/json/provider.py", line 180, in dumps
+    return json.dumps(obj, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nix/store/6334pjf6w2q623rgvwi499qaiym1p6yv-python3-3.11.14/lib/python3.11/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "/nix/store/6334pjf6w2q623rgvwi499qaiym1p6yv-python3-3.11.14/lib/python3.11/json/encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nix/store/6334pjf6w2q623rgvwi499qaiym1p6yv-python3-3.11.14/lib/python3.11/json/encoder.py", line 258, in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+  File "/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/flask/json/provider.py", line 120, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type Undefined is not JSON serializable
+
+2026-05-19 11:56:31,006 - app - WARNING - 404 Error: http://90d8f153-31c1-489b-8e45-a7fe6fa5b24f-00-95ju2chdoa31.spock.replit.dev/favicon.ico

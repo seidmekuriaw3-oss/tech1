@@ -38,6 +38,39 @@ ADDIS_FALLBACK = {
     'Maghrib': '18:35', 'Isha': '19:50'
 }
 
+ETHIOPIAN_CITIES = [
+    {'name': 'Addis Ababa',        'lat': 8.9806,  'lng': 38.7578},
+    {'name': 'Adama (Nazret)',      'lat': 8.5400,  'lng': 39.2700},
+    {'name': 'Arba Minch',         'lat': 6.0333,  'lng': 37.5500},
+    {'name': 'Assosa',             'lat': 10.0667, 'lng': 34.5333},
+    {'name': 'Asebe Teferi',       'lat': 9.0700,  'lng': 40.8700},
+    {'name': 'Awash',              'lat': 8.9922,  'lng': 40.1658},
+    {'name': 'Axum',               'lat': 14.1206, 'lng': 38.7197},
+    {'name': 'Bahir Dar',          'lat': 11.5742, 'lng': 37.3614},
+    {'name': 'Bishoftu (Debre Zeit)', 'lat': 8.7500, 'lng': 38.9833},
+    {'name': 'Bonga',              'lat': 7.2667,  'lng': 36.2333},
+    {'name': 'Debre Birhan',       'lat': 9.6833,  'lng': 39.5333},
+    {'name': 'Debre Markos',       'lat': 10.3500, 'lng': 37.7333},
+    {'name': 'Dessie',             'lat': 11.1333, 'lng': 39.6333},
+    {'name': 'Dilla',              'lat': 6.4167,  'lng': 38.3167},
+    {'name': 'Dire Dawa',          'lat': 9.5931,  'lng': 41.8661},
+    {'name': 'Gambela',            'lat': 8.2500,  'lng': 34.5833},
+    {'name': 'Gondar',             'lat': 12.6033, 'lng': 37.4521},
+    {'name': 'Harar',              'lat': 9.3111,  'lng': 42.1236},
+    {'name': 'Hawassa',            'lat': 7.0620,  'lng': 38.4769},
+    {'name': 'Jijiga',             'lat': 9.3500,  'lng': 42.7833},
+    {'name': 'Jimma',              'lat': 7.6780,  'lng': 36.8340},
+    {'name': 'Lalibela',           'lat': 12.0317, 'lng': 39.0450},
+    {'name': 'Mekelle',            'lat': 13.4967, 'lng': 39.4767},
+    {'name': 'Nekemte',            'lat': 9.0833,  'lng': 36.5500},
+    {'name': 'Robe (Bale)',        'lat': 7.1167,  'lng': 40.0000},
+    {'name': 'Shashamene',         'lat': 7.2000,  'lng': 38.5833},
+    {'name': 'Shire',              'lat': 14.1000, 'lng': 38.2833},
+    {'name': 'Sodo (Wolaita)',     'lat': 6.8500,  'lng': 37.7500},
+    {'name': 'Woliso',             'lat': 8.5333,  'lng': 37.9833},
+    {'name': 'Ziway',              'lat': 7.9333,  'lng': 38.7167},
+]
+
 
 def _fmt_time(t):
     t = t % 24
@@ -198,6 +231,7 @@ def islamic_suite():
         hijri_today=hijri_today,
         holidays=holidays,
         ramadan_active=ramadan_active,
+        cities=ETHIOPIAN_CITIES,
     )
 
 
