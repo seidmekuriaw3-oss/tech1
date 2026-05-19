@@ -19067,3 +19067,4 @@ TypeError: Object of type Undefined is not JSON serializable
 TypeError: Object of type Undefined is not JSON serializable
 
 2026-05-19 11:56:31,006 - app - WARNING - 404 Error: http://90d8f153-31c1-489b-8e45-a7fe6fa5b24f-00-95ju2chdoa31.spock.replit.dev/favicon.ico
+2026-05-19 15:30:11,184 - app - WARNING - Slow request: GET /api/quran/surah/1 - 4.89s

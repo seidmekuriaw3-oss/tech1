@@ -6,6 +6,15 @@ import io
 import csv
 import calendar as cal_module
 import traceback
+import os
+import json
+try:
+    import requests as _requests
+    _HAS_REQUESTS = True
+except ImportError:
+    _HAS_REQUESTS = False
+
+from database.quran_surahs import SURAHS, RECITERS
 
 islamic_bp = Blueprint('islamic', __name__)
 
@@ -208,6 +217,108 @@ def _safe_coords(lat_str, lng_str):
         return lat, lng, False
     except (TypeError, ValueError):
         return DEFAULT_LAT, DEFAULT_LNG, True
+
+
+_QURAN_CACHE_PATH = os.path.join(os.path.dirname(__file__), '..', 'database', 'quran_cache.json')
+_quran_data_cache = None
+
+
+def _load_quran_data():
+    global _quran_data_cache
+    if _quran_data_cache is not None:
+        return _quran_data_cache
+    cache_path = os.path.abspath(_QURAN_CACHE_PATH)
+    if os.path.exists(cache_path):
+        try:
+            with open(cache_path, 'r', encoding='utf-8') as f:
+                _quran_data_cache = json.load(f)
+            return _quran_data_cache
+        except Exception:
+            pass
+    if not _HAS_REQUESTS:
+        return None
+    try:
+        url = 'https://raw.githubusercontent.com/risan/quran-json/main/data/quran.json'
+        resp = _requests.get(url, timeout=20)
+        resp.raise_for_status()
+        data = resp.json()
+        with open(cache_path, 'w', encoding='utf-8') as f:
+            json.dump(data, f, ensure_ascii=False)
+        _quran_data_cache = data
+        return _quran_data_cache
+    except Exception:
+        return None
+
+
+@islamic_bp.route('/api/quran/surahs')
+def quran_surahs():
+    result = []
+    for num, arabic, transliteration, meaning, ayahs, revelation in SURAHS:
+        reciter = request.args.get('reciter', 'alafasy')
+        reciter_data = RECITERS.get(reciter, RECITERS['alafasy'])
+        result.append({
+            'number':         num,
+            'arabic_name':    arabic,
+            'transliteration':transliteration,
+            'meaning':        meaning,
+            'total_ayahs':    ayahs,
+            'revelation_type':revelation,
+            'audio_url':      reciter_data['urls'][num],
+        })
+    reciters_list = [{'id': k, 'name': v['name']} for k, v in RECITERS.items()]
+    return jsonify({'success': True, 'surahs': result, 'reciters': reciters_list})
+
+
+@islamic_bp.route('/api/quran/surah/<int:surah_num>')
+def quran_surah(surah_num):
+    if surah_num < 1 or surah_num > 114:
+        return jsonify({'success': False, 'error': 'Surah number must be 1–114'}), 400
+    meta = next((s for s in SURAHS if s[0] == surah_num), None)
+    if not meta:
+        return jsonify({'success': False, 'error': 'Surah not found'}), 404
+    num, arabic, transliteration, meaning, total_ayahs, revelation = meta
+    reciter = request.args.get('reciter', 'alafasy')
+    reciter_data = RECITERS.get(reciter, RECITERS['alafasy'])
+    audio_url = reciter_data['urls'][num]
+    ayahs = []
+    quran_data = _load_quran_data()
+    if quran_data:
+        try:
+            verses_list = None
+            if isinstance(quran_data, list):
+                if surah_num <= len(quran_data):
+                    entry = quran_data[surah_num - 1]
+                    if isinstance(entry, list):
+                        verses_list = entry
+                    elif isinstance(entry, dict):
+                        verses_list = entry.get('verses') or entry.get('ayahs') or []
+            elif isinstance(quran_data, dict):
+                entry = quran_data.get(surah_num) or quran_data.get(str(surah_num))
+                if isinstance(entry, list):
+                    verses_list = entry
+                elif isinstance(entry, dict):
+                    verses_list = entry.get('verses') or entry.get('ayahs') or []
+            if verses_list:
+                for i, v in enumerate(verses_list, 1):
+                    if isinstance(v, dict):
+                        text = v.get('text') or v.get('arabic') or v.get('ar') or ''
+                    else:
+                        text = str(v)
+                    ayahs.append({'number': i, 'text': text})
+        except Exception:
+            ayahs = []
+    return jsonify({
+        'success':          True,
+        'number':           num,
+        'arabic_name':      arabic,
+        'transliteration':  transliteration,
+        'meaning':          meaning,
+        'total_ayahs':      total_ayahs,
+        'revelation_type':  revelation,
+        'audio_url':        audio_url,
+        'ayahs':            ayahs,
+        'has_text':         len(ayahs) > 0,
+    })
 
 
 @islamic_bp.route('/islamic')
