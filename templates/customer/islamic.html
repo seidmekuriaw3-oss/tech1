@@ -24,11 +24,7 @@
     color: #e8dfc8;
 }
 
-.islamic-header {
-    text-align: center;
-    padding: 30px 0 24px;
-}
-
+.islamic-header { text-align: center; padding: 30px 0 24px; }
 .islamic-header .bismillah {
     font-size: clamp(22px, 5vw, 36px);
     color: var(--islamic-gold);
@@ -37,7 +33,6 @@
     margin-bottom: 6px;
     font-family: 'Noto Naskh Arabic', serif;
 }
-
 .islamic-header h1 {
     font-size: clamp(18px, 4vw, 28px);
     color: #d4c99a;
@@ -50,31 +45,28 @@
 .tabs {
     display: flex;
     justify-content: center;
-    gap: 12px;
+    gap: 10px;
     margin: 20px 0;
     flex-wrap: wrap;
 }
-
 .tab-btn {
     background: rgba(255,255,255,0.06);
     border: 1px solid var(--islamic-border);
     color: #b8a87a;
-    padding: 10px 24px;
+    padding: 10px 22px;
     border-radius: 30px;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 600;
     letter-spacing: 1px;
     transition: all 0.3s;
 }
-
 .tab-btn.active, .tab-btn:hover {
     background: var(--islamic-green);
     border-color: var(--islamic-gold);
     color: #fff;
     box-shadow: var(--glow-green);
 }
-
 .tab-panel { display: none; }
 .tab-panel.active { display: block; }
 
@@ -88,262 +80,194 @@
     margin: 0 auto 20px;
     backdrop-filter: blur(10px);
 }
-
 .location-status {
-    text-align: center;
-    padding: 12px;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    font-size: 13px;
-    background: rgba(201,168,76,0.08);
-    border: 1px solid rgba(201,168,76,0.2);
-    color: #c9a84c;
+    text-align: center; padding: 12px; border-radius: 10px;
+    margin-bottom: 20px; font-size: 13px;
+    background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.2); color: #c9a84c;
 }
+.location-status.error { background: rgba(180,40,40,0.1); border-color: rgba(180,40,40,0.3); color: #f87171; }
+.location-status.ok    { background: rgba(26,122,74,0.12); border-color: rgba(26,122,74,0.35); color: #6ee7a0; }
 
-.location-status.error {
-    background: rgba(180,40,40,0.1);
-    border-color: rgba(180,40,40,0.3);
-    color: #f87171;
-}
-
-.location-status.ok {
-    background: rgba(26,122,74,0.12);
-    border-color: rgba(26,122,74,0.35);
-    color: #6ee7a0;
-}
-
-.clock-display {
-    text-align: center;
-    margin-bottom: 24px;
-}
-
+.clock-display { text-align: center; margin-bottom: 24px; }
 .clock-display .time-now {
-    font-size: clamp(40px, 10vw, 64px);
-    font-weight: 700;
-    color: #fff;
-    letter-spacing: -1px;
-    line-height: 1;
-    text-shadow: 0 0 30px rgba(201,168,76,0.3);
+    font-size: clamp(40px, 10vw, 64px); font-weight: 700; color: #fff;
+    letter-spacing: -1px; line-height: 1; text-shadow: 0 0 30px rgba(201,168,76,0.3);
 }
-
-.clock-display .date-now {
-    font-size: 13px;
-    color: #a09060;
-    margin-top: 4px;
-}
+.clock-display .date-now { font-size: 13px; color: #a09060; margin-top: 4px; }
 
 .next-prayer-banner {
     background: linear-gradient(135deg, #1a7a4a22, #c9a84c22);
     border: 1px solid var(--islamic-gold);
-    border-radius: 14px;
-    padding: 14px 18px;
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    border-radius: 14px; padding: 14px 18px; margin-bottom: 20px;
+    display: flex; justify-content: space-between; align-items: center;
 }
+.next-prayer-banner .label { font-size: 11px; color: #a09060; text-transform: uppercase; letter-spacing: 1px; }
+.next-prayer-banner .prayer-name { font-size: 20px; font-weight: 700; color: var(--islamic-gold); }
+.next-prayer-banner .countdown { font-size: 22px; font-weight: 700; color: #6ee7a0; font-variant-numeric: tabular-nums; }
 
-.next-prayer-banner .label {
-    font-size: 11px;
-    color: #a09060;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.next-prayer-banner .prayer-name {
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--islamic-gold);
-}
-
-.next-prayer-banner .countdown {
-    font-size: 22px;
-    font-weight: 700;
-    color: #6ee7a0;
-    font-variant-numeric: tabular-nums;
-}
-
-.prayer-list {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
+.prayer-list { display: flex; flex-direction: column; gap: 10px; }
 .prayer-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 13px 16px;
-    border-radius: 12px;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.07);
-    transition: all 0.3s;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 13px 16px; border-radius: 12px;
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); transition: all 0.3s;
 }
-
-.prayer-row.current {
-    background: rgba(26,122,74,0.2);
-    border-color: var(--islamic-green);
-    box-shadow: var(--glow-green);
-}
-
-.prayer-row.next-up {
-    background: rgba(201,168,76,0.08);
-    border-color: rgba(201,168,76,0.4);
-}
-
-.prayer-row .p-icon { font-size: 18px; width: 28px; }
-
-.prayer-row .p-name {
-    flex: 1;
-    font-size: 15px;
-    font-weight: 600;
-    color: #d4c99a;
-    margin-left: 8px;
-}
-
+.prayer-row.current { background: rgba(26,122,74,0.2); border-color: var(--islamic-green); box-shadow: var(--glow-green); }
+.prayer-row.next-up  { background: rgba(201,168,76,0.08); border-color: rgba(201,168,76,0.4); }
+.prayer-row .p-icon  { font-size: 18px; width: 28px; }
+.prayer-row .p-name  { flex: 1; font-size: 15px; font-weight: 600; color: #d4c99a; margin-left: 8px; }
 .prayer-row.current .p-name { color: #6ee7a0; }
 .prayer-row.next-up .p-name { color: var(--islamic-gold); }
-
-.prayer-row .p-time {
-    font-size: 16px;
-    font-weight: 700;
-    color: #e8e0cc;
-    font-variant-numeric: tabular-nums;
-    letter-spacing: 1px;
-}
-
+.prayer-row .p-time  { font-size: 16px; font-weight: 700; color: #e8e0cc; font-variant-numeric: tabular-nums; letter-spacing: 1px; }
 .prayer-row .p-badge {
-    font-size: 9px;
-    background: var(--islamic-green);
-    color: #fff;
-    padding: 2px 7px;
-    border-radius: 20px;
-    margin-left: 8px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
+    font-size: 9px; background: var(--islamic-green); color: #fff;
+    padding: 2px 7px; border-radius: 20px; margin-left: 8px; font-weight: 700; text-transform: uppercase;
 }
-
-.prayer-row.next-up .p-badge {
-    background: var(--islamic-gold);
-    color: #0d1f14;
-}
+.prayer-row.next-up .p-badge { background: var(--islamic-gold); color: #0d1f14; }
 
 .notif-btn {
-    display: block;
-    width: 100%;
-    margin-top: 20px;
-    padding: 13px;
+    display: block; width: 100%; margin-top: 20px; padding: 13px;
     background: linear-gradient(135deg, #1a7a4a, #0f5232);
-    border: 1px solid var(--islamic-gold);
-    border-radius: 12px;
-    color: #fff;
-    font-size: 14px;
-    font-weight: 700;
-    cursor: pointer;
-    letter-spacing: 1px;
-    transition: all 0.3s;
-    text-transform: uppercase;
+    border: 1px solid var(--islamic-gold); border-radius: 12px;
+    color: #fff; font-size: 14px; font-weight: 700; cursor: pointer;
+    letter-spacing: 1px; transition: all 0.3s; text-transform: uppercase;
 }
-
 .notif-btn:hover { opacity: 0.85; transform: translateY(-1px); }
 .notif-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 
 /* ===== QIBLA ===== */
 .qibla-card {
-    background: var(--islamic-panel);
-    border: 1px solid var(--islamic-border);
-    border-radius: 20px;
-    padding: 28px 20px;
-    max-width: 480px;
-    margin: 0 auto;
-    backdrop-filter: blur(10px);
-    text-align: center;
+    background: var(--islamic-panel); border: 1px solid var(--islamic-border);
+    border-radius: 20px; padding: 28px 20px; max-width: 480px;
+    margin: 0 auto; backdrop-filter: blur(10px); text-align: center;
 }
-
-.qibla-card h2 {
-    font-size: 20px;
-    color: var(--islamic-gold);
-    margin-bottom: 4px;
-    font-weight: 700;
-}
-
-.qibla-card .subtitle {
-    font-size: 13px;
-    color: #7a7060;
-    margin-bottom: 20px;
-}
-
-#compass-wrapper {
-    position: relative;
-    width: 280px;
-    height: 280px;
-    margin: 0 auto 20px;
-}
-
-#qibla-canvas {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    display: block;
-}
-
-.bearing-display {
-    font-size: 32px;
-    font-weight: 700;
-    color: var(--islamic-gold);
-    letter-spacing: 2px;
-    margin-bottom: 4px;
-}
-
-.bearing-label {
-    font-size: 13px;
-    color: #7a7060;
-    margin-bottom: 16px;
-}
-
+.qibla-card h2 { font-size: 20px; color: var(--islamic-gold); margin-bottom: 4px; font-weight: 700; }
+.qibla-card .subtitle { font-size: 13px; color: #7a7060; margin-bottom: 20px; }
+#compass-wrapper { position: relative; width: 280px; height: 280px; margin: 0 auto 20px; }
+#qibla-canvas { width: 100%; height: 100%; border-radius: 50%; display: block; }
+.bearing-display { font-size: 32px; font-weight: 700; color: var(--islamic-gold); letter-spacing: 2px; margin-bottom: 4px; }
+.bearing-label { font-size: 13px; color: #7a7060; margin-bottom: 16px; }
 .qibla-alert {
-    display: none;
-    background: rgba(26,122,74,0.2);
-    border: 1px solid var(--islamic-green);
-    border-radius: 12px;
-    padding: 12px 18px;
-    font-size: 14px;
-    font-weight: 700;
-    color: #6ee7a0;
-    letter-spacing: 1px;
-    animation: pulse-green 1s infinite alternate;
+    display: none; background: rgba(26,122,74,0.2); border: 1px solid var(--islamic-green);
+    border-radius: 12px; padding: 12px 18px; font-size: 14px; font-weight: 700;
+    color: #6ee7a0; letter-spacing: 1px; animation: pulse-green 1s infinite alternate;
 }
-
 @keyframes pulse-green {
     from { box-shadow: 0 0 0 rgba(26,122,74,0); }
-    to { box-shadow: 0 0 16px rgba(26,122,74,0.6); }
+    to   { box-shadow: 0 0 16px rgba(26,122,74,0.6); }
 }
-
-.sensor-status {
-    font-size: 12px;
-    color: #6b6050;
-    margin-top: 14px;
-    padding: 8px;
-    border-radius: 8px;
-    background: rgba(255,255,255,0.03);
-}
-
+.sensor-status { font-size: 12px; color: #6b6050; margin-top: 14px; padding: 8px; border-radius: 8px; background: rgba(255,255,255,0.03); }
 .sensor-status.active { color: #6ee7a0; }
-.sensor-status.error { color: #f87171; }
+.sensor-status.error  { color: #f87171; }
 
-.ornament {
-    text-align: center;
-    color: var(--islamic-gold);
-    font-size: 20px;
-    opacity: 0.4;
-    margin: 10px 0;
-    letter-spacing: 8px;
+/* ===== CALENDAR ===== */
+.cal-card {
+    background: var(--islamic-panel); border: 1px solid var(--islamic-border);
+    border-radius: 20px; padding: 24px 20px; max-width: 620px;
+    margin: 0 auto 20px; backdrop-filter: blur(10px);
 }
+.cal-card h2 { font-size: 18px; color: var(--islamic-gold); font-weight: 700; margin-bottom: 16px; text-align: center; }
+
+.hijri-hero {
+    text-align: center;
+    background: linear-gradient(135deg, rgba(201,168,76,0.12), rgba(26,122,74,0.12));
+    border: 1px solid var(--islamic-gold);
+    border-radius: 16px; padding: 20px 16px; margin-bottom: 20px;
+}
+.hijri-hero .hijri-day  { font-size: 64px; font-weight: 900; color: var(--islamic-gold); line-height: 1; }
+.hijri-hero .hijri-month{ font-size: 22px; font-weight: 600; color: #d4c99a; margin: 4px 0; font-family: 'Noto Naskh Arabic', serif; }
+.hijri-hero .hijri-year { font-size: 14px; color: #a09060; }
+.hijri-hero .greg-date  { font-size: 13px; color: #7a7060; margin-top: 8px; border-top: 1px solid rgba(201,168,76,0.15); padding-top: 8px; }
+
+.holidays-section { margin-bottom: 20px; }
+.holidays-section h3 { font-size: 14px; color: var(--islamic-gold); font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; }
+.holiday-item {
+    display: flex; align-items: center; gap: 12px;
+    padding: 11px 14px; border-radius: 12px; margin-bottom: 8px;
+    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);
+    transition: background 0.2s;
+}
+.holiday-item.today-holiday {
+    background: rgba(201,168,76,0.1); border-color: var(--islamic-gold);
+    animation: pulse-gold 2s infinite alternate;
+}
+@keyframes pulse-gold {
+    from { box-shadow: 0 0 0 rgba(201,168,76,0); }
+    to   { box-shadow: 0 0 12px rgba(201,168,76,0.4); }
+}
+.holiday-icon { font-size: 22px; flex-shrink: 0; }
+.holiday-info { flex: 1; min-width: 0; }
+.holiday-name { font-size: 14px; font-weight: 600; color: #d4c99a; }
+.holiday-dates { font-size: 11px; color: #7a7060; margin-top: 2px; }
+.holiday-away  {
+    font-size: 11px; font-weight: 700;
+    background: rgba(26,122,74,0.2); color: #6ee7a0;
+    padding: 3px 8px; border-radius: 20px; white-space: nowrap; flex-shrink: 0;
+}
+.holiday-away.today-badge { background: var(--islamic-gold); color: #0d1f14; }
+
+.cal-nav {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 14px;
+}
+.cal-nav button {
+    background: rgba(255,255,255,0.07); border: 1px solid var(--islamic-border);
+    color: var(--islamic-gold); padding: 7px 16px; border-radius: 8px;
+    cursor: pointer; font-size: 16px; transition: all 0.2s;
+}
+.cal-nav button:hover { background: rgba(201,168,76,0.15); }
+.cal-nav .cal-month-label { font-size: 15px; font-weight: 700; color: #d4c99a; }
+
+.cal-grid {
+    display: grid; grid-template-columns: repeat(7, 1fr);
+    gap: 4px; margin-bottom: 16px;
+}
+.cal-day-hdr {
+    text-align: center; font-size: 10px; font-weight: 700;
+    color: #7a7060; padding: 4px; text-transform: uppercase; letter-spacing: 0.5px;
+}
+.cal-cell {
+    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 8px; padding: 6px 4px; text-align: center; cursor: pointer;
+    transition: all 0.2s; min-height: 52px;
+}
+.cal-cell:hover { background: rgba(201,168,76,0.08); border-color: var(--islamic-border); }
+.cal-cell.today { background: rgba(26,122,74,0.2); border-color: var(--islamic-green); }
+.cal-cell.selected { background: rgba(201,168,76,0.15); border-color: var(--islamic-gold); }
+.cal-cell.holiday-day { border-color: rgba(201,168,76,0.5); }
+.cal-cell .cell-greg { font-size: 13px; font-weight: 700; color: #d4c99a; line-height: 1.2; }
+.cal-cell.today .cell-greg { color: #6ee7a0; }
+.cal-cell .cell-hijri { font-size: 9px; color: #7a7060; }
+.cal-cell .cell-holiday-dot { width: 5px; height: 5px; background: var(--islamic-gold); border-radius: 50%; margin: 2px auto 0; }
+
+.cal-detail {
+    background: rgba(255,255,255,0.03); border: 1px solid var(--islamic-border);
+    border-radius: 14px; padding: 16px; margin-bottom: 16px; display: none;
+}
+.cal-detail.visible { display: block; }
+.cal-detail h4 { font-size: 14px; color: var(--islamic-gold); margin-bottom: 10px; font-weight: 700; }
+.cal-detail-times { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
+.cal-detail-time { text-align: center; }
+.cal-detail-time .dt-label { font-size: 9px; color: #7a7060; text-transform: uppercase; letter-spacing: 0.5px; }
+.cal-detail-time .dt-val   { font-size: 13px; font-weight: 700; color: #d4c99a; font-variant-numeric: tabular-nums; }
+
+.export-btn {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    width: 100%; padding: 13px; border-radius: 12px;
+    background: linear-gradient(135deg, rgba(201,168,76,0.2), rgba(201,168,76,0.08));
+    border: 1px solid var(--islamic-gold); color: var(--islamic-gold);
+    font-size: 14px; font-weight: 700; cursor: pointer; text-decoration: none;
+    letter-spacing: 1px; text-transform: uppercase; transition: all 0.3s;
+}
+.export-btn:hover { background: rgba(201,168,76,0.25); transform: translateY(-1px); }
+.export-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+.ornament { text-align: center; color: var(--islamic-gold); font-size: 20px; opacity: 0.4; margin: 10px 0; letter-spacing: 8px; }
 
 @media (max-width: 480px) {
     .islamic-page { padding: 12px 10px 80px; }
     #compass-wrapper { width: 240px; height: 240px; }
+    .cal-detail-times { grid-template-columns: repeat(3, 1fr); }
+    .hijri-hero .hijri-day { font-size: 48px; }
 }
 </style>
 {% endblock %}
@@ -358,20 +282,19 @@
     </div>
 
     <div class="tabs">
-        <button class="tab-btn active" onclick="switchTab('prayer')">🕌 Prayer Times</button>
-        <button class="tab-btn" onclick="switchTab('qibla')">🧭 Qibla Direction</button>
+        <button class="tab-btn active" onclick="switchTab('prayer', this)">🕌 Prayer Times</button>
+        <button class="tab-btn" onclick="switchTab('qibla', this)">🧭 Qibla</button>
+        <button class="tab-btn" onclick="switchTab('calendar', this)">📅 Calendar</button>
     </div>
 
     <!-- ===== PRAYER TIMES PANEL ===== -->
     <div id="tab-prayer" class="tab-panel active">
         <div class="prayer-card">
             <div id="location-status" class="location-status">📡 Requesting your location…</div>
-
             <div class="clock-display">
                 <div class="time-now" id="clock-now">--:--:--</div>
                 <div class="date-now" id="date-now">--</div>
             </div>
-
             <div class="next-prayer-banner" id="next-banner" style="display:none;">
                 <div>
                     <div class="label">Next Prayer</div>
@@ -383,11 +306,9 @@
                     <div class="countdown" id="countdown">--:--</div>
                 </div>
             </div>
-
             <div class="prayer-list" id="prayer-list">
                 <div style="text-align:center;padding:20px;color:#7a7060;">Loading prayer times…</div>
             </div>
-
             <button class="notif-btn" id="notif-btn" onclick="requestNotifications()">
                 🔔 Enable Prayer Notifications & Azan
             </button>
@@ -399,22 +320,85 @@
         <div class="qibla-card">
             <h2>🕋 Qibla Direction</h2>
             <p class="subtitle">Point your phone to find the direction of the Kaaba in Makkah</p>
-
             <div id="compass-wrapper">
                 <canvas id="qibla-canvas" width="560" height="560"></canvas>
             </div>
-
             <div class="bearing-display" id="bearing-display">--- °</div>
             <div class="bearing-label">Qibla bearing from your location</div>
+            <div class="qibla-alert" id="qibla-alert">✅ You are facing the Qibla!</div>
+            <div class="sensor-status" id="sensor-status">Sensor: waiting for location…</div>
+        </div>
+    </div>
 
-            <div class="qibla-alert" id="qibla-alert">
-                ✅ You are facing the Qibla!
+    <!-- ===== CALENDAR PANEL ===== -->
+    <div id="tab-calendar" class="tab-panel">
+
+        <!-- Hijri Date Hero -->
+        <div class="cal-card">
+            <h2>🌙 Hijri Calendar</h2>
+            <div class="hijri-hero">
+                <div class="hijri-day">{{ hijri_today.day }}</div>
+                <div class="hijri-month">{{ hijri_today.month }}</div>
+                <div class="hijri-year">{{ hijri_today.year }} AH</div>
+                <div class="greg-date">
+                    {% set months = ['January','February','March','April','May','June','July','August','September','October','November','December'] %}
+                    {% set now = hijri_today %}
+                    Today — {{ now.full }}
+                </div>
             </div>
 
-            <div class="sensor-status" id="sensor-status">
-                Sensor: waiting for location…
+            <!-- Upcoming Islamic Holidays -->
+            <div class="holidays-section">
+                <h3>⭐ Upcoming Islamic Occasions</h3>
+                {% for h in holidays %}
+                <div class="holiday-item {% if h.is_today %}today-holiday{% endif %}">
+                    <span class="holiday-icon">{{ h.icon }}</span>
+                    <div class="holiday-info">
+                        <div class="holiday-name">{{ h.name }}</div>
+                        <div class="holiday-dates">{{ h.gregorian }} &nbsp;·&nbsp; {{ h.hijri }}</div>
+                    </div>
+                    {% if h.is_today %}
+                        <span class="holiday-away today-badge">TODAY</span>
+                    {% elif h.days_away == 1 %}
+                        <span class="holiday-away">Tomorrow</span>
+                    {% else %}
+                        <span class="holiday-away">{{ h.days_away }}d</span>
+                    {% endif %}
+                </div>
+                {% endfor %}
             </div>
         </div>
+
+        <!-- Monthly Prayer Schedule -->
+        <div class="cal-card" id="schedule-card">
+            <h2>📅 Monthly Prayer Schedule</h2>
+
+            <div class="cal-nav">
+                <button onclick="changeMonth(-1)">‹</button>
+                <div class="cal-month-label" id="cal-month-label">Loading…</div>
+                <button onclick="changeMonth(1)">›</button>
+            </div>
+
+            <div class="cal-grid" id="cal-grid">
+                <div class="cal-day-hdr">Sun</div>
+                <div class="cal-day-hdr">Mon</div>
+                <div class="cal-day-hdr">Tue</div>
+                <div class="cal-day-hdr">Wed</div>
+                <div class="cal-day-hdr">Thu</div>
+                <div class="cal-day-hdr">Fri</div>
+                <div class="cal-day-hdr">Sat</div>
+            </div>
+
+            <div class="cal-detail" id="cal-detail">
+                <h4 id="cal-detail-title">—</h4>
+                <div class="cal-detail-times" id="cal-detail-times"></div>
+            </div>
+
+            <button class="export-btn" id="export-btn" onclick="exportCSV()" disabled>
+                ⬇ Download Month as CSV
+            </button>
+        </div>
+
     </div>
 
 </div>
@@ -426,27 +410,36 @@
 <script src="https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.min.js"></script>
 <script>
 const PRAYERS_ICONS = { Fajr:'🌙', Dhuhr:'☀️', Asr:'🌤️', Maghrib:'🌅', Isha:'🌙' };
-const PRAYER_ORDER = ['Fajr','Dhuhr','Asr','Maghrib','Isha'];
+const PRAYER_ORDER  = ['Fajr','Dhuhr','Asr','Maghrib','Isha'];
+const MONTH_NAMES   = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 
-let _prayerTimes = null;
-let _qiblaBearing = null;
-let _deviceHeading = null;
+let _prayerTimes    = null;
+let _qiblaBearing   = null;
+let _deviceHeading  = null;
 let _swRegistration = null;
 let _userLat = null, _userLng = null;
 
-function switchTab(name) {
+let _calYear  = new Date().getFullYear();
+let _calMonth = new Date().getMonth() + 1;
+let _calData  = null;
+let _selectedDay = null;
+
+/* ===== TABS ===== */
+function switchTab(name, btn) {
     document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
     document.getElementById('tab-' + name).classList.add('active');
-    event.currentTarget.classList.add('active');
+    btn.classList.add('active');
+    if (name === 'calendar' && _userLat && !_calData) loadCalendar();
 }
 
+/* ===== CLOCK ===== */
 function tickClock() {
-    const now = new Date();
-    const hms = now.toLocaleTimeString('en-GB', {hour:'2-digit',minute:'2-digit',second:'2-digit'});
+    const now  = new Date();
+    const hms  = now.toLocaleTimeString('en-GB', {hour:'2-digit',minute:'2-digit',second:'2-digit'});
     const date = now.toLocaleDateString('en-GB', {weekday:'long',year:'numeric',month:'long',day:'numeric'});
     document.getElementById('clock-now').textContent = hms;
-    document.getElementById('date-now').textContent = date;
+    document.getElementById('date-now').textContent  = date;
     if (_prayerTimes) updateNextPrayer();
 }
 
@@ -455,8 +448,9 @@ function parseTime(str) {
     return h * 60 + m;
 }
 
+/* ===== PRAYER NEXT BANNER ===== */
 function updateNextPrayer() {
-    const now = new Date();
+    const now    = new Date();
     const nowMin = now.getHours() * 60 + now.getMinutes();
     let nextName = null, nextMin = null;
     for (const p of PRAYER_ORDER) {
@@ -464,50 +458,31 @@ function updateNextPrayer() {
         if (t > nowMin) { nextName = p; nextMin = t; break; }
     }
     if (!nextName) { nextName = PRAYER_ORDER[0]; nextMin = parseTime(_prayerTimes[PRAYER_ORDER[0]]) + 1440; }
-
     const diff = nextMin - nowMin;
-    const h = Math.floor(diff / 60);
-    const m = diff % 60;
-    const banner = document.getElementById('next-banner');
-    banner.style.display = 'flex';
-    document.getElementById('next-name').textContent = PRAYERS_ICONS[nextName] + ' ' + nextName;
+    const h = Math.floor(diff / 60), m = diff % 60;
+    document.getElementById('next-banner').style.display = 'flex';
+    document.getElementById('next-name').textContent       = PRAYERS_ICONS[nextName] + ' ' + nextName;
     document.getElementById('next-time-label').textContent = _prayerTimes[nextName];
-    document.getElementById('countdown').textContent = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`;
+    document.getElementById('countdown').textContent       = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`;
 
     const rows = document.querySelectorAll('.prayer-row');
-    rows.forEach(r => {
-        r.classList.remove('current', 'next-up');
-        const badge = r.querySelector('.p-badge');
-        if (badge) badge.remove();
-    });
+    rows.forEach(r => { r.classList.remove('current','next-up'); const b = r.querySelector('.p-badge'); if(b) b.remove(); });
 
     let currentName = null;
     for (let i = PRAYER_ORDER.length - 1; i >= 0; i--) {
-        if (parseTime(_prayerTimes[PRAYER_ORDER[i]]) <= nowMin) {
-            currentName = PRAYER_ORDER[i]; break;
-        }
+        if (parseTime(_prayerTimes[PRAYER_ORDER[i]]) <= nowMin) { currentName = PRAYER_ORDER[i]; break; }
     }
-
     rows.forEach(r => {
         const pName = r.dataset.prayer;
         if (pName === currentName) {
             r.classList.add('current');
-            const b = document.createElement('span');
-            b.className = 'p-badge';
-            b.textContent = 'Now';
-            r.querySelector('.p-time').after(b);
+            const b = document.createElement('span'); b.className = 'p-badge'; b.textContent = 'Now'; r.querySelector('.p-time').after(b);
         } else if (pName === nextName) {
             r.classList.add('next-up');
-            const b = document.createElement('span');
-            b.className = 'p-badge';
-            b.textContent = 'Next';
-            r.querySelector('.p-time').after(b);
+            const b = document.createElement('span'); b.className = 'p-badge'; b.textContent = 'Next'; r.querySelector('.p-time').after(b);
         }
     });
-
-    if (diff === 0) {
-        playAzan(nextName);
-    }
+    if (diff === 0) playAzan(nextName);
 }
 
 function renderPrayerList(times) {
@@ -517,16 +492,15 @@ function renderPrayerList(times) {
             <span class="p-icon">${PRAYERS_ICONS[p]}</span>
             <span class="p-name">${p}</span>
             <span class="p-time">${times[p]}</span>
-        </div>
-    `).join('');
+        </div>`).join('');
     _prayerTimes = times;
     updateNextPrayer();
 }
 
+/* ===== FETCH PRAYER / QIBLA ===== */
 function fetchPrayerTimes(lat, lng) {
     fetch(`/api/prayer-times?lat=${lat}&lng=${lng}`)
-        .then(r => r.json())
-        .then(data => {
+        .then(r => r.json()).then(data => {
             if (data.success) {
                 const st = document.getElementById('location-status');
                 st.className = 'location-status ok';
@@ -534,8 +508,7 @@ function fetchPrayerTimes(lat, lng) {
                 renderPrayerList(data.times);
                 schedulePrayerNotifications(data.times);
             }
-        })
-        .catch(() => {
+        }).catch(() => {
             const st = document.getElementById('location-status');
             st.className = 'location-status error';
             st.textContent = '⚠️ Failed to load prayer times. Please try again.';
@@ -544,13 +517,12 @@ function fetchPrayerTimes(lat, lng) {
 
 function fetchQibla(lat, lng) {
     fetch(`/api/qibla-direction?lat=${lat}&lng=${lng}`)
-        .then(r => r.json())
-        .then(data => {
+        .then(r => r.json()).then(data => {
             if (data.success) {
                 _qiblaBearing = data.bearing;
                 document.getElementById('bearing-display').textContent = `${data.bearing.toFixed(1)} °`;
-                document.getElementById('sensor-status').textContent = `Qibla bearing: ${data.bearing.toFixed(1)}° from North. Rotate your phone to align.`;
-                drawCompass();
+                document.getElementById('sensor-status').textContent   = `Qibla bearing: ${data.bearing.toFixed(1)}° from North. Rotate your phone to align.`;
+                updateNeedle();
             }
         });
 }
@@ -559,8 +531,7 @@ function getLocation() {
     if (!navigator.geolocation) {
         const st = document.getElementById('location-status');
         st.className = 'location-status error';
-        st.textContent = '⚠️ Geolocation not supported on this device.';
-        return;
+        st.textContent = '⚠️ Geolocation not supported on this device.'; return;
     }
     navigator.geolocation.getCurrentPosition(
         pos => {
@@ -569,7 +540,7 @@ function getLocation() {
             fetchPrayerTimes(_userLat, _userLng);
             fetchQibla(_userLat, _userLng);
         },
-        err => {
+        () => {
             const st = document.getElementById('location-status');
             st.className = 'location-status error';
             st.textContent = '⚠️ Location access denied. Please allow location to use this feature.';
@@ -578,42 +549,26 @@ function getLocation() {
     );
 }
 
+/* ===== NOTIFICATIONS ===== */
 async function requestNotifications() {
     const btn = document.getElementById('notif-btn');
-    btn.disabled = true;
-    btn.textContent = '⏳ Requesting permission…';
-
-    if (!('Notification' in window)) {
-        btn.textContent = '⚠️ Notifications not supported';
-        return;
-    }
-
+    btn.disabled = true; btn.textContent = '⏳ Requesting permission…';
+    if (!('Notification' in window)) { btn.textContent = '⚠️ Notifications not supported'; return; }
     const perm = await Notification.requestPermission();
-    if (perm !== 'granted') {
-        btn.textContent = '❌ Permission denied';
-        btn.disabled = false;
-        return;
-    }
-
+    if (perm !== 'granted') { btn.textContent = '❌ Permission denied'; btn.disabled = false; return; }
     if ('serviceWorker' in navigator) {
         try {
             _swRegistration = await navigator.serviceWorker.register('/static/js/azan-sw.js', { scope: '/' });
             await navigator.serviceWorker.ready;
             btn.textContent = '✅ Azan Notifications Enabled';
             if (_prayerTimes) schedulePrayerNotifications(_prayerTimes);
-        } catch(e) {
-            btn.textContent = '⚠️ Service Worker failed — using in-tab alerts';
-            btn.disabled = false;
-        }
-    } else {
-        btn.textContent = '✅ In-app Azan Enabled';
-    }
+        } catch(e) { btn.textContent = '⚠️ Service Worker failed — using in-tab alerts'; btn.disabled = false; }
+    } else { btn.textContent = '✅ In-app Azan Enabled'; }
 }
 
 function schedulePrayerNotifications(times) {
     if (!_swRegistration || !_swRegistration.active) return;
-    const list = PRAYER_ORDER.map(p => ({ name: p, time: times[p] }));
-    _swRegistration.active.postMessage({ type: 'SCHEDULE_AZAN', prayers: list });
+    _swRegistration.active.postMessage({ type: 'SCHEDULE_AZAN', prayers: PRAYER_ORDER.map(p => ({ name: p, time: times[p] })) });
 }
 
 navigator.serviceWorker && navigator.serviceWorker.addEventListener('message', e => {
@@ -623,164 +578,93 @@ navigator.serviceWorker && navigator.serviceWorker.addEventListener('message', e
 function playAzan(prayerName) {
     const audio = document.getElementById('azan-audio');
     audio.src = prayerName === 'Fajr' ? '/static/audio/fajrazan.mp3' : '/static/audio/azan.mp3';
-    audio.load();
-    audio.play().catch(() => {});
+    audio.load(); audio.play().catch(() => {});
 }
 
-/* ===== 3D QIBLA COMPASS ===== */
+/* ===== 3D COMPASS ===== */
 let _scene, _camera, _renderer, _compassGroup, _needleGroup;
-let _animFrame;
 
 function initThreeCompass() {
     const wrapper = document.getElementById('compass-wrapper');
-    const W = wrapper.offsetWidth;
-    const H = wrapper.offsetHeight;
-
+    const W = wrapper.offsetWidth, H = wrapper.offsetHeight;
     _scene = new THREE.Scene();
     _camera = new THREE.PerspectiveCamera(45, W / H, 0.1, 100);
     _camera.position.set(0, 0, 3.8);
-
     _renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('qibla-canvas'), alpha: true, antialias: true });
     _renderer.setPixelRatio(window.devicePixelRatio);
     _renderer.setSize(W, H);
     _renderer.setClearColor(0x000000, 0);
 
-    const ambient = new THREE.AmbientLight(0xffffff, 0.6);
-    _scene.add(ambient);
-    const dirLight = new THREE.DirectionalLight(0xc9a84c, 1.2);
-    dirLight.position.set(2, 4, 3);
-    _scene.add(dirLight);
-    const backLight = new THREE.DirectionalLight(0x1a7a4a, 0.5);
-    backLight.position.set(-2, -2, -2);
-    _scene.add(backLight);
+    _scene.add(new THREE.AmbientLight(0xffffff, 0.6));
+    const dl = new THREE.DirectionalLight(0xc9a84c, 1.2); dl.position.set(2, 4, 3); _scene.add(dl);
+    const bl = new THREE.DirectionalLight(0x1a7a4a, 0.5); bl.position.set(-2,-2,-2); _scene.add(bl);
 
-    _compassGroup = new THREE.Group();
-    _scene.add(_compassGroup);
-
-    const dialGeo = new THREE.CylinderGeometry(1.5, 1.5, 0.08, 64);
-    const dialMat = new THREE.MeshStandardMaterial({ color: 0x0d1f14, metalness: 0.4, roughness: 0.6 });
-    _compassGroup.add(new THREE.Mesh(dialGeo, dialMat));
-
-    const ringGeo = new THREE.TorusGeometry(1.5, 0.04, 8, 64);
-    const ringMat = new THREE.MeshStandardMaterial({ color: 0xc9a84c, metalness: 0.9, roughness: 0.2 });
-    _compassGroup.add(new THREE.Mesh(ringGeo, ringMat));
-
-    const innerRingGeo = new THREE.TorusGeometry(1.2, 0.015, 8, 64);
-    const innerRingMat = new THREE.MeshStandardMaterial({ color: 0x1a7a4a, metalness: 0.8, roughness: 0.3 });
-    _compassGroup.add(new THREE.Mesh(innerRingGeo, innerRingMat));
-
-    const tickMat = new THREE.MeshStandardMaterial({ color: 0xc9a84c, metalness: 0.9, roughness: 0.1 });
+    _compassGroup = new THREE.Group(); _scene.add(_compassGroup);
+    _compassGroup.add(new THREE.Mesh(new THREE.CylinderGeometry(1.5,1.5,0.08,64), new THREE.MeshStandardMaterial({color:0x0d1f14,metalness:0.4,roughness:0.6})));
+    _compassGroup.add(new THREE.Mesh(new THREE.TorusGeometry(1.5,0.04,8,64), new THREE.MeshStandardMaterial({color:0xc9a84c,metalness:0.9,roughness:0.2})));
+    _compassGroup.add(new THREE.Mesh(new THREE.TorusGeometry(1.2,0.015,8,64), new THREE.MeshStandardMaterial({color:0x1a7a4a,metalness:0.8,roughness:0.3})));
+    const tickMat = new THREE.MeshStandardMaterial({color:0xc9a84c,metalness:0.9,roughness:0.1});
     for (let i = 0; i < 36; i++) {
-        const isMajor = i % 9 === 0;
-        const geo = new THREE.BoxGeometry(isMajor ? 0.03 : 0.015, 0.05, isMajor ? 0.18 : 0.09);
-        const tick = new THREE.Mesh(geo, tickMat);
-        const angle = (i / 36) * Math.PI * 2;
-        tick.position.set(Math.sin(angle) * 1.38, 0.065, Math.cos(angle) * 1.38);
-        tick.lookAt(0, 0.065, 0);
-        _compassGroup.add(tick);
+        const major = i % 9 === 0;
+        const tick = new THREE.Mesh(new THREE.BoxGeometry(major?0.03:0.015,0.05,major?0.18:0.09), tickMat);
+        const a = (i/36)*Math.PI*2;
+        tick.position.set(Math.sin(a)*1.38, 0.065, Math.cos(a)*1.38);
+        tick.lookAt(0,0.065,0); _compassGroup.add(tick);
     }
+    _needleGroup = new THREE.Group(); _compassGroup.add(_needleGroup);
 
-    _needleGroup = new THREE.Group();
-    _compassGroup.add(_needleGroup);
+    const nShape = new THREE.Shape(); nShape.moveTo(0,0); nShape.lineTo(-0.1,-0.5); nShape.lineTo(0,0.9); nShape.lineTo(0.1,-0.5); nShape.closePath();
+    const nMesh  = new THREE.Mesh(new THREE.ExtrudeGeometry(nShape,{depth:0.05,bevelEnabled:false}), new THREE.MeshStandardMaterial({color:0xf87171,metalness:0.6,roughness:0.3}));
+    nMesh.position.set(-0.05,0.08,0); _needleGroup.add(nMesh);
 
-    const northShape = new THREE.Shape();
-    northShape.moveTo(0, 0);
-    northShape.lineTo(-0.1, -0.5);
-    northShape.lineTo(0, 0.9);
-    northShape.lineTo(0.1, -0.5);
-    northShape.closePath();
-    const northGeo = new THREE.ExtrudeGeometry(northShape, { depth: 0.05, bevelEnabled: false });
-    const northMat = new THREE.MeshStandardMaterial({ color: 0xf87171, metalness: 0.6, roughness: 0.3 });
-    const northMesh = new THREE.Mesh(northGeo, northMat);
-    northMesh.position.set(-0.05, 0.08, 0);
-    _needleGroup.add(northMesh);
+    const sShape = new THREE.Shape(); sShape.moveTo(0,0); sShape.lineTo(-0.1,0.5); sShape.lineTo(0,-0.9); sShape.lineTo(0.1,0.5); sShape.closePath();
+    const sMesh  = new THREE.Mesh(new THREE.ExtrudeGeometry(sShape,{depth:0.05,bevelEnabled:false}), new THREE.MeshStandardMaterial({color:0xd4c99a,metalness:0.6,roughness:0.3}));
+    sMesh.position.set(-0.05,0.08,0); _needleGroup.add(sMesh);
 
-    const southShape = new THREE.Shape();
-    southShape.moveTo(0, 0);
-    southShape.lineTo(-0.1, 0.5);
-    southShape.lineTo(0, -0.9);
-    southShape.lineTo(0.1, 0.5);
-    southShape.closePath();
-    const southGeo = new THREE.ExtrudeGeometry(southShape, { depth: 0.05, bevelEnabled: false });
-    const southMat = new THREE.MeshStandardMaterial({ color: 0xd4c99a, metalness: 0.6, roughness: 0.3 });
-    const southMesh = new THREE.Mesh(southGeo, southMat);
-    southMesh.position.set(-0.05, 0.08, 0);
-    _needleGroup.add(southMesh);
-
-    const pivotGeo = new THREE.CylinderGeometry(0.12, 0.12, 0.12, 32);
-    const pivotMat = new THREE.MeshStandardMaterial({ color: 0xc9a84c, metalness: 1.0, roughness: 0.1 });
-    const pivot = new THREE.Mesh(pivotGeo, pivotMat);
-    pivot.position.y = 0.09;
-    _compassGroup.add(pivot);
-
+    const pivot = new THREE.Mesh(new THREE.CylinderGeometry(0.12,0.12,0.12,32), new THREE.MeshStandardMaterial({color:0xc9a84c,metalness:1.0,roughness:0.1}));
+    pivot.position.y = 0.09; _compassGroup.add(pivot);
     _compassGroup.rotation.x = -0.3;
 
-    function animate() {
-        _animFrame = requestAnimationFrame(animate);
-        _renderer.render(_scene, _camera);
-    }
-    animate();
-}
-
-function drawCompass() {
-    if (!_scene) {
-        initThreeCompass();
-    }
-    updateNeedle();
+    (function animate() { requestAnimationFrame(animate); _renderer.render(_scene, _camera); })();
 }
 
 function updateNeedle() {
     if (!_needleGroup || _qiblaBearing === null) return;
-    const deviceAngle = _deviceHeading !== null ? _deviceHeading : 0;
-    const relativeAngle = (_qiblaBearing - deviceAngle + 360) % 360;
-    _needleGroup.rotation.y = THREE.MathUtils.degToRad(-relativeAngle);
-
-    const tolerance = 5;
+    const rel = (_qiblaBearing - (_deviceHeading||0) + 360) % 360;
+    _needleGroup.rotation.y = THREE.MathUtils.degToRad(-rel);
     const alert = document.getElementById('qibla-alert');
-    if (Math.abs(relativeAngle) < tolerance || Math.abs(relativeAngle - 360) < tolerance) {
+    if (rel < 5 || rel > 355) {
         alert.style.display = 'block';
-        if (navigator.vibrate) navigator.vibrate([200, 100, 200]);
-    } else {
-        alert.style.display = 'none';
-    }
+        if (navigator.vibrate) navigator.vibrate([200,100,200]);
+    } else { alert.style.display = 'none'; }
 }
 
 function initDeviceOrientation() {
     const status = document.getElementById('sensor-status');
-
     function handleOrientation(e) {
         let heading = null;
-        if (e.webkitCompassHeading !== undefined && e.webkitCompassHeading !== null) {
-            heading = e.webkitCompassHeading;
-        } else if (e.alpha !== null) {
-            heading = (360 - e.alpha) % 360;
-        }
+        if (e.webkitCompassHeading != null) heading = e.webkitCompassHeading;
+        else if (e.alpha != null) heading = (360 - e.alpha) % 360;
         if (heading !== null) {
             _deviceHeading = heading;
             status.className = 'sensor-status active';
-            status.textContent = `Compass active — heading: ${heading.toFixed(1)}° | Qibla: ${_qiblaBearing !== null ? _qiblaBearing.toFixed(1) + '°' : 'loading...'}`;
+            status.textContent = `Compass: ${heading.toFixed(1)}° | Qibla: ${_qiblaBearing!==null?_qiblaBearing.toFixed(1)+'°':'loading…'}`;
             updateNeedle();
         }
     }
-
     if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
         const permBtn = document.createElement('button');
-        permBtn.className = 'notif-btn';
-        permBtn.style.marginTop = '12px';
+        permBtn.className = 'notif-btn'; permBtn.style.marginTop = '12px';
         permBtn.textContent = '📱 Enable Compass Sensor';
         permBtn.onclick = async () => {
             try {
-                const perm = await DeviceOrientationEvent.requestPermission();
-                if (perm === 'granted') {
+                const p = await DeviceOrientationEvent.requestPermission();
+                if (p === 'granted') {
                     window.addEventListener('deviceorientationabsolute', handleOrientation, true);
                     window.addEventListener('deviceorientation', handleOrientation, true);
                     permBtn.remove();
-                    status.textContent = 'Compass sensor activated.';
                 }
-            } catch(e) {
-                status.className = 'sensor-status error';
-                status.textContent = 'Sensor permission denied.';
-            }
+            } catch(e) { status.className='sensor-status error'; status.textContent='Sensor permission denied.'; }
         };
         document.querySelector('.qibla-card').appendChild(permBtn);
     } else if (window.DeviceOrientationEvent) {
@@ -792,6 +676,83 @@ function initDeviceOrientation() {
     }
 }
 
+/* ===== CALENDAR ===== */
+function loadCalendar() {
+    if (!_userLat) return;
+    _calData = null;
+    document.getElementById('cal-month-label').textContent = `${MONTH_NAMES[_calMonth-1]} ${_calYear}`;
+    document.getElementById('cal-detail').classList.remove('visible');
+
+    fetch(`/api/monthly-prayer-times?lat=${_userLat}&lng=${_userLng}&year=${_calYear}&month=${_calMonth}`)
+        .then(r => r.json()).then(data => {
+            if (!data.success) return;
+            _calData = data.days;
+            renderCalendarGrid(data.days);
+            document.getElementById('export-btn').disabled = false;
+        });
+}
+
+function renderCalendarGrid(days) {
+    const today = new Date();
+    const todayNum = (today.getFullYear() === _calYear && today.getMonth() + 1 === _calMonth) ? today.getDate() : -1;
+
+    const firstDay = new Date(_calYear, _calMonth - 1, 1).getDay();
+    const header = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].map(d => `<div class="cal-day-hdr">${d}</div>`).join('');
+
+    let cells = '';
+    for (let i = 0; i < firstDay; i++) cells += '<div></div>';
+
+    for (const d of days) {
+        const isToday   = d.day === todayNum;
+        const isSelected= d.day === _selectedDay;
+        cells += `<div class="cal-cell ${isToday?'today':''} ${isSelected?'selected':''}"
+            onclick="selectDay(${d.day})"
+            title="${d.weekday} ${d.day} — Fajr ${d.times.Fajr}">
+            <div class="cell-greg">${d.day}</div>
+            <div class="cell-hijri">${d.hijri_day}</div>
+        </div>`;
+    }
+
+    document.getElementById('cal-grid').innerHTML = header + cells;
+}
+
+function selectDay(day) {
+    if (!_calData) return;
+    _selectedDay = day;
+    const d = _calData.find(x => x.day === day);
+    if (!d) return;
+    renderCalendarGrid(_calData);
+
+    const detail = document.getElementById('cal-detail');
+    detail.classList.add('visible');
+    document.getElementById('cal-detail-title').textContent =
+        `${d.weekday}, ${MONTH_NAMES[_calMonth-1]} ${d.day} ${_calYear}  ·  ${d.hijri_day} ${d.hijri_month}`;
+    document.getElementById('cal-detail-times').innerHTML = PRAYER_ORDER.map(p => `
+        <div class="cal-detail-time">
+            <div class="dt-label">${PRAYERS_ICONS[p]} ${p}</div>
+            <div class="dt-val">${d.times[p]}</div>
+        </div>`).join('');
+
+    detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function changeMonth(delta) {
+    _calMonth += delta;
+    if (_calMonth > 12) { _calMonth = 1; _calYear++; }
+    if (_calMonth < 1)  { _calMonth = 12; _calYear--; }
+    _selectedDay = null;
+    loadCalendar();
+}
+
+function exportCSV() {
+    if (!_userLat) return;
+    const url = `/api/prayer-schedule-csv?lat=${_userLat}&lng=${_userLng}&year=${_calYear}&month=${_calMonth}`;
+    const a = document.createElement('a');
+    a.href = url; a.download = `prayer_times_${MONTH_NAMES[_calMonth-1]}_${_calYear}.csv`;
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+}
+
+/* ===== INIT ===== */
 window.addEventListener('DOMContentLoaded', () => {
     setInterval(tickClock, 1000);
     tickClock();
