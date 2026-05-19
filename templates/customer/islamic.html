@@ -1,0 +1,811 @@
+{% extends "base.html" %}
+
+{% block title %}Islamic Utility Suite — Ethiosadat{% endblock %}
+
+{% block extra_css %}
+{{ super() }}
+<style>
+:root {
+    --islamic-gold: #c9a84c;
+    --islamic-green: #1a7a4a;
+    --islamic-dark: #0d1f14;
+    --islamic-panel: rgba(13,31,20,0.92);
+    --islamic-border: rgba(201,168,76,0.3);
+    --glow-green: 0 0 18px rgba(26,122,74,0.7);
+}
+
+* { box-sizing: border-box; }
+
+.islamic-page {
+    min-height: 100vh;
+    background: radial-gradient(ellipse at top, #0d2a1a 0%, #071209 60%, #000 100%);
+    padding: 20px 16px 80px;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #e8dfc8;
+}
+
+.islamic-header {
+    text-align: center;
+    padding: 30px 0 24px;
+}
+
+.islamic-header .bismillah {
+    font-size: clamp(22px, 5vw, 36px);
+    color: var(--islamic-gold);
+    letter-spacing: 2px;
+    text-shadow: 0 0 20px rgba(201,168,76,0.5);
+    margin-bottom: 6px;
+    font-family: 'Noto Naskh Arabic', serif;
+}
+
+.islamic-header h1 {
+    font-size: clamp(18px, 4vw, 28px);
+    color: #d4c99a;
+    font-weight: 300;
+    margin: 0;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.tabs {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+.tab-btn {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--islamic-border);
+    color: #b8a87a;
+    padding: 10px 24px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+}
+
+.tab-btn.active, .tab-btn:hover {
+    background: var(--islamic-green);
+    border-color: var(--islamic-gold);
+    color: #fff;
+    box-shadow: var(--glow-green);
+}
+
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* ===== PRAYER TIMES ===== */
+.prayer-card {
+    background: var(--islamic-panel);
+    border: 1px solid var(--islamic-border);
+    border-radius: 20px;
+    padding: 28px 24px;
+    max-width: 520px;
+    margin: 0 auto 20px;
+    backdrop-filter: blur(10px);
+}
+
+.location-status {
+    text-align: center;
+    padding: 12px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    font-size: 13px;
+    background: rgba(201,168,76,0.08);
+    border: 1px solid rgba(201,168,76,0.2);
+    color: #c9a84c;
+}
+
+.location-status.error {
+    background: rgba(180,40,40,0.1);
+    border-color: rgba(180,40,40,0.3);
+    color: #f87171;
+}
+
+.location-status.ok {
+    background: rgba(26,122,74,0.12);
+    border-color: rgba(26,122,74,0.35);
+    color: #6ee7a0;
+}
+
+.clock-display {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.clock-display .time-now {
+    font-size: clamp(40px, 10vw, 64px);
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -1px;
+    line-height: 1;
+    text-shadow: 0 0 30px rgba(201,168,76,0.3);
+}
+
+.clock-display .date-now {
+    font-size: 13px;
+    color: #a09060;
+    margin-top: 4px;
+}
+
+.next-prayer-banner {
+    background: linear-gradient(135deg, #1a7a4a22, #c9a84c22);
+    border: 1px solid var(--islamic-gold);
+    border-radius: 14px;
+    padding: 14px 18px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.next-prayer-banner .label {
+    font-size: 11px;
+    color: #a09060;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.next-prayer-banner .prayer-name {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--islamic-gold);
+}
+
+.next-prayer-banner .countdown {
+    font-size: 22px;
+    font-weight: 700;
+    color: #6ee7a0;
+    font-variant-numeric: tabular-nums;
+}
+
+.prayer-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.prayer-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 13px 16px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.07);
+    transition: all 0.3s;
+}
+
+.prayer-row.current {
+    background: rgba(26,122,74,0.2);
+    border-color: var(--islamic-green);
+    box-shadow: var(--glow-green);
+}
+
+.prayer-row.next-up {
+    background: rgba(201,168,76,0.08);
+    border-color: rgba(201,168,76,0.4);
+}
+
+.prayer-row .p-icon { font-size: 18px; width: 28px; }
+
+.prayer-row .p-name {
+    flex: 1;
+    font-size: 15px;
+    font-weight: 600;
+    color: #d4c99a;
+    margin-left: 8px;
+}
+
+.prayer-row.current .p-name { color: #6ee7a0; }
+.prayer-row.next-up .p-name { color: var(--islamic-gold); }
+
+.prayer-row .p-time {
+    font-size: 16px;
+    font-weight: 700;
+    color: #e8e0cc;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 1px;
+}
+
+.prayer-row .p-badge {
+    font-size: 9px;
+    background: var(--islamic-green);
+    color: #fff;
+    padding: 2px 7px;
+    border-radius: 20px;
+    margin-left: 8px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.prayer-row.next-up .p-badge {
+    background: var(--islamic-gold);
+    color: #0d1f14;
+}
+
+.notif-btn {
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+    padding: 13px;
+    background: linear-gradient(135deg, #1a7a4a, #0f5232);
+    border: 1px solid var(--islamic-gold);
+    border-radius: 12px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+    text-transform: uppercase;
+}
+
+.notif-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+.notif-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+/* ===== QIBLA ===== */
+.qibla-card {
+    background: var(--islamic-panel);
+    border: 1px solid var(--islamic-border);
+    border-radius: 20px;
+    padding: 28px 20px;
+    max-width: 480px;
+    margin: 0 auto;
+    backdrop-filter: blur(10px);
+    text-align: center;
+}
+
+.qibla-card h2 {
+    font-size: 20px;
+    color: var(--islamic-gold);
+    margin-bottom: 4px;
+    font-weight: 700;
+}
+
+.qibla-card .subtitle {
+    font-size: 13px;
+    color: #7a7060;
+    margin-bottom: 20px;
+}
+
+#compass-wrapper {
+    position: relative;
+    width: 280px;
+    height: 280px;
+    margin: 0 auto 20px;
+}
+
+#qibla-canvas {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    display: block;
+}
+
+.bearing-display {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--islamic-gold);
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+}
+
+.bearing-label {
+    font-size: 13px;
+    color: #7a7060;
+    margin-bottom: 16px;
+}
+
+.qibla-alert {
+    display: none;
+    background: rgba(26,122,74,0.2);
+    border: 1px solid var(--islamic-green);
+    border-radius: 12px;
+    padding: 12px 18px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #6ee7a0;
+    letter-spacing: 1px;
+    animation: pulse-green 1s infinite alternate;
+}
+
+@keyframes pulse-green {
+    from { box-shadow: 0 0 0 rgba(26,122,74,0); }
+    to { box-shadow: 0 0 16px rgba(26,122,74,0.6); }
+}
+
+.sensor-status {
+    font-size: 12px;
+    color: #6b6050;
+    margin-top: 14px;
+    padding: 8px;
+    border-radius: 8px;
+    background: rgba(255,255,255,0.03);
+}
+
+.sensor-status.active { color: #6ee7a0; }
+.sensor-status.error { color: #f87171; }
+
+.ornament {
+    text-align: center;
+    color: var(--islamic-gold);
+    font-size: 20px;
+    opacity: 0.4;
+    margin: 10px 0;
+    letter-spacing: 8px;
+}
+
+@media (max-width: 480px) {
+    .islamic-page { padding: 12px 10px 80px; }
+    #compass-wrapper { width: 240px; height: 240px; }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="islamic-page">
+
+    <div class="islamic-header">
+        <div class="bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+        <h1>Islamic Utility Suite</h1>
+        <div class="ornament">❧ ✦ ❧</div>
+    </div>
+
+    <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab('prayer')">🕌 Prayer Times</button>
+        <button class="tab-btn" onclick="switchTab('qibla')">🧭 Qibla Direction</button>
+    </div>
+
+    <!-- ===== PRAYER TIMES PANEL ===== -->
+    <div id="tab-prayer" class="tab-panel active">
+        <div class="prayer-card">
+            <div id="location-status" class="location-status">📡 Requesting your location…</div>
+
+            <div class="clock-display">
+                <div class="time-now" id="clock-now">--:--:--</div>
+                <div class="date-now" id="date-now">--</div>
+            </div>
+
+            <div class="next-prayer-banner" id="next-banner" style="display:none;">
+                <div>
+                    <div class="label">Next Prayer</div>
+                    <div class="prayer-name" id="next-name">--</div>
+                    <div class="label" style="margin-top:4px;" id="next-time-label">--:--</div>
+                </div>
+                <div>
+                    <div class="label" style="text-align:right;">In</div>
+                    <div class="countdown" id="countdown">--:--</div>
+                </div>
+            </div>
+
+            <div class="prayer-list" id="prayer-list">
+                <div style="text-align:center;padding:20px;color:#7a7060;">Loading prayer times…</div>
+            </div>
+
+            <button class="notif-btn" id="notif-btn" onclick="requestNotifications()">
+                🔔 Enable Prayer Notifications & Azan
+            </button>
+        </div>
+    </div>
+
+    <!-- ===== QIBLA PANEL ===== -->
+    <div id="tab-qibla" class="tab-panel">
+        <div class="qibla-card">
+            <h2>🕋 Qibla Direction</h2>
+            <p class="subtitle">Point your phone to find the direction of the Kaaba in Makkah</p>
+
+            <div id="compass-wrapper">
+                <canvas id="qibla-canvas" width="560" height="560"></canvas>
+            </div>
+
+            <div class="bearing-display" id="bearing-display">--- °</div>
+            <div class="bearing-label">Qibla bearing from your location</div>
+
+            <div class="qibla-alert" id="qibla-alert">
+                ✅ You are facing the Qibla!
+            </div>
+
+            <div class="sensor-status" id="sensor-status">
+                Sensor: waiting for location…
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<audio id="azan-audio" preload="auto"></audio>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.min.js"></script>
+<script>
+const PRAYERS_ICONS = { Fajr:'🌙', Dhuhr:'☀️', Asr:'🌤️', Maghrib:'🌅', Isha:'🌙' };
+const PRAYER_ORDER = ['Fajr','Dhuhr','Asr','Maghrib','Isha'];
+
+let _prayerTimes = null;
+let _qiblaBearing = null;
+let _deviceHeading = null;
+let _swRegistration = null;
+let _userLat = null, _userLng = null;
+
+function switchTab(name) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    event.currentTarget.classList.add('active');
+}
+
+function tickClock() {
+    const now = new Date();
+    const hms = now.toLocaleTimeString('en-GB', {hour:'2-digit',minute:'2-digit',second:'2-digit'});
+    const date = now.toLocaleDateString('en-GB', {weekday:'long',year:'numeric',month:'long',day:'numeric'});
+    document.getElementById('clock-now').textContent = hms;
+    document.getElementById('date-now').textContent = date;
+    if (_prayerTimes) updateNextPrayer();
+}
+
+function parseTime(str) {
+    const [h, m] = str.split(':').map(Number);
+    return h * 60 + m;
+}
+
+function updateNextPrayer() {
+    const now = new Date();
+    const nowMin = now.getHours() * 60 + now.getMinutes();
+    let nextName = null, nextMin = null;
+    for (const p of PRAYER_ORDER) {
+        const t = parseTime(_prayerTimes[p]);
+        if (t > nowMin) { nextName = p; nextMin = t; break; }
+    }
+    if (!nextName) { nextName = PRAYER_ORDER[0]; nextMin = parseTime(_prayerTimes[PRAYER_ORDER[0]]) + 1440; }
+
+    const diff = nextMin - nowMin;
+    const h = Math.floor(diff / 60);
+    const m = diff % 60;
+    const banner = document.getElementById('next-banner');
+    banner.style.display = 'flex';
+    document.getElementById('next-name').textContent = PRAYERS_ICONS[nextName] + ' ' + nextName;
+    document.getElementById('next-time-label').textContent = _prayerTimes[nextName];
+    document.getElementById('countdown').textContent = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`;
+
+    const rows = document.querySelectorAll('.prayer-row');
+    rows.forEach(r => {
+        r.classList.remove('current', 'next-up');
+        const badge = r.querySelector('.p-badge');
+        if (badge) badge.remove();
+    });
+
+    let currentName = null;
+    for (let i = PRAYER_ORDER.length - 1; i >= 0; i--) {
+        if (parseTime(_prayerTimes[PRAYER_ORDER[i]]) <= nowMin) {
+            currentName = PRAYER_ORDER[i]; break;
+        }
+    }
+
+    rows.forEach(r => {
+        const pName = r.dataset.prayer;
+        if (pName === currentName) {
+            r.classList.add('current');
+            const b = document.createElement('span');
+            b.className = 'p-badge';
+            b.textContent = 'Now';
+            r.querySelector('.p-time').after(b);
+        } else if (pName === nextName) {
+            r.classList.add('next-up');
+            const b = document.createElement('span');
+            b.className = 'p-badge';
+            b.textContent = 'Next';
+            r.querySelector('.p-time').after(b);
+        }
+    });
+
+    if (diff === 0) {
+        playAzan(nextName);
+    }
+}
+
+function renderPrayerList(times) {
+    const list = document.getElementById('prayer-list');
+    list.innerHTML = PRAYER_ORDER.map(p => `
+        <div class="prayer-row" data-prayer="${p}">
+            <span class="p-icon">${PRAYERS_ICONS[p]}</span>
+            <span class="p-name">${p}</span>
+            <span class="p-time">${times[p]}</span>
+        </div>
+    `).join('');
+    _prayerTimes = times;
+    updateNextPrayer();
+}
+
+function fetchPrayerTimes(lat, lng) {
+    fetch(`/api/prayer-times?lat=${lat}&lng=${lng}`)
+        .then(r => r.json())
+        .then(data => {
+            if (data.success) {
+                const st = document.getElementById('location-status');
+                st.className = 'location-status ok';
+                st.textContent = `📍 Location acquired — ${lat.toFixed(4)}°, ${lng.toFixed(4)}°`;
+                renderPrayerList(data.times);
+                schedulePrayerNotifications(data.times);
+            }
+        })
+        .catch(() => {
+            const st = document.getElementById('location-status');
+            st.className = 'location-status error';
+            st.textContent = '⚠️ Failed to load prayer times. Please try again.';
+        });
+}
+
+function fetchQibla(lat, lng) {
+    fetch(`/api/qibla-direction?lat=${lat}&lng=${lng}`)
+        .then(r => r.json())
+        .then(data => {
+            if (data.success) {
+                _qiblaBearing = data.bearing;
+                document.getElementById('bearing-display').textContent = `${data.bearing.toFixed(1)} °`;
+                document.getElementById('sensor-status').textContent = `Qibla bearing: ${data.bearing.toFixed(1)}° from North. Rotate your phone to align.`;
+                drawCompass();
+            }
+        });
+}
+
+function getLocation() {
+    if (!navigator.geolocation) {
+        const st = document.getElementById('location-status');
+        st.className = 'location-status error';
+        st.textContent = '⚠️ Geolocation not supported on this device.';
+        return;
+    }
+    navigator.geolocation.getCurrentPosition(
+        pos => {
+            _userLat = pos.coords.latitude;
+            _userLng = pos.coords.longitude;
+            fetchPrayerTimes(_userLat, _userLng);
+            fetchQibla(_userLat, _userLng);
+        },
+        err => {
+            const st = document.getElementById('location-status');
+            st.className = 'location-status error';
+            st.textContent = '⚠️ Location access denied. Please allow location to use this feature.';
+        },
+        { enableHighAccuracy: true, timeout: 10000 }
+    );
+}
+
+async function requestNotifications() {
+    const btn = document.getElementById('notif-btn');
+    btn.disabled = true;
+    btn.textContent = '⏳ Requesting permission…';
+
+    if (!('Notification' in window)) {
+        btn.textContent = '⚠️ Notifications not supported';
+        return;
+    }
+
+    const perm = await Notification.requestPermission();
+    if (perm !== 'granted') {
+        btn.textContent = '❌ Permission denied';
+        btn.disabled = false;
+        return;
+    }
+
+    if ('serviceWorker' in navigator) {
+        try {
+            _swRegistration = await navigator.serviceWorker.register('/static/js/azan-sw.js', { scope: '/' });
+            await navigator.serviceWorker.ready;
+            btn.textContent = '✅ Azan Notifications Enabled';
+            if (_prayerTimes) schedulePrayerNotifications(_prayerTimes);
+        } catch(e) {
+            btn.textContent = '⚠️ Service Worker failed — using in-tab alerts';
+            btn.disabled = false;
+        }
+    } else {
+        btn.textContent = '✅ In-app Azan Enabled';
+    }
+}
+
+function schedulePrayerNotifications(times) {
+    if (!_swRegistration || !_swRegistration.active) return;
+    const list = PRAYER_ORDER.map(p => ({ name: p, time: times[p] }));
+    _swRegistration.active.postMessage({ type: 'SCHEDULE_AZAN', prayers: list });
+}
+
+navigator.serviceWorker && navigator.serviceWorker.addEventListener('message', e => {
+    if (e.data && e.data.type === 'PLAY_AZAN') playAzan(e.data.prayer);
+});
+
+function playAzan(prayerName) {
+    const audio = document.getElementById('azan-audio');
+    audio.src = prayerName === 'Fajr' ? '/static/audio/fajrazan.mp3' : '/static/audio/azan.mp3';
+    audio.load();
+    audio.play().catch(() => {});
+}
+
+/* ===== 3D QIBLA COMPASS ===== */
+let _scene, _camera, _renderer, _compassGroup, _needleGroup;
+let _animFrame;
+
+function initThreeCompass() {
+    const wrapper = document.getElementById('compass-wrapper');
+    const W = wrapper.offsetWidth;
+    const H = wrapper.offsetHeight;
+
+    _scene = new THREE.Scene();
+    _camera = new THREE.PerspectiveCamera(45, W / H, 0.1, 100);
+    _camera.position.set(0, 0, 3.8);
+
+    _renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('qibla-canvas'), alpha: true, antialias: true });
+    _renderer.setPixelRatio(window.devicePixelRatio);
+    _renderer.setSize(W, H);
+    _renderer.setClearColor(0x000000, 0);
+
+    const ambient = new THREE.AmbientLight(0xffffff, 0.6);
+    _scene.add(ambient);
+    const dirLight = new THREE.DirectionalLight(0xc9a84c, 1.2);
+    dirLight.position.set(2, 4, 3);
+    _scene.add(dirLight);
+    const backLight = new THREE.DirectionalLight(0x1a7a4a, 0.5);
+    backLight.position.set(-2, -2, -2);
+    _scene.add(backLight);
+
+    _compassGroup = new THREE.Group();
+    _scene.add(_compassGroup);
+
+    const dialGeo = new THREE.CylinderGeometry(1.5, 1.5, 0.08, 64);
+    const dialMat = new THREE.MeshStandardMaterial({ color: 0x0d1f14, metalness: 0.4, roughness: 0.6 });
+    _compassGroup.add(new THREE.Mesh(dialGeo, dialMat));
+
+    const ringGeo = new THREE.TorusGeometry(1.5, 0.04, 8, 64);
+    const ringMat = new THREE.MeshStandardMaterial({ color: 0xc9a84c, metalness: 0.9, roughness: 0.2 });
+    _compassGroup.add(new THREE.Mesh(ringGeo, ringMat));
+
+    const innerRingGeo = new THREE.TorusGeometry(1.2, 0.015, 8, 64);
+    const innerRingMat = new THREE.MeshStandardMaterial({ color: 0x1a7a4a, metalness: 0.8, roughness: 0.3 });
+    _compassGroup.add(new THREE.Mesh(innerRingGeo, innerRingMat));
+
+    const tickMat = new THREE.MeshStandardMaterial({ color: 0xc9a84c, metalness: 0.9, roughness: 0.1 });
+    for (let i = 0; i < 36; i++) {
+        const isMajor = i % 9 === 0;
+        const geo = new THREE.BoxGeometry(isMajor ? 0.03 : 0.015, 0.05, isMajor ? 0.18 : 0.09);
+        const tick = new THREE.Mesh(geo, tickMat);
+        const angle = (i / 36) * Math.PI * 2;
+        tick.position.set(Math.sin(angle) * 1.38, 0.065, Math.cos(angle) * 1.38);
+        tick.lookAt(0, 0.065, 0);
+        _compassGroup.add(tick);
+    }
+
+    _needleGroup = new THREE.Group();
+    _compassGroup.add(_needleGroup);
+
+    const northShape = new THREE.Shape();
+    northShape.moveTo(0, 0);
+    northShape.lineTo(-0.1, -0.5);
+    northShape.lineTo(0, 0.9);
+    northShape.lineTo(0.1, -0.5);
+    northShape.closePath();
+    const northGeo = new THREE.ExtrudeGeometry(northShape, { depth: 0.05, bevelEnabled: false });
+    const northMat = new THREE.MeshStandardMaterial({ color: 0xf87171, metalness: 0.6, roughness: 0.3 });
+    const northMesh = new THREE.Mesh(northGeo, northMat);
+    northMesh.position.set(-0.05, 0.08, 0);
+    _needleGroup.add(northMesh);
+
+    const southShape = new THREE.Shape();
+    southShape.moveTo(0, 0);
+    southShape.lineTo(-0.1, 0.5);
+    southShape.lineTo(0, -0.9);
+    southShape.lineTo(0.1, 0.5);
+    southShape.closePath();
+    const southGeo = new THREE.ExtrudeGeometry(southShape, { depth: 0.05, bevelEnabled: false });
+    const southMat = new THREE.MeshStandardMaterial({ color: 0xd4c99a, metalness: 0.6, roughness: 0.3 });
+    const southMesh = new THREE.Mesh(southGeo, southMat);
+    southMesh.position.set(-0.05, 0.08, 0);
+    _needleGroup.add(southMesh);
+
+    const pivotGeo = new THREE.CylinderGeometry(0.12, 0.12, 0.12, 32);
+    const pivotMat = new THREE.MeshStandardMaterial({ color: 0xc9a84c, metalness: 1.0, roughness: 0.1 });
+    const pivot = new THREE.Mesh(pivotGeo, pivotMat);
+    pivot.position.y = 0.09;
+    _compassGroup.add(pivot);
+
+    _compassGroup.rotation.x = -0.3;
+
+    function animate() {
+        _animFrame = requestAnimationFrame(animate);
+        _renderer.render(_scene, _camera);
+    }
+    animate();
+}
+
+function drawCompass() {
+    if (!_scene) {
+        initThreeCompass();
+    }
+    updateNeedle();
+}
+
+function updateNeedle() {
+    if (!_needleGroup || _qiblaBearing === null) return;
+    const deviceAngle = _deviceHeading !== null ? _deviceHeading : 0;
+    const relativeAngle = (_qiblaBearing - deviceAngle + 360) % 360;
+    _needleGroup.rotation.y = THREE.MathUtils.degToRad(-relativeAngle);
+
+    const tolerance = 5;
+    const alert = document.getElementById('qibla-alert');
+    if (Math.abs(relativeAngle) < tolerance || Math.abs(relativeAngle - 360) < tolerance) {
+        alert.style.display = 'block';
+        if (navigator.vibrate) navigator.vibrate([200, 100, 200]);
+    } else {
+        alert.style.display = 'none';
+    }
+}
+
+function initDeviceOrientation() {
+    const status = document.getElementById('sensor-status');
+
+    function handleOrientation(e) {
+        let heading = null;
+        if (e.webkitCompassHeading !== undefined && e.webkitCompassHeading !== null) {
+            heading = e.webkitCompassHeading;
+        } else if (e.alpha !== null) {
+            heading = (360 - e.alpha) % 360;
+        }
+        if (heading !== null) {
+            _deviceHeading = heading;
+            status.className = 'sensor-status active';
+            status.textContent = `Compass active — heading: ${heading.toFixed(1)}° | Qibla: ${_qiblaBearing !== null ? _qiblaBearing.toFixed(1) + '°' : 'loading...'}`;
+            updateNeedle();
+        }
+    }
+
+    if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
+        const permBtn = document.createElement('button');
+        permBtn.className = 'notif-btn';
+        permBtn.style.marginTop = '12px';
+        permBtn.textContent = '📱 Enable Compass Sensor';
+        permBtn.onclick = async () => {
+            try {
+                const perm = await DeviceOrientationEvent.requestPermission();
+                if (perm === 'granted') {
+                    window.addEventListener('deviceorientationabsolute', handleOrientation, true);
+                    window.addEventListener('deviceorientation', handleOrientation, true);
+                    permBtn.remove();
+                    status.textContent = 'Compass sensor activated.';
+                }
+            } catch(e) {
+                status.className = 'sensor-status error';
+                status.textContent = 'Sensor permission denied.';
+            }
+        };
+        document.querySelector('.qibla-card').appendChild(permBtn);
+    } else if (window.DeviceOrientationEvent) {
+        window.addEventListener('deviceorientationabsolute', handleOrientation, true);
+        window.addEventListener('deviceorientation', handleOrientation, true);
+    } else {
+        status.className = 'sensor-status error';
+        status.textContent = 'No compass sensor detected on this device.';
+    }
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+    setInterval(tickClock, 1000);
+    tickClock();
+    getLocation();
+    initDeviceOrientation();
+    initThreeCompass();
+});
+
+window.addEventListener('resize', () => {
+    if (!_renderer) return;
+    const w = document.getElementById('compass-wrapper');
+    _renderer.setSize(w.offsetWidth, w.offsetHeight);
+    _camera.aspect = w.offsetWidth / w.offsetHeight;
+    _camera.updateProjectionMatrix();
+});
+</script>
+{% endblock %}
