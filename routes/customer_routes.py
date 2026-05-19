@@ -88,6 +88,51 @@ def index():
         platform = get_platform()
         show_about = platform in ('desktop', 'mobile_browser')
 
+        hijri_home = None
+        daily_ayah = None
+        next_event = None
+        try:
+            from routes.islamic_routes import (
+                _gregorian_to_hijri, HIJRI_MONTHS,
+                _load_quran_data, SURAHS, _upcoming_holidays
+            )
+            _today = datetime_.date.today()
+            _hy, _hm, _hd = _gregorian_to_hijri(_today.year, _today.month, _today.day)
+            hijri_home = {
+                'day':   _hd,
+                'month': HIJRI_MONTHS[_hm - 1],
+                'year':  _hy,
+                'full':  f"{_hd} {HIJRI_MONTHS[_hm-1]} {_hy} AH",
+            }
+            _holidays = _upcoming_holidays(1)
+            if _holidays:
+                _h = _holidays[0]
+                next_event = {
+                    'name':      _h['name'],
+                    'icon':      _h['icon'],
+                    'gregorian': _h['gregorian'],
+                    'days_away': _h['days_away'],
+                    'is_today':  _h['is_today'],
+                }
+            _qdata = _load_quran_data()
+            if _qdata:
+                _featured = [55, 36, 67, 18, 56, 3, 59, 78, 87, 89, 91, 93, 94, 96, 99, 112, 113, 114]
+                _doy = _today.timetuple().tm_yday
+                _snum = _featured[_doy % len(_featured)]
+                _verses = _qdata.get(_snum) or _qdata.get(str(_snum)) or []
+                if _verses:
+                    _aidx = (_doy // len(_featured)) % max(1, len(_verses))
+                    _v = _verses[_aidx]
+                    _meta = next((s for s in SURAHS if s[0] == _snum), None)
+                    daily_ayah = {
+                        'text':       _v.get('text', '') if isinstance(_v, dict) else str(_v),
+                        'surah_num':  _snum,
+                        'surah_name': _meta[2] if _meta else f'Surah {_snum}',
+                        'ayah_num':   _v.get('verse', _aidx + 1) if isinstance(_v, dict) else _aidx + 1,
+                    }
+        except Exception:
+            pass
+
         return render_template('customer/index.html',
                                featured_products=featured_list,
                                new_products=new_list,
@@ -96,7 +141,10 @@ def index():
                                recently_viewed_products=recently_viewed_list,
                                show_about=show_about,
                                platform=platform,
-                               lang=lang)
+                               lang=lang,
+                               hijri_home=hijri_home,
+                               daily_ayah=daily_ayah,
+                               next_event=next_event)
     except Exception as e:
         import traceback
         print(f"Home page error: {e}\n{traceback.format_exc()}")

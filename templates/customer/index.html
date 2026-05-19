@@ -4,6 +4,9 @@
 
 {% block extra_css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/slider.css') }}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&display=swap">
 <style>
     /* Fullscreen video overlay */
     .fullscreen-video {
@@ -343,20 +346,110 @@
             background: #16213e;
         }
     }
-    /* Responsive */
     @media (max-width: 768px) {
-        .hero {
-            padding: 40px 20px !important;
-        }
-        .hero h1 {
-            font-size: 24px !important;
-        }
-        .products-grid {
-            gap: 16px !important;
-        }
-        .about-section {
-            padding: 30px 20px;
-        }
+        .hero { padding: 40px 20px !important; }
+        .hero h1 { font-size: 24px !important; }
+        .products-grid { gap: 16px !important; }
+        .about-section { padding: 30px 20px; }
+    }
+
+    .idc-wrap {
+        margin: 52px 0;
+        background: linear-gradient(160deg,#f0faf4 0%,#fdfffe 55%,#f2f8f4 100%);
+        border-radius: 24px;
+        border: 1px solid #d4ead8;
+        padding: 40px 28px 32px;
+    }
+    .idc-head { text-align:center; margin-bottom:30px; }
+    .idc-head h2 {
+        font-size:clamp(19px,3.5vw,26px); font-weight:800; color:#1a2e1e;
+        margin:0 0 5px; display:flex; align-items:center; justify-content:center; gap:10px;
+    }
+    .idc-arabic-sub {
+        font-family:'Amiri',serif; font-size:17px; color:#4a8a5e;
+        display:block; margin-bottom:5px;
+    }
+    .idc-head p { font-size:13px; color:#6a8f70; margin:0; }
+    .idc-grid {
+        display:grid; grid-template-columns:1fr 1fr;
+        gap:16px; max-width:880px; margin:0 auto 26px;
+    }
+    .idc-card {
+        background:#fff; border-radius:18px; padding:20px 18px;
+        box-shadow:0 2px 18px rgba(26,122,74,.07);
+        border:1px solid rgba(26,122,74,.1);
+        display:flex; flex-direction:column;
+        transition:transform .22s,box-shadow .22s;
+    }
+    .idc-card:hover { transform:translateY(-3px); box-shadow:0 8px 28px rgba(26,122,74,.13); }
+    .idc-card-head { display:flex; align-items:center; gap:9px; margin-bottom:14px; }
+    .idc-card-icon {
+        width:36px; height:36px; border-radius:10px;
+        background:linear-gradient(135deg,#1a7a4a,#0f5232);
+        display:flex; align-items:center; justify-content:center;
+        font-size:17px; flex-shrink:0;
+    }
+    .idc-card-lbl { font-size:11px; font-weight:700; color:#6a8f70; text-transform:uppercase; letter-spacing:1px; }
+    .idc-card-link {
+        margin-top:auto; padding-top:12px;
+        font-size:12px; color:#1a7a4a; font-weight:700;
+        text-decoration:none; display:flex; align-items:center; gap:5px;
+        border-top:1px solid #edf6ef;
+    }
+    .idc-card-link:hover { color:#0f5232; }
+
+    .idc-prayer-list { display:flex; flex-direction:column; gap:6px; flex:1; }
+    .idc-prayer-row {
+        display:flex; align-items:center; justify-content:space-between;
+        padding:7px 10px; border-radius:9px;
+        background:#f7fbf8; border-left:3px solid transparent; transition:all .18s;
+    }
+    .idc-prayer-row.pnext { background:rgba(26,122,74,.09); border-left-color:#1a7a4a; }
+    .idc-prayer-row.pcurr { background:rgba(201,168,76,.1); border-left-color:#c9a84c; }
+    .idc-pname { font-size:13px; font-weight:600; color:#2a4a2e; display:flex; align-items:center; gap:5px; }
+    .idc-ptime { font-size:13px; font-weight:700; color:#1a7a4a; font-variant-numeric:tabular-nums; }
+
+    .idc-hijri-body { text-align:center; flex:1; padding:4px 0 12px; }
+    .idc-hijri-day { font-size:60px; font-weight:900; color:#1a7a4a; line-height:1; margin-bottom:4px; }
+    .idc-hijri-month { font-size:17px; font-weight:600; color:#2a4a2e; margin-bottom:2px; }
+    .idc-hijri-year { font-size:12px; color:#8aaa8e; margin-bottom:14px; }
+    .idc-next-event {
+        background:rgba(26,122,74,.06); border-radius:9px;
+        padding:8px 12px; font-size:11px; color:#5a7a60;
+        border:1px solid rgba(26,122,74,.1);
+    }
+    .idc-next-event strong { color:#1a7a4a; }
+
+    .idc-compass-body { display:flex; flex-direction:column; align-items:center; flex:1; gap:8px; padding:4px 0 10px; }
+    .idc-compass-svg { width:108px; height:108px; }
+    .idc-bearing { font-size:26px; font-weight:800; color:#1a7a4a; letter-spacing:-1px; text-align:center; }
+    .idc-bearing-sub { font-size:11px; color:#8aaa8e; text-align:center; }
+
+    .idc-ayah-body { flex:1; display:flex; flex-direction:column; }
+    .idc-ayah-text {
+        font-family:'Amiri','Traditional Arabic',serif;
+        font-size:clamp(16px,2.6vw,21px); color:#1a2e1e;
+        line-height:1.9; text-align:right; direction:rtl; unicode-bidi:embed;
+        flex:1; padding:4px 0 12px; border-bottom:1px solid #edf6ef;
+    }
+    .idc-ayah-ref { font-size:11px; color:#8aaa8e; margin-top:8px; display:flex; align-items:center; gap:5px; }
+
+    .idc-cta { text-align:center; padding-top:4px; }
+    .idc-cta a {
+        display:inline-flex; align-items:center; gap:9px;
+        background:linear-gradient(135deg,#1a7a4a,#0f5232); color:#fff;
+        text-decoration:none; padding:12px 30px; border-radius:30px;
+        font-weight:700; font-size:14px;
+        transition:transform .22s,box-shadow .22s;
+        box-shadow:0 4px 16px rgba(26,122,74,.28);
+    }
+    .idc-cta a:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(26,122,74,.38); }
+
+    @media (max-width:640px) {
+        .idc-wrap { padding:28px 14px 24px; }
+        .idc-grid { grid-template-columns:1fr; }
+        .idc-hijri-day { font-size:48px; }
+        .idc-compass-svg { width:88px; height:88px; }
     }
 </style>
 {% endblock %}
@@ -572,6 +665,120 @@
 </div>
 {% endif %}
 
+{% if hijri_home %}
+<div class="idc-wrap">
+    <div class="idc-head">
+        <span class="idc-arabic-sub">الزاوية الإسلامية</span>
+        <h2>🕌 Islamic Corner</h2>
+        <p>Prayer times, Hijri calendar, Qibla direction & daily Qur'an — for our Muslim customers</p>
+    </div>
+
+    <div class="idc-grid">
+
+        <div class="idc-card">
+            <div class="idc-card-head">
+                <div class="idc-card-icon">🕐</div>
+                <span class="idc-card-lbl">Prayer Times</span>
+            </div>
+            <div class="idc-prayer-list" id="idc-prayer-list">
+                <div style="font-size:12px;color:#a0b8a4;text-align:center;padding:14px 0;">Loading…</div>
+            </div>
+            <a href="{{ url_for('islamic.islamic_suite') }}#prayer" class="idc-card-link">
+                Full Prayer Schedule →
+            </a>
+        </div>
+
+        <div class="idc-card">
+            <div class="idc-card-head">
+                <div class="idc-card-icon">📅</div>
+                <span class="idc-card-lbl">Hijri Calendar</span>
+            </div>
+            <div class="idc-hijri-body">
+                <div class="idc-hijri-day">{{ hijri_home.day }}</div>
+                <div class="idc-hijri-month">{{ hijri_home.month }}</div>
+                <div class="idc-hijri-year">{{ hijri_home.year }} AH</div>
+                {% if next_event %}
+                <div class="idc-next-event">
+                    {{ next_event.icon }}
+                    {% if next_event.is_today %}
+                        <strong>{{ next_event.name }}</strong> — Today!
+                    {% elif next_event.days_away == 1 %}
+                        <strong>{{ next_event.name }}</strong> — Tomorrow
+                    {% else %}
+                        <strong>{{ next_event.name }}</strong> in {{ next_event.days_away }} days
+                    {% endif %}
+                </div>
+                {% endif %}
+            </div>
+            <a href="{{ url_for('islamic.islamic_suite') }}#calendar" class="idc-card-link">
+                Full Hijri Calendar →
+            </a>
+        </div>
+
+        <div class="idc-card">
+            <div class="idc-card-head">
+                <div class="idc-card-icon">🧭</div>
+                <span class="idc-card-lbl">Qibla Direction</span>
+            </div>
+            <div class="idc-compass-body">
+                <svg class="idc-compass-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="47" fill="#f7fbf8" stroke="#d4ead8" stroke-width="1.5"/>
+                    <circle cx="50" cy="50" r="38" fill="none" stroke="#edf6ef" stroke-width="1"/>
+                    <line x1="50" y1="12" x2="50" y2="18" stroke="#d4ead8" stroke-width="1.5"/>
+                    <line x1="88" y1="50" x2="82" y2="50" stroke="#d4ead8" stroke-width="1"/>
+                    <line x1="50" y1="88" x2="50" y2="82" stroke="#d4ead8" stroke-width="1"/>
+                    <line x1="12" y1="50" x2="18" y2="50" stroke="#d4ead8" stroke-width="1"/>
+                    <text x="50" y="11" text-anchor="middle" font-size="9" font-weight="700" fill="#1a7a4a" font-family="system-ui,sans-serif">N</text>
+                    <text x="91" y="53" text-anchor="middle" font-size="7" fill="#a0c0a8" font-family="system-ui,sans-serif">E</text>
+                    <text x="50" y="97" text-anchor="middle" font-size="7" fill="#a0c0a8" font-family="system-ui,sans-serif">S</text>
+                    <text x="9" y="53" text-anchor="middle" font-size="7" fill="#a0c0a8" font-family="system-ui,sans-serif">W</text>
+                    <g id="idc-compass-needle" style="transform-origin:50px 50px;transform:rotate(4.6deg)">
+                        <polygon points="50,14 46,50 54,50" fill="#1a7a4a"/>
+                        <polygon points="50,86 46,50 54,50" fill="#d4ead8"/>
+                        <circle cx="50" cy="50" r="4" fill="white" stroke="#1a7a4a" stroke-width="1.5"/>
+                    </g>
+                </svg>
+                <div class="idc-bearing" id="idc-bearing-val">4.6°</div>
+                <div class="idc-bearing-sub" id="idc-bearing-sub">from Addis Ababa · North</div>
+            </div>
+            <a href="{{ url_for('islamic.islamic_suite') }}#qibla" class="idc-card-link">
+                Interactive Compass →
+            </a>
+        </div>
+
+        <div class="idc-card">
+            <div class="idc-card-head">
+                <div class="idc-card-icon">📖</div>
+                <span class="idc-card-lbl">Daily Ayah</span>
+            </div>
+            <div class="idc-ayah-body">
+                {% if daily_ayah and daily_ayah.text %}
+                <div class="idc-ayah-text">{{ daily_ayah.text }}</div>
+                <div class="idc-ayah-ref">
+                    <span>📖</span>
+                    <span>{{ daily_ayah.surah_name }} — {{ daily_ayah.surah_num }}:{{ daily_ayah.ayah_num }}</span>
+                </div>
+                {% else %}
+                <div style="font-size:13px;color:#a0b8a4;text-align:center;padding:20px 0;flex:1;">
+                    بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ
+                </div>
+                {% endif %}
+            </div>
+            <a href="{{ url_for('islamic.islamic_suite') }}#quran" class="idc-card-link">
+                Read Full Qur'an →
+            </a>
+        </div>
+
+    </div>
+
+    <div class="idc-cta">
+        <a href="{{ url_for('islamic.islamic_suite') }}">
+            🕌 Open Full Islamic Suite
+        </a>
+    </div>
+</div>
+{% endif %}
+
 <!-- Recently Viewed Section -->
 {% if recently_viewed_products and recently_viewed_products|length > 0 %}
 <div style="margin-top: 40px;">
@@ -650,7 +857,65 @@
 </div>
 
 <script>
-    // Fullscreen video function
+(function() {
+    var PICONS = {Fajr:'🌙',Dhuhr:'☀️',Asr:'🌤️',Maghrib:'🌅',Isha:'🌃'};
+    var PORDER = ['Fajr','Dhuhr','Asr','Maghrib','Isha'];
+    function toMin(s) { var p=s.split(':'); return +p[0]*60 + +p[1]; }
+    function compassDir(deg) {
+        var dirs = ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];
+        return dirs[Math.round(deg/22.5) % 16];
+    }
+    function renderPrayers(times) {
+        var now = new Date();
+        var cur = now.getHours()*60 + now.getMinutes();
+        var nextP = null;
+        for (var i=0; i<PORDER.length; i++) {
+            if (toMin(times[PORDER[i]]) > cur) { nextP = PORDER[i]; break; }
+        }
+        if (!nextP) nextP = PORDER[0];
+        var currP = null;
+        for (var j=PORDER.length-1; j>=0; j--) {
+            if (toMin(times[PORDER[j]]) <= cur) { currP = PORDER[j]; break; }
+        }
+        var el = document.getElementById('idc-prayer-list');
+        if (!el) return;
+        el.innerHTML = PORDER.map(function(p) {
+            var cls = p===nextP ? 'pnext' : (p===currP ? 'pcurr' : '');
+            return '<div class="idc-prayer-row '+cls+'">'
+                + '<span class="idc-pname">'+PICONS[p]+' '+p+'</span>'
+                + '<span class="idc-ptime">'+times[p]+'</span>'
+                + '</div>';
+        }).join('');
+    }
+    function loadPrayers() {
+        fetch('/api/islamic/prayer-times?lat=8.9806&lng=38.7578')
+            .then(function(r){ return r.json(); })
+            .then(function(d){ if(d.success) renderPrayers(d.times); })
+            .catch(function(){});
+    }
+    function loadQibla() {
+        fetch('/api/islamic/qibla-direction?lat=8.9806&lng=38.7578')
+            .then(function(r){ return r.json(); })
+            .then(function(d){
+                if (!d.success) return;
+                var b = d.bearing;
+                var val = document.getElementById('idc-bearing-val');
+                var sub = document.getElementById('idc-bearing-sub');
+                var needle = document.getElementById('idc-compass-needle');
+                if (val) val.textContent = b.toFixed(1)+'°';
+                if (sub) sub.textContent = 'from Addis Ababa · '+compassDir(b);
+                if (needle) needle.style.transform = 'rotate('+b+'deg)';
+            })
+            .catch(function(){});
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+        if (document.getElementById('idc-prayer-list')) {
+            loadPrayers();
+            loadQibla();
+        }
+    });
+})();
+
     function playFullscreen(videoSrc) {
         const fullscreenDiv = document.createElement('div');
         fullscreenDiv.className = 'fullscreen-video';
