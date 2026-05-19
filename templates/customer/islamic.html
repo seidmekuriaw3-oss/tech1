@@ -3,6 +3,9 @@
 
 {% block extra_css %}
 {{ super() }}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&display=swap">
 <style>
 :root {
     --ig: #1a7a4a;
@@ -237,8 +240,6 @@
     .hh-day{font-size:44px}
     {% if ramadan_active %}.ramadan-timers{grid-template-columns:1fr}{% endif %}
 }
-
-@import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&display=swap');
 
 .qpanel-wrap{max-width:600px;margin:0 auto}
 .qsearch-bar{
@@ -834,7 +835,7 @@ function selectCity(i) {
     bar.textContent = `📍 ${c.name}`;
     loadPrayerTimes(c.lat, c.lng);
     loadQibla(c.lat, c.lng);
-    if (_calData) loadCalendar();
+    if (_cData) { _cData=null; loadCalendar(); }
 }
 
 function cityKeyNav(e) {
@@ -882,7 +883,7 @@ function useGPS() {
             setTimeout(() => { btn.textContent = '📡 Use My Current Location (GPS)'; btn.disabled = false; }, 3000);
             loadPrayerTimes(_lat, _lng);
             loadQibla(_lat, _lng);
-            if (_calData) loadCalendar();
+            if (_cData) { _cData=null; loadCalendar(); }
         },
         () => {
             btn.textContent = '⚠️ Location denied — showing default';
@@ -1068,11 +1069,11 @@ function exportCSV() {
     document.body.appendChild(a); a.click(); document.body.removeChild(a);
 }
 
+let _compassInited = false;
 window.addEventListener('DOMContentLoaded',()=>{
     setInterval(tickClock,1000); tickClock();
     startLocation();
     initOrientation();
-    initCompass();
 });
 window.addEventListener('resize',()=>{
     if(!_rend) return;
@@ -1289,6 +1290,22 @@ const _origSwitchTab = switchTab;
 switchTab = function(name, btn) {
     _origSwitchTab(name, btn);
     if (name === 'quran' && !_qSurahs.length) qLoadSurahs();
+    if (name === 'qibla') {
+        if (!_compassInited) {
+            _compassInited = true;
+            requestAnimationFrame(() => {
+                initCompass();
+                if (_qbear !== null) updateNeedle();
+                const w = document.getElementById('compass-wrapper');
+                if (_rend) _rend.setSize(w.offsetWidth, w.offsetHeight);
+                if (_cam) { _cam.aspect = w.offsetWidth / w.offsetHeight; _cam.updateProjectionMatrix(); }
+            });
+        } else if (_rend) {
+            const w = document.getElementById('compass-wrapper');
+            _rend.setSize(w.offsetWidth, w.offsetHeight);
+            if (_cam) { _cam.aspect = w.offsetWidth / w.offsetHeight; _cam.updateProjectionMatrix(); }
+        }
+    }
 };
 </script>
 {% endblock %}
