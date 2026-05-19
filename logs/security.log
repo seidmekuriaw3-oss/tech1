@@ -18846,3 +18846,5 @@ NameError: name 'WHATSAPP_NUMBER' is not defined
 2026-05-16 17:38:48,492 - app - WARNING - 404 Error: http://fe9bf4b8-2713-443a-a95f-47ed94558eb1-00-nwiptrk9p8ll.riker.replit.dev/favicon.ico
 2026-05-17 01:18:41,608 - app - WARNING - 404 Error: http://fe9bf4b8-2713-443a-a95f-47ed94558eb1-00-nwiptrk9p8ll.riker.replit.dev/favicon.ico
 2026-05-17 01:56:39,310 - app - WARNING - 404 Error: http://localhost:5000/api/admin/ads
+2026-05-19 11:26:17,798 - app - WARNING - 404 Error: http://90d8f153-31c1-489b-8e45-a7fe6fa5b24f-00-95ju2chdoa31.spock.replit.dev/static/images/logo.svg
+2026-05-19 11:26:19,625 - app - WARNING - 404 Error: http://90d8f153-31c1-489b-8e45-a7fe6fa5b24f-00-95ju2chdoa31.spock.replit.dev/static/images/logo.svg
