@@ -90,7 +90,7 @@
         justify-content: center;
         text-align: center;
         padding: 18px 20px;
-        background: linear-gradient(160deg, #0d47a1, #1565c0);
+        background: linear-gradient(160deg, #0f5232, #0f5232);
         color: white;
         gap: 10px;
     }
@@ -169,7 +169,7 @@
         justify-content: center;
         text-align: center;
         padding: 24px 20px;
-        background: linear-gradient(160deg, #0d47a1, #1565c0);
+        background: linear-gradient(160deg, #0f5232, #0f5232);
         color: white;
         gap: 12px;
     }
@@ -221,7 +221,7 @@
     .adg-btn {
         display: inline-block;
         background: white;
-        color: #1a73e8;
+        color: #1a7a4a;
         padding: 10px 24px;
         border-radius: 50px;
         text-decoration: none;
@@ -259,7 +259,7 @@
         box-shadow: 0 4px 20px rgba(0,0,0,0.08);
     }
     .about-section h2 {
-        color: var(--primary, #1a73e8);
+        color: var(--primary, #1a7a4a);
         margin-bottom: 20px;
     }
     .about-section p {
@@ -270,7 +270,7 @@
     }
     
     .hero {
-        background: linear-gradient(135deg, #1a73e8, #0d47a1);
+        background: linear-gradient(135deg, #1a7a4a, #0f5232);
         color: white;
         text-align: center;
         padding: 60px 20px;
@@ -291,12 +291,12 @@
         background: var(--bg-white, white);
         border-radius: 25px;
         text-decoration: none;
-        color: #1a73e8;
-        border: 1px solid #1a73e8;
+        color: #1a7a4a;
+        border: 1px solid #1a7a4a;
         transition: all 0.3s;
     }
     .btn-outline:hover {
-        background: #1a73e8;
+        background: #1a7a4a;
         color: white;
         transform: translateY(-2px);
     }
@@ -315,7 +315,7 @@
     }
     .btn-add-to-cart {
         width: 100%;
-        background: #1a73e8;
+        background: #1a7a4a;
         color: white;
         border: none;
         padding: 10px;
@@ -327,7 +327,7 @@
         z-index: 2;
     }
     .btn-add-to-cart:hover {
-        background: #0d47a1;
+        background: #0f5232;
         transform: scale(1.02);
     }
     .product-card .price-row {
@@ -553,7 +553,7 @@
     <div class="ad-grid-card ad-grid-text" style="background:linear-gradient(135deg,
         {% if loop.index % 3 == 0 %}#667eea,#764ba2
         {% elif loop.index % 3 == 2 %}#f093fb,#f5576c
-        {% else %}#1a73e8,#0d47a1{% endif %});">
+        {% else %}#1a7a4a,#0f5232{% endif %});">
         <div class="adg-text-center">
             <div style="font-size:44px;margin-bottom:12px;">🎉</div>
             <h3>{{ localized_ad_title(ad) or '🎉 ' ~ t.promo }}</h3>
@@ -608,7 +608,7 @@
         <div style="padding: 15px;">
             <h3 style="font-size: 16px; margin-bottom: 5px; color: var(--text-color, #333);">{{ product_name(product) }}</h3>
             <div class="price-row" style="margin: 10px 0;">
-                <span style="font-size: 20px; font-weight: bold; color: #1a73e8;">{{ format_price(product.price) }}</span>
+                <span style="font-size: 20px; font-weight: bold; color: #1a7a4a;">{{ format_price(product.price) }}</span>
                 {% if product.compare_price and product.compare_price|float > product.price|float %}
                     <span style="text-decoration: line-through; color: var(--text-muted, #999); font-size: 14px; margin-left: 8px;">{{ format_price(product.compare_price) }}</span>
                 {% endif %}
@@ -649,7 +649,7 @@
         <div style="padding: 15px;">
             <h3 style="font-size: 16px; margin-bottom: 5px; color: var(--text-color, #333);">{{ product_name(product) }}</h3>
             <div class="price-row" style="margin: 10px 0;">
-                <span style="font-size: 20px; font-weight: bold; color: #1a73e8;">{{ format_price(product.price) }}</span>
+                <span style="font-size: 20px; font-weight: bold; color: #1a7a4a;">{{ format_price(product.price) }}</span>
                 {% if product.compare_price and product.compare_price|float > product.price|float %}
                     <span style="text-decoration: line-through; color: var(--text-muted, #999); font-size: 14px; margin-left: 8px;">{{ format_price(product.compare_price) }}</span>
                 {% endif %}
@@ -807,7 +807,7 @@
             <div style="padding:15px;">
                 <h3 style="font-size:16px; margin-bottom:5px; color:var(--text-color,#333);">{{ product_name(product) }}</h3>
                 <div class="price-row" style="margin:10px 0;">
-                    <span style="font-size:20px; font-weight:bold; color:#1a73e8;">{{ format_price(product.price) }}</span>
+                    <span style="font-size:20px; font-weight:bold; color:#1a7a4a;">{{ format_price(product.price) }}</span>
                     {% if product.compare_price and product.compare_price|float > product.price|float %}
                         <span style="text-decoration:line-through; color:var(--text-muted,#999); font-size:14px; margin-left:8px;">{{ format_price(product.compare_price) }}</span>
                     {% endif %}

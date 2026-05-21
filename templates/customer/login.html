@@ -25,7 +25,7 @@
     }
     .login-header h2 {
         margin: 0 0 8px 0;
-        color: #1a73e8;
+        color: #1a7a4a;
     }
     .login-header p {
         color: var(--text-muted, #666);
@@ -53,8 +53,8 @@
     }
     .form-group input:focus {
         outline: none;
-        border-color: #1a73e8;
-        box-shadow: 0 0 0 3px rgba(26,115,232,0.1);
+        border-color: #1a7a4a;
+        box-shadow: 0 0 0 3px rgba(26,122,74,0.1);
     }
     .form-group input.error {
         border-color: #f44336;
@@ -101,7 +101,7 @@
         color: var(--text-muted, #666);
     }
     .register-link a {
-        color: #1a73e8;
+        color: #1a7a4a;
         text-decoration: none;
         font-weight: 500;
     }
@@ -124,7 +124,7 @@
     .demo-info p {
         margin: 5px 0;
         font-size: 13px;
-        color: #1a73e8;
+        color: #1a7a4a;
     }
     @media (max-width: 480px) {
         .login-container {
@@ -178,8 +178,8 @@
                     border-radius: 12px;
                     margin-bottom: 20px;
                     background: {% if category == 'error' or category == 'danger' %}#ffebee{% else %}#e8f0fe{% endif %};
-                    color: {% if category == 'error' or category == 'danger' %}#f44336{% else %}#1a73e8{% endif %};
-                    border-left: 3px solid {% if category == 'error' or category == 'danger' %}#f44336{% else %}#1a73e8{% endif %};
+                    color: {% if category == 'error' or category == 'danger' %}#f44336{% else %}#1a7a4a{% endif %};
+                    border-left: 3px solid {% if category == 'error' or category == 'danger' %}#f44336{% else %}#1a7a4a{% endif %};
                 ">
                     {{ message }}
                 </div>
@@ -221,7 +221,7 @@
         
         <!-- Forgot Password Link -->
         <div style="text-align: center; margin-top: 16px;">
-            <a href="{{ url_for('customer.forgot_password') }}" style="color: #1a73e8; text-decoration: none; font-size: 13px;">
+            <a href="{{ url_for('customer.forgot_password') }}" style="color: #1a7a4a; text-decoration: none; font-size: 13px;">
                 Forgot Password?
             </a>
         </div>

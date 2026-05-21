@@ -21,7 +21,7 @@
         margin-bottom: 20px;
         padding-bottom: 12px;
         border-bottom: 2px solid var(--border-color, #f0f0f0);
-        color: var(--primary, #1a73e8);
+        color: var(--primary, #1a7a4a);
         display: flex;
         align-items: center;
         gap: 8px;
@@ -240,7 +240,7 @@
             <div>
                 <div class="detail-row">
                     <div class="detail-label">Current Price:</div>
-                    <div class="detail-value"><strong style="font-size: 20px; color: #1a73e8;">{{ format_price(product.price) }}</strong></div>
+                    <div class="detail-value"><strong style="font-size: 20px; color: #1a7a4a;">{{ format_price(product.price) }}</strong></div>
                 </div>
                 <div class="detail-row">
                     <div class="detail-label">Compare Price:</div>
@@ -390,7 +390,7 @@
         <div class="detail-row">
             <div class="detail-label">Product URL:</div>
             <div class="detail-value">
-                <a href="{{ url_for('customer.product_detail', product_id=product.id) }}" target="_blank" style="color: #1a73e8;">
+                <a href="{{ url_for('customer.product_detail', product_id=product.id) }}" target="_blank" style="color: #1a7a4a;">
                     /product/{{ product.id }}
                 </a>
             </div>

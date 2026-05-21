@@ -73,7 +73,7 @@
                 width: 50px;
                 height: 50px;
                 border: 4px solid var(--border-color, #f0f0f0);
-                border-top-color: #1a73e8;
+                border-top-color: #1a7a4a;
                 border-radius: 50%;
                 animation: spin 0.8s linear infinite;
                 margin-bottom: 20px;
@@ -120,7 +120,7 @@
                     <div id="modalCategory" class="product-category" style="
                         display: inline-block;
                         background: #e8f0fe;
-                        color: #1a73e8;
+                        color: #1a7a4a;
                         padding: 4px 12px;
                         border-radius: 20px;
                         font-size: 12px;
@@ -135,7 +135,7 @@
                     
                     <!-- Price -->
                     <div class="product-price" style="margin-bottom: 20px;">
-                        <span id="modalPrice" style="font-size: 28px; font-weight: bold; color: #1a73e8;"></span>
+                        <span id="modalPrice" style="font-size: 28px; font-weight: bold; color: #1a7a4a;"></span>
                         <span id="modalOldPrice" style="text-decoration: line-through; color: var(--text-muted, #999); margin-left: 12px;"></span>
                         <span id="modalDiscount" class="discount-badge" style="
                             background: #f44336;
@@ -265,7 +265,7 @@
     }
     
     .thumbnail-img.active {
-        border-color: #1a73e8;
+        border-color: #1a7a4a;
     }
     
     @media (max-width: 768px) {
@@ -421,7 +421,7 @@
                 mb = document.createElement('div');
                 mb.id = 'modalMemberBadge';
                 mb.style.cssText = 'margin:8px 0;padding:8px 12px;background:#fff8e1;border-radius:10px;border-left:4px solid #ffc107;font-size:12px;color:#555;';
-                mb.innerHTML = '🔓 <a href="/login" style="color:#1a73e8;font-weight:700;">Login</a> to get <strong style="color:#f59e0b;">10% off</strong>!';
+                mb.innerHTML = '🔓 <a href="/login" style="color:#1a7a4a;font-weight:700;">Login</a> to get <strong style="color:#f59e0b;">10% off</strong>!';
                 const priceBox = priceEl ? priceEl.closest('.product-price') : null;
                 if (priceBox) priceBox.after(mb);
             } else {

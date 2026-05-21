@@ -13,14 +13,14 @@
 
     /* ── Hero Header ── */
     .ph {
-        background: linear-gradient(135deg, #0f2a6e 0%, #1a73e8 55%, #1565c0 100%);
+        background: linear-gradient(135deg, #0f2a6e 0%, #1a7a4a 55%, #0f5232 100%);
         border-radius: 24px;
         padding: 32px 28px 28px;
         color: #fff;
         margin-bottom: 28px;
         position: relative;
         overflow: hidden;
-        box-shadow: 0 12px 40px rgba(26,115,232,0.35);
+        box-shadow: 0 12px 40px rgba(26,122,74,0.35);
     }
     .ph::before {
         content: '';
@@ -200,7 +200,7 @@
         text-transform: uppercase;
         letter-spacing: 0.5px;
     }
-    .stat-blue .stat-num  { color: #1a73e8; }
+    .stat-blue .stat-num  { color: #1a7a4a; }
     .stat-green .stat-num { color: #43a047; }
     .stat-amber .stat-num { color: #f59e0b; }
     .stat-indigo .stat-num { color: #5c6bc0; }
@@ -232,7 +232,7 @@
     }
     .tab-btn.active {
         background: #fff;
-        color: #1a73e8;
+        color: #1a7a4a;
         box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
 
@@ -256,7 +256,7 @@
         background: var(--bg-hover, #f8f9fc);
         border-radius: 13px;
         padding: 14px 16px;
-        border-left: 3px solid #1a73e8;
+        border-left: 3px solid #1a7a4a;
     }
     .info-field.span2 { grid-column: 1 / -1; }
     .info-field .field-label {
@@ -298,11 +298,11 @@
         text-decoration: none;
     }
     .order-card-item:hover {
-        border-color: #1a73e8;
-        box-shadow: 0 4px 20px rgba(26,115,232,0.12);
+        border-color: #1a7a4a;
+        box-shadow: 0 4px 20px rgba(26,122,74,0.12);
     }
     .oc-left {}
-    .oc-num { font-size: 14px; font-weight: 700; color: #1a73e8; margin-bottom: 3px; }
+    .oc-num { font-size: 14px; font-weight: 700; color: #1a7a4a; margin-bottom: 3px; }
     .oc-date { font-size: 12px; color: #aaa; }
     .oc-right { display: flex; align-items: center; gap: 14px; }
     .oc-total { font-size: 16px; font-weight: 800; color: #222; }
@@ -311,7 +311,7 @@
         border-radius: 20px; text-transform: capitalize; white-space: nowrap;
     }
     .s-pending   { background: #fff3e0; color: #e65100; }
-    .s-confirmed { background: #e3f2fd; color: #1565c0; }
+    .s-confirmed { background: #e3f2fd; color: #0f5232; }
     .s-processing{ background: #f3e5f5; color: #6a1b9a; }
     .s-shipped   { background: #ede7f6; color: #4527a0; }
     .s-delivered { background: #e8f5e9; color: #1b5e20; }
@@ -361,7 +361,7 @@
         padding-bottom: 16px;
         border-bottom: 2px solid var(--border-color, #f0f0f0);
     }
-    .modal-head h3 { margin: 0; font-size: 18px; color: #1a73e8; }
+    .modal-head h3 { margin: 0; font-size: 18px; color: #1a7a4a; }
     .modal-close-x {
         background: var(--bg-hover, #f2f2f2);
         border: none;
@@ -391,8 +391,8 @@
     }
     .fg input:focus, .fg textarea:focus {
         outline: none;
-        border-color: #1a73e8;
-        box-shadow: 0 0 0 3px rgba(26,115,232,0.12);
+        border-color: #1a7a4a;
+        box-shadow: 0 0 0 3px rgba(26,122,74,0.12);
     }
     .fg input[readonly] {
         background: var(--bg-hover, #f5f5f5);
@@ -400,13 +400,13 @@
     }
     .fg small { font-size: 11px; color: #aaa; margin-top: 4px; display: block; }
     .btn-save {
-        background: linear-gradient(135deg, #1a73e8, #0d47a1);
+        background: linear-gradient(135deg, #1a7a4a, #0f5232);
         color: #fff; border: none;
         padding: 12px 28px; border-radius: 11px;
         font-size: 15px; font-weight: 700;
         cursor: pointer; transition: all 0.2s;
     }
-    .btn-save:hover { transform: translateY(-2px); box-shadow: 0 6px 22px rgba(26,115,232,0.38); }
+    .btn-save:hover { transform: translateY(-2px); box-shadow: 0 6px 22px rgba(26,122,74,0.38); }
     .btn-cancel {
         background: var(--bg-hover, #f2f2f2);
         color: #555; border: none;
@@ -535,7 +535,7 @@
         </button>
         <button class="tab-btn" id="tab-orders" onclick="switchTab('orders')" role="tab">
             📦 Order History
-            {% if orders %}<span style="background:#1a73e8;color:#fff;font-size:10px;padding:2px 7px;border-radius:20px;">{{ orders|length }}</span>{% endif %}
+            {% if orders %}<span style="background:#1a7a4a;color:#fff;font-size:10px;padding:2px 7px;border-radius:20px;">{{ orders|length }}</span>{% endif %}
         </button>
     </div>
 

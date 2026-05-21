@@ -12,7 +12,7 @@
         font-weight: 600;
     }
     .status-pending { background: #ff9800; color: white; }
-    .status-confirmed { background: #2196f3; color: white; }
+    .status-confirmed { background: #1a7a4a; color: white; }
     .status-processing { background: #9c27b0; color: white; }
     .status-shipped { background: #9c27b0; color: white; }
     .status-delivered { background: #4caf50; color: white; }
@@ -30,7 +30,7 @@
         margin-bottom: 16px;
         padding-bottom: 12px;
         border-bottom: 2px solid var(--border-color, #f0f0f0);
-        color: var(--primary, #1a73e8);
+        color: var(--primary, #1a7a4a);
     }
     .info-row {
         display: flex;
@@ -89,8 +89,8 @@
         background: #4caf50;
     }
     .timeline-item.current::before {
-        background: var(--primary, #1a73e8);
-        box-shadow: 0 0 0 3px rgba(26,115,232,0.2);
+        background: var(--primary, #1a7a4a);
+        box-shadow: 0 0 0 3px rgba(26,122,74,0.2);
     }
     .timeline-date {
         font-size: 11px;
@@ -258,7 +258,7 @@
             </div>
             <div class="info-row" style="border-bottom: none; font-size: 18px; font-weight: bold; margin-top: 8px; padding-top: 8px; border-top: 2px solid var(--border-color, #f0f0f0);">
                 <div class="info-label">Total:</div>
-                <div class="info-value" style="color: var(--primary, #1a73e8);">{{ format_price(order.total) if order.total else '0 ETB' }}</div>
+                <div class="info-value" style="color: var(--primary, #1a7a4a);">{{ format_price(order.total) if order.total else '0 ETB' }}</div>
             </div>
         </div>
     </div>
@@ -307,7 +307,7 @@
                     </tr>
                     <tr style="background: var(--primary-light, #e8f0fe);">
                         <td colspan="4" style="text-align: right; font-weight: 600; font-size: 16px;">TOTAL:</td>
-                        <td style="font-size: 18px; font-weight: bold; color: var(--primary, #1a73e8);">{{ format_price(order.total) if order.total else '0 ETB' }}</td>
+                        <td style="font-size: 18px; font-weight: bold; color: var(--primary, #1a7a4a);">{{ format_price(order.total) if order.total else '0 ETB' }}</td>
                     </tr>
                 </tfoot>
             </table>

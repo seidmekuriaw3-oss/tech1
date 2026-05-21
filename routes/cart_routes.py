@@ -389,7 +389,16 @@ def place_order():
     shipping_cost = totals['shipping_cost']
     total = totals['total']
     discount = totals['discount']
-    
+
+    coupon_info = session.pop('applied_coupon', None)
+    if coupon_info:
+        if coupon_info.get('discount_type') == 'percentage':
+            extra_disc = round(subtotal_after_discount * float(coupon_info['discount_value']) / 100, 2)
+        else:
+            extra_disc = min(float(coupon_info['discount_value']), subtotal_after_discount)
+        discount = round(discount + extra_disc, 2)
+        total = round(max(0, total - extra_disc), 2)
+
     # Generate order number
     from datetime import datetime
     import random

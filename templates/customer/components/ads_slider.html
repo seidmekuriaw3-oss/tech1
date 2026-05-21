@@ -36,7 +36,7 @@
                         {% endif %}
                         <div style="width: 100%; text-align: center;">
                             <a href="{{ ad.link if ad.link else '/products' }}" class="slide-btn" style="
-                                display: inline-block; background: white; color: #1a73e8;
+                                display: inline-block; background: white; color: #1a7a4a;
                                 padding: 12px 30px; border-radius: 50px; text-decoration: none;
                                 font-weight: bold; transition: transform 0.3s, box-shadow 0.3s;
                             " onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 5px 20px rgba(0,0,0,0.3)'"
@@ -66,7 +66,7 @@
                         {% endif %}
                         <div style="width: 100%; text-align: center;">
                             <a href="{{ ad.link if ad.link else '/products' }}" class="slide-btn" style="
-                                display: inline-block; background: white; color: #1a73e8;
+                                display: inline-block; background: white; color: #1a7a4a;
                                 padding: 12px 30px; border-radius: 50px; text-decoration: none;
                                 font-weight: bold; transition: transform 0.3s, box-shadow 0.3s;
                             " onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 5px 20px rgba(0,0,0,0.3)'"
@@ -83,7 +83,7 @@
                     background: linear-gradient(135deg,
                         {% if loop.index % 2 == 0 %}#667eea, #764ba2
                         {% elif loop.index % 3 == 0 %}#f093fb, #f5576c
-                        {% else %}#1a73e8, #0d47a1{% endif %});
+                        {% else %}#1a7a4a, #0f5232{% endif %});
                     padding: 40px 60px; color: white; text-align: center;
                     min-height: 250px; display: flex; align-items: center;
                     justify-content: center; flex-direction: column;">
@@ -95,7 +95,7 @@
                         {{ ad.description if ad.description else ad.text if ad.text else 'Special offer available!' }}
                     </p>
                     <a href="{{ ad.link if ad.link else '/products' }}" class="slide-btn" style="
-                        display: inline-block; background: white; color: #1a73e8;
+                        display: inline-block; background: white; color: #1a7a4a;
                         padding: 12px 30px; border-radius: 50px; text-decoration: none;
                         font-weight: bold; transition: transform 0.3s, box-shadow 0.3s;
                     " onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 5px 20px rgba(0,0,0,0.2)'"

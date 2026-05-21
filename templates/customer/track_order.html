@@ -6,7 +6,7 @@
     .track-wrap { max-width: 680px; margin: 0 auto; padding: 24px 16px 60px; }
 
     .track-header {
-        background: linear-gradient(135deg, #1a73e8, #0d47a1);
+        background: linear-gradient(135deg, #1a7a4a, #0f5232);
         border-radius: 20px;
         padding: 32px 24px;
         color: white;
@@ -35,9 +35,9 @@
         outline: none;
         transition: border-color .2s;
     }
-    .search-input:focus { border-color: #1a73e8; }
+    .search-input:focus { border-color: #1a7a4a; }
     .search-btn {
-        background: #1a73e8;
+        background: #1a7a4a;
         color: white;
         border: none;
         border-radius: 12px;
@@ -75,11 +75,11 @@
         box-shadow: 0 0 0 2px #e0e0e0;
     }
     .tl-dot.done { background: #4caf50; color: white; box-shadow: 0 0 0 2px #4caf50; }
-    .tl-dot.active { background: #1a73e8; color: white; box-shadow: 0 0 0 3px rgba(26,115,232,.25); animation: tl-pulse 1.5s infinite; }
+    .tl-dot.active { background: #1a7a4a; color: white; box-shadow: 0 0 0 3px rgba(26,122,74,.25); animation: tl-pulse 1.5s infinite; }
     .tl-dot.cancel { background: #f44336; color: white; box-shadow: 0 0 0 2px #f44336; }
-    @keyframes tl-pulse { 0%,100%{box-shadow:0 0 0 3px rgba(26,115,232,.25)} 50%{box-shadow:0 0 0 7px rgba(26,115,232,.08)} }
+    @keyframes tl-pulse { 0%,100%{box-shadow:0 0 0 3px rgba(26,122,74,.25)} 50%{box-shadow:0 0 0 7px rgba(26,122,74,.08)} }
     .tl-title { font-weight: 700; color: #333; font-size: .95rem; margin-bottom: 3px; }
-    .tl-title.active { color: #1a73e8; }
+    .tl-title.active { color: #1a7a4a; }
     .tl-desc { color: #777; font-size: .85rem; line-height: 1.5; }
 
     /* Order summary */
@@ -89,7 +89,7 @@
 
     .status-badge { display: inline-block; padding: 4px 14px; border-radius: 50px; font-size: .78rem; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; }
     .s-pending { background: #fff3e0; color: #e65100; }
-    .s-processing { background: #e3f2fd; color: #1565c0; }
+    .s-processing { background: #e3f2fd; color: #0f5232; }
     .s-shipped { background: #f3e5f5; color: #6a1b9a; }
     .s-delivered { background: #e8f5e9; color: #2e7d32; }
     .s-cancelled { background: #ffebee; color: #c62828; }
@@ -101,7 +101,7 @@
     .item-info { flex: 1; }
     .item-name { font-weight: 600; color: #222; font-size: .88rem; }
     .item-qty  { color: #888; font-size: .8rem; }
-    .item-price { font-weight: 700; color: #1a73e8; font-size: .88rem; white-space: nowrap; }
+    .item-price { font-weight: 700; color: #1a7a4a; font-size: .88rem; white-space: nowrap; }
 
     .btn-wa { display: inline-flex; align-items: center; gap: 8px; background: #25D366; color: white; text-decoration: none; border-radius: 12px; padding: 12px 22px; font-weight: 700; width: 100%; justify-content: center; box-sizing: border-box; }
 
@@ -200,7 +200,7 @@
         <div class="order-meta">
             <div class="meta-item">
                 <label>Total Amount</label>
-                <span style="color: #1a73e8;">{{ "{:,.0f}".format(order.total) }} ETB</span>
+                <span style="color: #1a7a4a;">{{ "{:,.0f}".format(order.total) }} ETB</span>
             </div>
             <div class="meta-item">
                 <label>Payment</label>

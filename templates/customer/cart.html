@@ -94,9 +94,9 @@
         color: var(--text-color, #333);
     }
     .quantity-btn:hover {
-        background: #1a73e8;
+        background: #1a7a4a;
         color: white;
-        border-color: #1a73e8;
+        border-color: #1a7a4a;
     }
     .order-summary {
         background: var(--bg-white, white);
@@ -202,7 +202,7 @@
                 <div style="flex: 1;">
                     <h3 style="margin: 0 0 8px 0; font-size: 18px; color: var(--text-color, #333);">{{ item.name_am or item.name }}</h3>
                     <div class="product-price" style="margin-bottom: 12px;">
-                        <span style="font-size: 20px; font-weight: bold; color: #1a73e8;">{{ format_price(item.discounted_price or item.price) }}</span>
+                        <span style="font-size: 20px; font-weight: bold; color: #1a7a4a;">{{ format_price(item.discounted_price or item.price) }}</span>
                         {% if item.price != item.discounted_price %}
                         <span style="text-decoration: line-through; color: var(--text-muted, #999); font-size: 14px; margin-left: 8px;">{{ format_price(item.price) }}</span>
                         {% endif %}
@@ -222,7 +222,7 @@
                 
                 <!-- Item Total -->
                 <div style="text-align: right;">
-                    <div class="item-total" style="font-size: 18px; font-weight: bold; color: #1a73e8;">
+                    <div class="item-total" style="font-size: 18px; font-weight: bold; color: #1a7a4a;">
                         {{ format_price(item.subtotal) }}
                     </div>
                 </div>
@@ -275,7 +275,7 @@
             <div class="coupon-section">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
                     <span style="font-size: 14px; color: var(--text-muted, #666);">🎟️ Coupon Code</span>
-                    <a href="#" onclick="toggleCouponInput(); return false;" style="font-size: 12px; color: #1a73e8;">Apply</a>
+                    <a href="#" onclick="toggleCouponInput(); return false;" style="font-size: 12px; color: #1a7a4a;">Apply</a>
                 </div>
                 <div id="couponInput" style="display: none;" class="coupon-input-group">
                     <input type="text" id="couponCode" class="coupon-input" placeholder="Enter coupon code">
@@ -288,7 +288,7 @@
             <!-- Total -->
             <div style="display: flex; justify-content: space-between; margin-bottom: 20px; font-size: 22px; font-weight: bold;">
                 <span style="color: var(--text-color, #333);">Total:</span>
-                <span id="summaryTotal" style="color: #1a73e8;">{{ format_price(total) }}</span>
+                <span id="summaryTotal" style="color: #1a7a4a;">{{ format_price(total) }}</span>
             </div>
             
             <!-- Free Shipping Progress -->
@@ -299,7 +299,7 @@
                     🚚 Add {{ format_price(free_shipping_threshold - (subtotal_after_discount|default(subtotal - discount))) }} more for FREE shipping!
                 </div>
                 <div style="background: rgba(255,255,255,0.5); border-radius: 10px; height: 6px; overflow: hidden;">
-                    <div style="width: {{ ((subtotal_after_discount|default(subtotal - discount)) / free_shipping_threshold * 100)|round }}%; background: #1a73e8; height: 100%; border-radius: 10px;"></div>
+                    <div style="width: {{ ((subtotal_after_discount|default(subtotal - discount)) / free_shipping_threshold * 100)|round }}%; background: #1a7a4a; height: 100%; border-radius: 10px;"></div>
                 </div>
             </div>
             {% else %}

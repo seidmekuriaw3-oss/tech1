@@ -44,8 +44,8 @@
     }
     .form-control:focus {
         outline: none;
-        border-color: #1a73e8;
-        box-shadow: 0 0 0 3px rgba(26,115,232,0.1);
+        border-color: #1a7a4a;
+        box-shadow: 0 0 0 3px rgba(26,122,74,0.1);
     }
     .form-control.error {
         border-color: #f44336;
@@ -85,7 +85,7 @@
         color: var(--text-color, #333);
     }
     .order-item-price {
-        color: #1a73e8;
+        color: #1a7a4a;
         font-weight: 600;
     }
     .summary-row {
@@ -278,7 +278,7 @@
             
             <div class="summary-total">
                 <span>Total:</span>
-                <span style="color: #1a73e8;">{{ format_price(total) }}</span>
+                <span style="color: #1a7a4a;">{{ format_price(total) }}</span>
             </div>
             
             {% if shipping_cost == 0 %}

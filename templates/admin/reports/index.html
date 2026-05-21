@@ -41,7 +41,7 @@
         margin-bottom: 20px;
         padding-bottom: 12px;
         border-bottom: 2px solid var(--border-color, #f0f0f0);
-        color: var(--primary, #1a73e8);
+        color: var(--primary, #1a7a4a);
         display: flex;
         align-items: center;
         gap: 8px;
@@ -62,7 +62,7 @@
     .kpi-value {
         font-size: 28px;
         font-weight: bold;
-        color: var(--primary, #1a73e8);
+        color: var(--primary, #1a7a4a);
     }
     .kpi-label {
         font-size: 13px;
@@ -169,7 +169,7 @@
             </div>
             <div style="margin: 15px 0;">
                 <p><strong>Total Orders:</strong> <span id="salesTotalOrders">{{ total_orders|default(0) }}</span></p>
-                <p><strong>Total Revenue:</strong> <span style="color: var(--primary, #1a73e8); font-size: 20px; font-weight: bold;" id="salesTotalRevenue">{{ total_revenue|default(0) }} ETB</span></p>
+                <p><strong>Total Revenue:</strong> <span style="color: var(--primary, #1a7a4a); font-size: 20px; font-weight: bold;" id="salesTotalRevenue">{{ total_revenue|default(0) }} ETB</span></p>
                 <p><strong>Average Order:</strong> <span id="salesAvgOrder">0</span> ETB</p>
             </div>
             <a href="{{ url_for('admin.reports_sales') }}" class="btn btn-outline" style="width: 100%; text-align: center;">View Details →</a>
@@ -204,7 +204,7 @@
             </div>
             <div style="margin: 15px 0;">
                 <p><strong>Pending Orders:</strong> <span style="color: #ff9800; font-weight: bold;" id="pendingOrders">{{ pending_orders|default(0) }}</span></p>
-                <p><strong>Confirmed Orders:</strong> <span style="color: #2196f3; font-weight: bold;" id="confirmedOrders">0</span></p>
+                <p><strong>Confirmed Orders:</strong> <span style="color: #1a7a4a; font-weight: bold;" id="confirmedOrders">0</span></p>
                 <p><strong>Processing Orders:</strong> <span style="color: #9c27b0; font-weight: bold;" id="processingOrders">0</span></p>
                 <p><strong>Shipped Orders:</strong> <span style="color: #9c27b0; font-weight: bold;" id="shippedOrders">0</span></p>
                 <p><strong>Delivered Orders:</strong> <span style="color: #4caf50; font-weight: bold;" id="deliveredOrders">{{ completed_orders|default(0) }}</span></p>
@@ -230,7 +230,7 @@
                         <span>{{ cat.product_count }} products ({{ ((cat.product_count / total_products) * 100)|round(1) if total_products > 0 else 0 }}%)</span>
                     </div>
                     <div style="background: var(--bg-hover, #f0f0f0); border-radius: 10px; height: 8px; overflow: hidden;">
-                        <div class="progress-bar" style="width: 0%; background: linear-gradient(90deg, var(--primary, #1a73e8), #0d47a1); height: 100%; border-radius: 10px;"
+                        <div class="progress-bar" style="width: 0%; background: linear-gradient(90deg, var(--primary, #1a7a4a), #0f5232); height: 100%; border-radius: 10px;"
                              data-width="{{ (cat.product_count / total_products * 100) if total_products > 0 else 0 }}">
                         </div>
                     </div>
@@ -332,8 +332,8 @@
                 datasets: [{
                     label: 'Revenue (ETB)',
                     data: values,
-                    borderColor: '#1a73e8',
-                    backgroundColor: 'rgba(26, 115, 232, 0.1)',
+                    borderColor: '#1a7a4a',
+                    backgroundColor: 'rgba(26, 122, 74, 0.1)',
                     borderWidth: 2,
                     fill: true,
                     tension: 0.4

@@ -3,14 +3,14 @@
 
 /* CSS Variables */
 :root {
-    --admin-primary: #1a73e8;
-    --admin-primary-dark: #0d47a1;
-    --admin-primary-light: #4285f4;
+    --admin-primary: #1a7a4a;
+    --admin-primary-dark: #0f5232;
+    --admin-primary-light: #2d9966;
     --admin-secondary: #ff9800;
     --admin-success: #4caf50;
     --admin-danger: #f44336;
     --admin-warning: #ff9800;
-    --admin-info: #2196f3;
+    --admin-info: #1a7a4a;
     --admin-dark: #2c3e50;
     --admin-light: #f5f7fa;
     --admin-gray: #6c757d;
@@ -300,7 +300,7 @@ body.admin-body {
 
 .status-confirmed {
     background: #e3f2fd;
-    color: #2196f3;
+    color: #1a7a4a;
 }
 
 .status-shipped {
@@ -500,8 +500,8 @@ textarea.admin-form-control {
 
 .alert-info {
     background: #e3f2fd;
-    color: #1565c0;
-    border-left: 3px solid #2196f3;
+    color: #0f5232;
+    border-left: 3px solid #1a7a4a;
 }
 
 /* ==================== RESPONSIVE ==================== */

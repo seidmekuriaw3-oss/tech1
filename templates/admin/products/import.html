@@ -21,7 +21,7 @@
         margin-bottom: 20px;
         padding-bottom: 12px;
         border-bottom: 2px solid var(--border-color, #f0f0f0);
-        color: var(--primary, #1a73e8);
+        color: var(--primary, #1a7a4a);
         display: flex;
         align-items: center;
         gap: 8px;
@@ -30,19 +30,19 @@
 
     /* ── Drop zone ── */
     .drop-zone {
-        border: 2px dashed #1a73e8;
+        border: 2px dashed #1a7a4a;
         border-radius: 12px;
         padding: 44px 24px;
         text-align: center;
         cursor: pointer;
         transition: background 0.2s, border-color 0.2s;
-        background: rgba(26,115,232,0.03);
+        background: rgba(26,122,74,0.03);
         position: relative;
         user-select: none;
     }
     .drop-zone.drag-over {
-        background: rgba(26,115,232,0.1);
-        border-color: #0d47a1;
+        background: rgba(26,122,74,0.1);
+        border-color: #0f5232;
     }
     .drop-zone.has-file {
         border-color: #4caf50;
@@ -57,7 +57,7 @@
         height: 100%;
     }
     .drop-zone-icon { font-size: 44px; margin-bottom: 10px; }
-    .drop-zone-label { font-size: 15px; font-weight: 600; color: #1a73e8; margin-bottom: 5px; }
+    .drop-zone-label { font-size: 15px; font-weight: 600; color: #1a7a4a; margin-bottom: 5px; }
     .drop-zone-hint  { font-size: 12px; color: var(--text-muted,#999); }
     .file-name-display {
         margin-top: 10px;
@@ -106,15 +106,15 @@
         display: none;
         margin-top: 14px;
         padding: 12px 16px;
-        background: rgba(26,115,232,0.07);
+        background: rgba(26,122,74,0.07);
         border-radius: 10px;
-        border-left: 4px solid #1a73e8;
+        border-left: 4px solid #1a7a4a;
     }
     .processing-bar.show { display: block; }
     .processing-bar p {
         margin: 0 0 8px 0;
         font-size: 13px;
-        color: #1a73e8;
+        color: #1a7a4a;
         font-weight: 500;
     }
     .bar-track {
@@ -126,7 +126,7 @@
     .bar-fill {
         height: 100%;
         width: 40%;
-        background: linear-gradient(90deg, #1a73e8, #42a5f5);
+        background: linear-gradient(90deg, #1a7a4a, #42a5f5);
         border-radius: 3px;
         animation: indeterminate 1.4s ease infinite;
         transform-origin: left center;
@@ -247,7 +247,7 @@
         font-size: 13px;
     }
     .columns-table th {
-        background: linear-gradient(135deg, #1a73e8, #0d47a1);
+        background: linear-gradient(135deg, #1a7a4a, #0f5232);
         color: white;
         padding: 10px 14px;
         text-align: left;
@@ -278,11 +278,11 @@
     .tip-box {
         margin-top: 16px;
         padding: 12px 16px;
-        background: rgba(26,115,232,0.06);
+        background: rgba(26,122,74,0.06);
         border-radius: 8px;
         font-size: 13px;
-        color: #1a73e8;
-        border-left: 3px solid #1a73e8;
+        color: #1a7a4a;
+        border-left: 3px solid #1a7a4a;
     }
 </style>
 {% endblock %}

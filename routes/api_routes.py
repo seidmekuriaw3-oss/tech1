@@ -918,6 +918,20 @@ def api_categories():
 
 # ==================== WISHLIST API ====================
 
+@api_bp.route('/wishlist/ids', methods=['GET'])
+def api_wishlist_ids():
+    if not session.get('user_id'):
+        return jsonify({'ids': []})
+    try:
+        db = get_db()
+        cursor = db.cursor()
+        cursor.execute("SELECT product_id FROM wishlist WHERE user_id = ?", (session['user_id'],))
+        rows = cursor.fetchall()
+        return jsonify({'ids': [str(r['product_id']) for r in rows]})
+    except Exception:
+        return jsonify({'ids': []})
+
+
 @api_bp.route('/wishlist/add', methods=['POST'])
 def api_wishlist_add():
     """Add product to wishlist."""

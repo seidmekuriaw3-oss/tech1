@@ -6,7 +6,7 @@
     --bottom-nav-bg: rgba(255, 255, 255, 0.98);
     --bottom-nav-border: rgba(0, 0, 0, 0.05);
     --bottom-nav-shadow: 0 -2px 20px rgba(0, 0, 0, 0.1);
-    --bottom-nav-active: linear-gradient(135deg, #1a73e8, #0d47a1);
+    --bottom-nav-active: linear-gradient(135deg, #1a7a4a, #0f5232);
     --bottom-nav-hover-bg: rgba(26, 115, 232, 0.1);
     --bottom-nav-text: #333;
     --bottom-nav-text-light: #999;
@@ -279,7 +279,7 @@
 }
 
 .category-chip:hover {
-    background: #1a73e8 !important;
+    background: #1a7a4a !important;
     color: white !important;
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(26, 115, 232, 0.3);
@@ -372,7 +372,7 @@
 .fullscreen-modal textarea:focus,
 .fullscreen-modal select:focus {
     outline: none;
-    border-color: #1a73e8;
+    border-color: #1a7a4a;
     box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.2);
 }
 
@@ -392,12 +392,12 @@
 }
 
 .fullscreen-modal .btn-primary {
-    background: #1a73e8;
+    background: #1a7a4a;
     color: white;
 }
 
 .fullscreen-modal .btn-primary:hover {
-    background: #0d47a1;
+    background: #0f5232;
     transform: translateY(-2px);
 }
 
@@ -418,7 +418,7 @@
 }
 
 .fullscreen-modal .switch-link a {
-    color: #1a73e8;
+    color: #1a7a4a;
     text-decoration: none;
 }
 
@@ -601,7 +601,7 @@
     transform: translateX(-50%);
     width: 30px;
     height: 3px;
-    background: #1a73e8;
+    background: #1a7a4a;
     border-radius: 3px;
 }
 

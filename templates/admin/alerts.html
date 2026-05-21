@@ -18,7 +18,7 @@
         <div style="display:flex;gap:10px;flex-wrap:wrap;">
             {% if unread > 0 %}
             <button onclick="markAllRead()"
-                    style="background:#1a73e8;color:#fff;border:none;border-radius:10px;padding:10px 18px;font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:6px;">
+                    style="background:#1a7a4a;color:#fff;border:none;border-radius:10px;padding:10px 18px;font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:6px;">
                 ✅ Mark All Read
                 <span style="background:rgba(255,255,255,0.3);border-radius:20px;padding:1px 8px;font-size:11px;">{{ unread }}</span>
             </button>
@@ -33,7 +33,7 @@
     <!-- Stats bar -->
     <div style="background:#f8f9fa;border-radius:14px;padding:16px 20px;margin-bottom:24px;display:flex;gap:24px;flex-wrap:wrap;">
         <div>
-            <div style="font-size:22px;font-weight:900;color:#1a73e8;">{{ alerts|length }}</div>
+            <div style="font-size:22px;font-weight:900;color:#1a7a4a;">{{ alerts|length }}</div>
             <div style="font-size:12px;color:#888;margin-top:2px;">Total Alerts</div>
         </div>
         <div>
@@ -60,7 +60,7 @@
             gap:14px;
             align-items:flex-start;
             opacity:{{ '0.75' if alert.is_read else '1' }};
-            border-left:4px solid {{ '#1a73e8' if not alert.is_read else 'transparent' }};
+            border-left:4px solid {{ '#1a7a4a' if not alert.is_read else 'transparent' }};
             transition:opacity 0.3s;
         ">
             <div style="font-size:26px;flex-shrink:0;margin-top:2px;">{{ type_icon }}</div>
@@ -75,7 +75,7 @@
                     <span style="font-size:11px;color:#aaa;">{{ alert.created_at }}</span>
                     {% if alert.ref_order_id %}
                     <a href="{{ url_for('admin.admin_order_detail', order_id=alert.ref_order_id) }}"
-                       style="font-size:11px;color:#1a73e8;font-weight:700;text-decoration:none;background:rgba(26,115,232,0.1);padding:2px 8px;border-radius:6px;">
+                       style="font-size:11px;color:#1a7a4a;font-weight:700;text-decoration:none;background:rgba(26,122,74,0.1);padding:2px 8px;border-radius:6px;">
                         View Order →
                     </a>
                     {% endif %}
@@ -87,7 +87,7 @@
                     {% endif %}
                     {% if alert.link and not alert.ref_order_id and not alert.ref_user_id %}
                     <a href="{{ alert.link }}"
-                       style="font-size:11px;color:#1a73e8;font-weight:700;text-decoration:none;background:rgba(26,115,232,0.1);padding:2px 8px;border-radius:6px;">
+                       style="font-size:11px;color:#1a7a4a;font-weight:700;text-decoration:none;background:rgba(26,122,74,0.1);padding:2px 8px;border-radius:6px;">
                         View →
                     </a>
                     {% endif %}
@@ -95,9 +95,9 @@
             </div>
             {% if not alert.is_read %}
             <div style="display:flex;flex-direction:column;align-items:center;gap:6px;flex-shrink:0;">
-                <div style="width:9px;height:9px;background:#1a73e8;border-radius:50%;"></div>
+                <div style="width:9px;height:9px;background:#1a7a4a;border-radius:50%;"></div>
                 <button onclick="markOneRead({{ alert.id }})"
-                        style="background:none;border:1px solid #1a73e8;color:#1a73e8;border-radius:6px;padding:3px 8px;font-size:10px;font-weight:700;cursor:pointer;white-space:nowrap;">
+                        style="background:none;border:1px solid #1a7a4a;color:#1a7a4a;border-radius:6px;padding:3px 8px;font-size:10px;font-weight:700;cursor:pointer;white-space:nowrap;">
                     Mark read
                 </button>
             </div>

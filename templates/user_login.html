@@ -61,8 +61,8 @@
     }
     .form-control:focus {
         outline: none;
-        border-color: #1a73e8;
-        box-shadow: 0 0 0 3px rgba(26,115,232,0.1);
+        border-color: #1a7a4a;
+        box-shadow: 0 0 0 3px rgba(26,122,74,0.1);
     }
     .form-control.error {
         border-color: #f44336;
@@ -109,7 +109,7 @@
         color: var(--text-muted, #666);
     }
     .register-link a {
-        color: #1a73e8;
+        color: #1a7a4a;
         text-decoration: none;
         font-weight: 500;
     }
@@ -121,7 +121,7 @@
         margin-top: 16px;
     }
     .forgot-link a {
-        color: #1a73e8;
+        color: #1a7a4a;
         text-decoration: none;
         font-size: 13px;
     }
@@ -170,8 +170,8 @@
                     border-radius: 12px;
                     margin-bottom: 20px;
                     background: {% if category == 'error' or category == 'danger' %}#ffebee{% else %}#e8f0fe{% endif %};
-                    color: {% if category == 'error' or category == 'danger' %}#f44336{% else %}#1a73e8{% endif %};
-                    border-left: 3px solid {% if category == 'error' or category == 'danger' %}#f44336{% else %}#1a73e8{% endif %};
+                    color: {% if category == 'error' or category == 'danger' %}#f44336{% else %}#1a7a4a{% endif %};
+                    border-left: 3px solid {% if category == 'error' or category == 'danger' %}#f44336{% else %}#1a7a4a{% endif %};
                 ">
                     {{ message }}
                 </div>

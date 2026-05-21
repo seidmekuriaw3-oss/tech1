@@ -146,7 +146,7 @@
                     <span class="current-price" style="
                         font-size: 20px;
                         font-weight: bold;
-                        color: #1a73e8;
+                        color: #1a7a4a;
                     ">{{ format_price(product.price) }}</span>
                     {% if product.compare_price and product.compare_price|float > product.price|float %}
                     <span class="old-price" style="
@@ -167,7 +167,7 @@
                         onclick="event.stopPropagation(); if(window.addToCart) addToCart('{{ product.id }}', 1, this)"
                         style="
                             width: 100%;
-                            background: #1a73e8;
+                            background: #1a7a4a;
                             color: white;
                             border: none;
                             padding: 10px;
@@ -181,8 +181,8 @@
                             justify-content: center;
                             gap: 8px;
                         "
-                        onmouseover="this.style.background='#0d47a1'; this.style.transform='translateY(-2px)'"
-                        onmouseout="this.style.background='#1a73e8'; this.style.transform='translateY(0)'">
+                        onmouseover="this.style.background='#0f5232'; this.style.transform='translateY(-2px)'"
+                        onmouseout="this.style.background='#1a7a4a'; this.style.transform='translateY(0)'">
                     🛒 <span>{% if lang == 'am' %}ጨምር{% else %}Add to Cart{% endif %}</span>
                 </button>
             </div>

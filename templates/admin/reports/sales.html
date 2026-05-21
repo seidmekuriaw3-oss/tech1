@@ -33,7 +33,7 @@
     .stat-value {
         font-size: 28px;
         font-weight: bold;
-        color: var(--primary, #1a73e8);
+        color: var(--primary, #1a7a4a);
     }
     .stat-label {
         color: var(--text-muted, #666);
@@ -52,7 +52,7 @@
         border-collapse: collapse;
     }
     .sales-table th {
-        background: linear-gradient(135deg, #1a73e8, #0d47a1);
+        background: linear-gradient(135deg, #1a7a4a, #0f5232);
         color: white;
         padding: 12px;
         text-align: left;
@@ -85,9 +85,9 @@
         color: var(--text-color, #333);
     }
     .page-btn.active {
-        background: #1a73e8;
+        background: #1a7a4a;
         color: white;
-        border-color: #1a73e8;
+        border-color: #1a7a4a;
     }
     .page-btn:disabled {
         opacity: 0.5;
@@ -101,7 +101,7 @@
         font-weight: 600;
     }
     .status-pending { background: #ff9800; color: white; }
-    .status-confirmed { background: #2196f3; color: white; }
+    .status-confirmed { background: #1a7a4a; color: white; }
     .status-processing { background: #9c27b0; color: white; }
     .status-shipped { background: #9c27b0; color: white; }
     .status-delivered { background: #4caf50; color: white; }
@@ -334,8 +334,8 @@
                 datasets: [{
                     label: 'Revenue (ETB)',
                     data: chartData.values || [],
-                    borderColor: '#1a73e8',
-                    backgroundColor: 'rgba(26, 115, 232, 0.1)',
+                    borderColor: '#1a7a4a',
+                    backgroundColor: 'rgba(26, 122, 74, 0.1)',
                     borderWidth: 2,
                     fill: true,
                     tension: 0.4
@@ -375,7 +375,7 @@
                 <td><strong>${escapeHtml(product.name)}</strong></td>
                 <td>${escapeHtml(product.category || '-')}</td>
                 <td>${product.units_sold}</td>
-                <td style="color: #1a73e8; font-weight: bold;">${product.revenue.toLocaleString()} ETB</td>
+                <td style="color: #1a7a4a; font-weight: bold;">${product.revenue.toLocaleString()} ETB</td>
             </tr>
         `).join('');
     }
@@ -394,7 +394,7 @@
         
         tbody.innerHTML = pageOrders.map(order => `
             <tr>
-                <td><a href="{{ url_for('admin.order_detail', oid=0) }}".replace('/0', '/' + order.id) style="color: #1a73e8;">${escapeHtml(order.order_number)}</a></td>
+                <td><a href="{{ url_for('admin.order_detail', oid=0) }}".replace('/0', '/' + order.id) style="color: #1a7a4a;">${escapeHtml(order.order_number)}</a></td>
                 <td>${escapeHtml(order.customer_name)}</td>
                 <td>${escapeHtml(order.date)}</td>
                 <td>${order.items_count || 0}</td>

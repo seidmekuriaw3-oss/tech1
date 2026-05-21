@@ -37,7 +37,7 @@
     .stat-value {
         font-size: 32px;
         font-weight: bold;
-        color: var(--primary, #1a73e8);
+        color: var(--primary, #1a7a4a);
     }
     .stat-label {
         color: var(--text-muted, #666);
@@ -83,9 +83,9 @@
         color: var(--text-color, #333);
     }
     .page-btn.active {
-        background: #1a73e8;
+        background: #1a7a4a;
         color: white;
-        border-color: #1a73e8;
+        border-color: #1a7a4a;
     }
     .page-btn:disabled {
         opacity: 0.5;
@@ -204,7 +204,7 @@
     <div style="background: var(--bg-white, white); border-radius: 15px; overflow-x: auto; box-shadow: 0 2px 10px rgba(0,0,0,0.08);">
         <table class="product-table" style="width: 100%; border-collapse: collapse;">
             <thead>
-                <tr style="background: linear-gradient(135deg, #1a73e8, #0d47a1); color: white;">
+                <tr style="background: linear-gradient(135deg, #1a7a4a, #0f5232); color: white;">
                     <th style="padding: 14px; text-align: left;">ID</th>
                     <th style="padding: 14px; text-align: left;">Image</th>
                     <th style="padding: 14px; text-align: left;">Name</th>
@@ -236,7 +236,7 @@
                         <span class="category-badge">{{ product.category.name_am if product.category else '-' }}</span>
                     </td>
                     <td style="padding: 12px; text-align: right;">
-                        <strong style="color: var(--primary, #1a73e8);">{{ format_price(product.price) }}</strong>
+                        <strong style="color: var(--primary, #1a7a4a);">{{ format_price(product.price) }}</strong>
                         {% if product.compare_price and product.compare_price > 0 %}
                             <br><small style="text-decoration: line-through; color: var(--text-muted, #999);">{{ format_price(product.compare_price) }}</small>
                         {% endif %}
@@ -283,7 +283,7 @@
                         <span>{{ cat.product_count }} products ({{ ((cat.product_count / total_products) * 100)|round(1) if total_products > 0 else 0 }}%)</span>
                     </div>
                     <div style="background: var(--bg-hover, #f0f0f0); border-radius: 10px; height: 8px; overflow: hidden;">
-                        <div class="progress-bar" style="width: 0%; background: linear-gradient(90deg, var(--primary, #1a73e8), #0d47a1); height: 100%; border-radius: 10px;"
+                        <div class="progress-bar" style="width: 0%; background: linear-gradient(90deg, var(--primary, #1a7a4a), #0f5232); height: 100%; border-radius: 10px;"
                              data-width="{{ (cat.product_count / total_products * 100) if total_products > 0 else 0 }}">
                         </div>
                     </div>

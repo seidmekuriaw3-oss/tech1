@@ -25,7 +25,7 @@
     }
     .register-header h2 {
         margin: 0 0 8px 0;
-        color: #1a73e8;
+        color: #1a7a4a;
     }
     .register-header p {
         color: var(--text-muted, #666);
@@ -57,8 +57,8 @@
     }
     .form-group input:focus {
         outline: none;
-        border-color: #1a73e8;
-        box-shadow: 0 0 0 3px rgba(26,115,232,0.1);
+        border-color: #1a7a4a;
+        box-shadow: 0 0 0 3px rgba(26,122,74,0.1);
     }
     .form-group input.error {
         border-color: #f44336;
@@ -84,7 +84,7 @@
     }
     .strength-weak { background: #f44336; width: 25%; }
     .strength-fair { background: #ff9800; width: 50%; }
-    .strength-good { background: #2196f3; width: 75%; }
+    .strength-good { background: #1a7a4a; width: 75%; }
     .strength-strong { background: #4caf50; width: 100%; }
     .password-hint {
         font-size: 11px;
@@ -126,7 +126,7 @@
         color: var(--text-muted, #666);
     }
     .login-link a {
-        color: #1a73e8;
+        color: #1a7a4a;
         text-decoration: none;
         font-weight: 500;
     }
@@ -140,7 +140,7 @@
         margin-top: 20px;
     }
     .terms a {
-        color: #1a73e8;
+        color: #1a7a4a;
         text-decoration: none;
     }
     @media (max-width: 480px) {
@@ -192,8 +192,8 @@
                     border-radius: 12px;
                     margin-bottom: 20px;
                     background: {% if category == 'error' or category == 'danger' %}#ffebee{% else %}#e8f0fe{% endif %};
-                    color: {% if category == 'error' or category == 'danger' %}#f44336{% else %}#1a73e8{% endif %};
-                    border-left: 3px solid {% if category == 'error' or category == 'danger' %}#f44336{% else %}#1a73e8{% endif %};
+                    color: {% if category == 'error' or category == 'danger' %}#f44336{% else %}#1a7a4a{% endif %};
+                    border-left: 3px solid {% if category == 'error' or category == 'danger' %}#f44336{% else %}#1a7a4a{% endif %};
                 ">
                     {{ message }}
                 </div>
@@ -245,8 +245,8 @@
             <div class="form-group">
                 <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
                     <input type="checkbox" name="agree_terms" id="agreeTerms" required style="width: 18px; height: 18px;">
-                    I agree to the <a href="{{ url_for('customer.terms') }}" target="_blank" style="color: #1a73e8;">Terms of Service</a> and 
-                    <a href="{{ url_for('customer.privacy') }}" target="_blank" style="color: #1a73e8;">Privacy Policy</a>
+                    I agree to the <a href="{{ url_for('customer.terms') }}" target="_blank" style="color: #1a7a4a;">Terms of Service</a> and 
+                    <a href="{{ url_for('customer.privacy') }}" target="_blank" style="color: #1a7a4a;">Privacy Policy</a>
                     <span class="required">*</span>
                 </label>
                 <div class="error-message" id="termsError"></div>

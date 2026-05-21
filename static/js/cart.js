@@ -699,7 +699,7 @@ function applyCoupon() {
     
     if (window.showLoading) window.showLoading(true);
     
-    fetch('/api/cart/coupon', {
+    fetch('/api/apply-coupon', {
         method: 'POST',
         headers: { 
             'Content-Type': 'application/json',

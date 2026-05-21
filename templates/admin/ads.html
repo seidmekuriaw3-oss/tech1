@@ -5,7 +5,7 @@
 {% block extra_css %}
 <style>
     .ads-header {
-        background: linear-gradient(135deg, #1a73e8, #0d47a1);
+        background: linear-gradient(135deg, #1a7a4a, #0f5232);
         border-radius: 15px;
         padding: 30px;
         margin-bottom: 30px;
@@ -25,7 +25,7 @@
     .stat-value {
         font-size: 32px;
         font-weight: bold;
-        color: #1a73e8;
+        color: #1a7a4a;
     }
     .stat-label {
         color: #666;
@@ -39,7 +39,7 @@
         margin-bottom: 20px;
         box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         transition: all 0.3s;
-        border-left: 4px solid #1a73e8;
+        border-left: 4px solid #1a7a4a;
     }
     .ad-card:hover {
         box-shadow: 0 4px 15px rgba(0,0,0,0.15);
@@ -130,7 +130,7 @@
         color: #f44336;
     }
     .btn-toggle {
-        color: #1a73e8;
+        color: #1a7a4a;
     }
     .empty-state {
         text-align: center;
@@ -156,9 +156,9 @@
         cursor: pointer;
     }
     .page-btn.active {
-        background: #1a73e8;
+        background: #1a7a4a;
         color: white;
-        border-color: #1a73e8;
+        border-color: #1a7a4a;
     }
     @media (max-width: 768px) {
         .ads-header {
@@ -191,7 +191,7 @@
                 <h1 style="margin: 0 0 10px 0;">📢 Advertisements</h1>
                 <p style="margin: 0; opacity: 0.9;">Manage your store advertisements and promotions</p>
             </div>
-            <a href="{{ url_for('admin.ad_create') }}" class="btn btn-primary" style="background: white; color: #1a73e8;">
+            <a href="{{ url_for('admin.ad_create') }}" class="btn btn-primary" style="background: white; color: #1a7a4a;">
                 <span style="font-size: 18px;">➕</span> Create New Ad
             </a>
         </div>
@@ -254,7 +254,7 @@
                             <span>🆔 ID: #{{ ad.id }}</span>
                             <span>🔢 Sort Order: {{ ad.sort_order|default(0) }}</span>
                             {% if ad.link %}
-                            <span>🔗 <a href="{{ ad.link }}" target="_blank" style="color: #1a73e8;">View Link</a></span>
+                            <span>🔗 <a href="{{ ad.link }}" target="_blank" style="color: #1a7a4a;">View Link</a></span>
                             {% endif %}
                             <span class="status-badge {% if ad.is_active %}status-active{% else %}status-inactive{% endif %}">
                                 {% if ad.is_active %}🟢 Active{% else %}🔴 Inactive{% endif %}
