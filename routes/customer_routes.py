@@ -299,28 +299,28 @@ def category_products(category_id=None):
         cursor.execute("SELECT * FROM categories WHERE is_active = 1 ORDER BY sort_order ASC")
         all_cats = cursor.fetchall()
 
-        category_name = None
+        page_title = None
         if category_id:
             cursor.execute("SELECT * FROM categories WHERE id = ? AND is_active = 1", (category_id,))
-            category = cursor.fetchone()
-            if category:
-                category_name = category['name_am'] if lang == 'am' else category['name']
+            cat_row = cursor.fetchone()
+            if cat_row:
+                page_title = cat_row['name_am'] if lang == 'am' else cat_row['name']
                 cursor.execute("""
-                    SELECT p.*, c.name as category_name
+                    SELECT p.*, c.name as cat_name
                     FROM products p LEFT JOIN categories c ON p.category_id = c.id
                     WHERE p.category_id = ? AND p.is_active = 1 ORDER BY p.id DESC
                 """, (category_id,))
             else:
-                category_name = 'ሁሉም ምርቶች' if lang == 'am' else 'All Products'
+                page_title = 'ሁሉም ምርቶች' if lang == 'am' else 'All Products'
                 cursor.execute("""
-                    SELECT p.*, c.name as category_name
+                    SELECT p.*, c.name as cat_name
                     FROM products p LEFT JOIN categories c ON p.category_id = c.id
                     WHERE p.is_active = 1 ORDER BY p.id DESC
                 """)
         else:
-            category_name = 'ሁሉም ምርቶች' if lang == 'am' else 'All Products'
+            page_title = 'ሁሉም ምርቶች' if lang == 'am' else 'All Products'
             cursor.execute("""
-                SELECT p.*, c.name as category_name
+                SELECT p.*, c.name as cat_name
                 FROM products p LEFT JOIN categories c ON p.category_id = c.id
                 WHERE p.is_active = 1 ORDER BY p.id DESC
             """)
@@ -331,13 +331,13 @@ def category_products(category_id=None):
 
         return render_template('customer/category.html',
                                products=products_list, categories=categories_list,
-                               category_name=category_name, current_category=category_id,
+                               page_title=page_title, current_category=category_id,
                                lang=lang)
     except Exception as e:
         print(f"Category products error: {e}")
         flash('Unable to load category products.', 'error')
         return render_template('customer/category.html',
-                               products=[], categories=[], category_name='Products',
+                               products=[], categories=[], page_title='Products',
                                current_category=None, lang=lang)
 
 

@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}{{ category_name }} - Ethiosadat Furniture{% endblock %}
+{% block title %}{{ page_title }} - Ethiosadat Furniture{% endblock %}
 
 {% block extra_css %}
 <style>
@@ -241,8 +241,8 @@
     
     <!-- Category Header -->
     <div class="category-header">
-        <h1>📂 {{ category_name }}</h1>
-        <p>Browse our collection of {{ category_name }} products</p>
+        <h1>📂 {{ page_title }}</h1>
+        <p>Browse our collection of {{ page_title }} products</p>
     </div>
 
     {% if products and products|length > 0 %}
@@ -310,7 +310,7 @@
     <!-- Empty State -->
     <div class="empty-state">
         <div class="empty-icon">📭</div>
-        <h2>No products found in {{ category_name }}</h2>
+        <h2>No products found in {{ page_title }}</h2>
         <p style="color: var(--text-muted, #666); margin-bottom: 24px;">Check back later for new arrivals!</p>
         <a href="{{ url_for('customer.index') }}" class="btn btn-primary">Continue Shopping →</a>
     </div>
