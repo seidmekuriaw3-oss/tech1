@@ -155,21 +155,113 @@
 .nb-sub  {font-size:11px;color:#7a7060;margin-top:2px}
 .nb-cd   {font-size:20px;font-weight:700;color:#6ee7a0;font-variant-numeric:tabular-nums}
 
-.plist{display:flex;flex-direction:column;gap:8px}
-.prow{
-    display:flex;align-items:center;justify-content:space-between;
-    padding:12px 14px;border-radius:11px;
-    background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);transition:all .3s;
+.prayer-carousel{
+    position:relative;width:100%;
+    perspective:900px;
+    margin:0 auto;
+    overflow:hidden;
+    border-radius:18px;
+    min-height:220px;
+    touch-action:pan-y;
 }
-.prow.curr{background:rgba(26,122,74,.2);border-color:var(--ig);box-shadow:var(--ggreen)}
-.prow.nxt {background:rgba(201,168,76,.07);border-color:rgba(201,168,76,.4)}
-.prow .pi{font-size:17px;width:26px}
-.prow .pn{flex:1;font-size:14px;font-weight:600;color:#d4c99a;margin-left:8px}
-.prow.curr .pn{color:#6ee7a0}
-.prow.nxt  .pn{color:var(--igold)}
-.prow .pt{font-size:15px;font-weight:700;color:#e8e0cc;font-variant-numeric:tabular-nums;letter-spacing:.5px}
-.pbadge{font-size:9px;background:var(--ig);color:#fff;padding:2px 7px;border-radius:20px;margin-left:6px;font-weight:700;text-transform:uppercase}
-.prow.nxt .pbadge{background:var(--igold);color:#0d1f14}
+.pc-track{
+    position:relative;width:100%;height:100%;
+    transform-style:preserve-3d;
+}
+.pc-slide{
+    position:absolute;inset:0;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    gap:10px;
+    border-radius:18px;
+    padding:28px 20px 20px;
+    border:1px solid rgba(255,255,255,.1);
+    background:linear-gradient(145deg,rgba(20,40,24,.85),rgba(12,26,16,.95));
+    backdrop-filter:blur(14px);
+    backface-visibility:hidden;
+    transition:transform .55s cubic-bezier(.4,0,.2,1), opacity .55s;
+    opacity:0;
+    transform:rotateY(90deg) scale(.88);
+    pointer-events:none;
+}
+.pc-slide.active{
+    opacity:1;
+    transform:rotateY(0deg) scale(1);
+    pointer-events:auto;
+    position:relative;
+}
+.pc-slide.exit-left{
+    opacity:0;
+    transform:rotateY(-90deg) scale(.88);
+    pointer-events:none;
+}
+.pc-slide.enter-right{
+    opacity:0;
+    transform:rotateY(90deg) scale(.88);
+    pointer-events:none;
+}
+.pc-slide.exit-right{
+    opacity:0;
+    transform:rotateY(90deg) scale(.88);
+    pointer-events:none;
+}
+.pc-slide.enter-left{
+    opacity:0;
+    transform:rotateY(-90deg) scale(.88);
+    pointer-events:none;
+}
+
+.pc-slide.curr{
+    background:linear-gradient(145deg,rgba(26,100,58,.75),rgba(12,48,24,.92));
+    border-color:rgba(110,231,160,.35);
+    box-shadow:0 0 36px rgba(26,122,74,.35), inset 0 0 24px rgba(26,122,74,.08);
+}
+.pc-slide.nxt{
+    background:linear-gradient(145deg,rgba(55,45,10,.75),rgba(30,24,5,.92));
+    border-color:rgba(201,168,76,.4);
+    box-shadow:0 0 24px rgba(201,168,76,.2), inset 0 0 18px rgba(201,168,76,.05);
+}
+
+.pc-emoji{font-size:46px;line-height:1;filter:drop-shadow(0 0 12px rgba(201,168,76,.6));margin-bottom:4px}
+.pc-name{
+    font-size:22px;font-weight:800;letter-spacing:2px;text-transform:uppercase;
+    color:#d4c99a;text-shadow:0 0 18px rgba(201,168,76,.4);
+}
+.pc-slide.curr .pc-name{color:#6ee7a0;text-shadow:0 0 18px rgba(110,231,160,.5)}
+.pc-slide.nxt  .pc-name{color:var(--igold);text-shadow:0 0 18px rgba(201,168,76,.5)}
+.pc-time{
+    font-size:44px;font-weight:900;font-variant-numeric:tabular-nums;
+    letter-spacing:3px;color:#fff;
+    text-shadow:0 0 28px rgba(255,255,255,.25);
+}
+.pc-slide.curr .pc-time{color:#6ee7a0;text-shadow:0 0 28px rgba(110,231,160,.4)}
+.pc-slide.nxt  .pc-time{color:var(--igold);text-shadow:0 0 28px rgba(201,168,76,.4)}
+.pc-badge{
+    font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;
+    padding:4px 12px;border-radius:20px;
+}
+.pc-slide.curr .pc-badge{background:rgba(110,231,160,.2);color:#6ee7a0;border:1px solid rgba(110,231,160,.4)}
+.pc-slide.nxt  .pc-badge{background:rgba(201,168,76,.2);color:var(--igold);border:1px solid rgba(201,168,76,.4)}
+
+.pc-nav{
+    display:flex;align-items:center;justify-content:center;gap:14px;
+    margin-top:12px;
+}
+.pc-arr{
+    width:36px;height:36px;border-radius:50%;
+    background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.13);
+    color:#d4c99a;font-size:17px;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    transition:all .2s;flex-shrink:0;
+    user-select:none;
+}
+.pc-arr:hover{background:rgba(201,168,76,.2);border-color:var(--igold);color:var(--igold)}
+.pc-dots{display:flex;gap:7px;align-items:center}
+.pc-dot{
+    width:7px;height:7px;border-radius:50%;
+    background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.2);
+    cursor:pointer;transition:all .25s;
+}
+.pc-dot.on{background:var(--igold);border-color:var(--igold);transform:scale(1.35);box-shadow:0 0 8px rgba(201,168,76,.6)}
 
 .action-btn{
     display:block;width:100%;margin-top:16px;padding:12px;
@@ -485,8 +577,19 @@
                 <div class="nb-cd" id="nb-cd">--:--</div>
             </div>
         </div>
-        <div class="plist" id="plist">
-            <div style="text-align:center;padding:18px;color:#7a7060;font-size:13px">Loading prayer times…</div>
+        <div class="prayer-carousel" id="prayer-carousel">
+            <div class="pc-track" id="pc-track">
+                <div class="pc-slide active" style="position:relative">
+                    <div class="pc-emoji">🕌</div>
+                    <div class="pc-name" style="font-size:16px;opacity:.6">Loading…</div>
+                    <div class="pc-time" style="font-size:28px;opacity:.4">--:--</div>
+                </div>
+            </div>
+        </div>
+        <div class="pc-nav" id="pc-nav">
+            <button class="pc-arr" onclick="pcNav(-1)" aria-label="Previous">&#8249;</button>
+            <div class="pc-dots" id="pc-dots"></div>
+            <button class="pc-arr" onclick="pcNav(1)" aria-label="Next">&#8250;</button>
         </div>
         <button class="action-btn" id="notif-btn" onclick="requestAzan()">
             🔔 Enable Prayer Notifications & Azan
@@ -735,17 +838,128 @@ function updateRamadanTimers() {
     }
 }
 
+let _pcIdx      = 0;
+let _pcTotal    = 5;
+let _pcBusy     = false;
+let _pcAuto     = null;
+let _pcTimes    = null;
+let _pcCurrP    = null;
+let _pcNxtP     = null;
+let _pcTouchX   = null;
+
+function _pcBadge(p) {
+    if (p === _pcCurrP) return '<div class="pc-badge">&#9654; Now</div>';
+    if (p === _pcNxtP)  return '<div class="pc-badge">&#9679; Next</div>';
+    return '';
+}
+
+function _pcSlideHTML(p, times) {
+    const isCurr = p === _pcCurrP;
+    const isNxt  = p === _pcNxtP;
+    const cls    = isCurr ? ' curr' : isNxt ? ' nxt' : '';
+    return `<div class="pc-slide${cls}" data-p="${p}">
+        <div class="pc-emoji">${PI[p]}</div>
+        <div class="pc-name">${p}</div>
+        <div class="pc-time">${times[p]}</div>
+        ${_pcBadge(p)}
+    </div>`;
+}
+
 function renderList(times) {
-    const list = document.getElementById('plist');
-    list.innerHTML = PORD.map(p=>`
-        <div class="prow" data-p="${p}">
-            <span class="pi">${PI[p]}</span>
-            <span class="pn">${p}</span>
-            <span class="pt">${times[p]}</span>
-        </div>`).join('');
-    _times = times;
+    _times  = times;
+    _pcTimes = times;
     updateNextBanner();
     if (RAMADAN_ACTIVE) updateRamadanTimers();
+
+    const now = new Date();
+    const toMin = s => { const [h,m] = s.split(':').map(Number); return h*60+m; };
+    const nowMin = now.getHours()*60 + now.getMinutes();
+    let currIdx = -1, nxtIdx = 0;
+    for (let i = 0; i < PORD.length; i++) {
+        if (toMin(times[PORD[i]]) <= nowMin) currIdx = i;
+    }
+    nxtIdx = currIdx >= 0 ? (currIdx + 1) % PORD.length : 0;
+    _pcCurrP = currIdx >= 0 ? PORD[currIdx] : null;
+    _pcNxtP  = PORD[nxtIdx];
+
+    _pcTotal = PORD.length;
+    _pcIdx   = nxtIdx;
+
+    const track = document.getElementById('pc-track');
+    track.innerHTML = PORD.map(p => _pcSlideHTML(p, times)).join('');
+
+    const slides = track.querySelectorAll('.pc-slide');
+    slides.forEach((s, i) => {
+        s.classList.remove('active','enter-right','enter-left','exit-left','exit-right');
+        if (i !== _pcIdx) {
+            s.style.position = 'absolute';
+        }
+    });
+    slides[_pcIdx].classList.add('active');
+    slides[_pcIdx].style.position = 'relative';
+
+    const dots = document.getElementById('pc-dots');
+    dots.innerHTML = PORD.map((_,i) =>
+        `<div class="pc-dot${i===_pcIdx?' on':''}" onclick="pcGoTo(${i})"></div>`
+    ).join('');
+
+    _pcAuto && clearInterval(_pcAuto);
+    _pcAuto = setInterval(() => pcNav(1), 3200);
+
+    const car = document.getElementById('prayer-carousel');
+    car.addEventListener('touchstart', e => { _pcTouchX = e.touches[0].clientX; }, {passive:true});
+    car.addEventListener('touchend', e => {
+        if (_pcTouchX === null) return;
+        const dx = e.changedTouches[0].clientX - _pcTouchX;
+        _pcTouchX = null;
+        if (Math.abs(dx) > 40) pcNav(dx < 0 ? 1 : -1);
+    }, {passive:true});
+}
+
+function pcNav(dir) {
+    if (_pcBusy || !_pcTimes) return;
+    const next = ((_pcIdx + dir) % _pcTotal + _pcTotal) % _pcTotal;
+    pcGoTo(next, dir);
+}
+
+function pcGoTo(next, dir) {
+    if (_pcBusy || !_pcTimes || next === _pcIdx) return;
+    if (dir === undefined) dir = next > _pcIdx ? 1 : -1;
+    _pcBusy = true;
+
+    const track   = document.getElementById('pc-track');
+    const slides  = track.querySelectorAll('.pc-slide');
+    const current = slides[_pcIdx];
+    const incoming= slides[next];
+
+    incoming.style.position = 'absolute';
+    incoming.classList.remove('active','exit-left','exit-right','enter-left','enter-right');
+    incoming.classList.add(dir > 0 ? 'enter-right' : 'enter-left');
+
+    requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+            current.classList.remove('active');
+            current.classList.add(dir > 0 ? 'exit-left' : 'exit-right');
+            incoming.classList.remove('enter-right','enter-left');
+            incoming.classList.add('active');
+            incoming.style.position = 'relative';
+
+            _pcIdx = next;
+
+            document.querySelectorAll('#pc-dots .pc-dot').forEach((d,i) => {
+                d.classList.toggle('on', i === _pcIdx);
+            });
+
+            setTimeout(() => {
+                current.style.position = 'absolute';
+                current.classList.remove('exit-left','exit-right');
+                _pcBusy = false;
+            }, 580);
+        });
+    });
+
+    _pcAuto && clearInterval(_pcAuto);
+    _pcAuto = setInterval(() => pcNav(1), 3200);
 }
 
 function loadPrayerTimes(lat, lng) {
