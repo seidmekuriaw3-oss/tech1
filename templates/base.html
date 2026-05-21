@@ -186,6 +186,18 @@
             <span class="badge">{{ pending_orders_count }}</span>
             {% endif %}
         </a>
+        <a href="{{ url_for('admin.admin_inbox') }}" class="menu-item">
+            <span class="icon">📩</span>
+            <span class="text">Contact Messages</span>
+        </a>
+        <a href="{{ url_for('admin.admin_reviews') }}" class="menu-item">
+            <span class="icon">⭐</span>
+            <span class="text">Reviews</span>
+        </a>
+        <a href="{{ url_for('admin.admin_users') }}" class="menu-item">
+            <span class="icon">👥</span>
+            <span class="text">Customers</span>
+        </a>
         <a href="{{ url_for('admin.reports') }}" class="menu-item">
             <span class="icon">📈</span>
             <span class="text">Reports</span>
@@ -233,14 +245,26 @@
     <!-- SHOPPING SECTION -->
     <div class="menu-section">
         <div class="menu-title">🛍️ SHOPPING</div>
+        <a href="{{ url_for('customer.products') }}" class="menu-item">
+            <span class="icon">📦</span>
+            <span class="text">{% if lang == 'am' %}ሁሉም ምርቶች{% elif lang == 'ar' %}كل المنتجات{% else %}All Products{% endif %}</span>
+        </a>
         <a href="{{ url_for('cart.view_cart') }}" class="menu-item">
             <span class="icon">🛒</span>
-            <span class="text">My Cart</span>
+            <span class="text">{% if lang == 'am' %}ጋሪ{% elif lang == 'ar' %}السلة{% else %}My Cart{% endif %}</span>
             <span id="menu-cart-count" class="badge" style="display: none;">0</span>
         </a>
-        <a href="{{ url_for('customer.products') }}" class="menu-item">
-            <span class="icon">🔄</span>
-            <span class="text">All Products</span>
+        <a href="{{ url_for('customer.wishlist') }}" class="menu-item">
+            <span class="icon">❤️</span>
+            <span class="text">{% if lang == 'am' %}ምኞት ዝርዝር{% elif lang == 'ar' %}المفضلة{% else %}Wishlist{% endif %}</span>
+        </a>
+        <a href="{{ url_for('customer.search') }}" class="menu-item">
+            <span class="icon">🔍</span>
+            <span class="text">{% if lang == 'am' %}ፈልግ{% elif lang == 'ar' %}بحث{% else %}Search Products{% endif %}</span>
+        </a>
+        <a href="{{ url_for('customer.track_order_public') }}" class="menu-item">
+            <span class="icon">🚚</span>
+            <span class="text">{% if lang == 'am' %}ትዕዛዝ ክትትል{% elif lang == 'ar' %}تتبع الطلب{% else %}Track Order{% endif %}</span>
         </a>
     </div>
     
@@ -277,6 +301,18 @@
             <span class="icon">📍</span>
             <span class="text">{% if lang == 'am' %}ቅርንጫፎቻችን{% elif lang == 'ar' %}فروعنا{% else %}Our Branches{% endif %}</span>
         </a>
+        <a href="{{ url_for('customer.faq') }}" class="menu-item">
+            <span class="icon">❓</span>
+            <span class="text">{% if lang == 'am' %}በጥ ተጠ ጥያቄዎች{% elif lang == 'ar' %}الأسئلة الشائعة{% else %}FAQ{% endif %}</span>
+        </a>
+        <a href="{{ url_for('customer.shipping_info') }}" class="menu-item">
+            <span class="icon">🚚</span>
+            <span class="text">{% if lang == 'am' %}ማጓጓዝ መረጃ{% elif lang == 'ar' %}معلومات الشحن{% else %}Shipping Info{% endif %}</span>
+        </a>
+        <a href="{{ url_for('customer.returns_policy') }}" class="menu-item">
+            <span class="icon">🔄</span>
+            <span class="text">{% if lang == 'am' %}መመለስ እና መለዋወጥ{% elif lang == 'ar' %}الإرجاع والتبادل{% else %}Returns & Exchanges{% endif %}</span>
+        </a>
         <a href="{{ url_for('customer.about') }}" class="menu-item">
             <span class="icon">ℹ️</span>
             <span class="text">{% if lang == 'am' %}ስለ እኛ{% elif lang == 'ar' %}معلومات عنا{% else %}About Us{% endif %}</span>
@@ -284,6 +320,14 @@
         <a href="{{ url_for('customer.contact') }}" class="menu-item">
             <span class="icon">📞</span>
             <span class="text">{% if lang == 'am' %}አግኙን{% elif lang == 'ar' %}اتصل بنا{% else %}Contact Us{% endif %}</span>
+        </a>
+        <a href="{{ url_for('customer.privacy') }}" class="menu-item">
+            <span class="icon">🔒</span>
+            <span class="text">{% if lang == 'am' %}ግላዊነት ፖሊሲ{% elif lang == 'ar' %}سياسة الخصوصية{% else %}Privacy Policy{% endif %}</span>
+        </a>
+        <a href="{{ url_for('customer.terms') }}" class="menu-item">
+            <span class="icon">📜</span>
+            <span class="text">{% if lang == 'am' %}ውሎች{% elif lang == 'ar' %}الشروط والأحكام{% else %}Terms & Conditions{% endif %}</span>
         </a>
     </div>
     

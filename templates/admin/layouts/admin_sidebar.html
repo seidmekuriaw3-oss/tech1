@@ -153,20 +153,6 @@
                 <span class="nav-icon">📥</span>
                 <span class="nav-text">Import Products</span>
             </a>
-            
-            <a href="{{ url_for('admin.products') }}" class="nav-item" style="
-                display: flex;
-                align-items: center;
-                gap: 12px;
-                padding: 10px 20px;
-                color: rgba(255,255,255,0.8);
-                text-decoration: none;
-                transition: all 0.3s;
-                border-left: 3px solid transparent;
-            ">
-                <span class="nav-icon">📂</span>
-                <span class="nav-text">Categories</span>
-            </a>
 
             <a href="{{ url_for('admin.admin_reviews') }}" class="nav-item" style="
                 display: flex;
@@ -262,20 +248,6 @@
             ">
                 <span class="nav-icon">✨</span>
                 <span class="nav-text">Create Ad</span>
-            </a>
-            
-            <a href="{{ url_for('admin.ads') }}" class="nav-item" style="
-                display: flex;
-                align-items: center;
-                gap: 12px;
-                padding: 10px 20px;
-                color: rgba(255,255,255,0.8);
-                text-decoration: none;
-                transition: all 0.3s;
-                border-left: 3px solid transparent;
-            ">
-                <span class="nav-icon">🏷️</span>
-                <span class="nav-text">Promotions</span>
             </a>
             
             <a href="{{ url_for('admin.send_notification') }}" class="nav-item" style="
@@ -419,6 +391,20 @@
                 <span class="nav-icon">👥</span>
                 <span class="nav-text">Users</span>
             </a>
+
+            <a href="{{ url_for('admin.admin_inbox') }}" class="nav-item {% if request.endpoint == 'admin.admin_inbox' %}active{% endif %}" style="
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                padding: 10px 20px;
+                color: rgba(255,255,255,0.8);
+                text-decoration: none;
+                transition: all 0.3s;
+                border-left: 3px solid transparent;
+            ">
+                <span class="nav-icon">📩</span>
+                <span class="nav-text">Contact Messages</span>
+            </a>
             
             <a href="{{ url_for('admin.backup_database') }}" class="nav-item" style="
                 display: flex;
@@ -432,20 +418,6 @@
             ">
                 <span class="nav-icon">💾</span>
                 <span class="nav-text">Backup</span>
-            </a>
-            
-            <a href="{{ url_for('admin.dashboard') }}" class="nav-item" style="
-                display: flex;
-                align-items: center;
-                gap: 12px;
-                padding: 10px 20px;
-                color: rgba(255,255,255,0.8);
-                text-decoration: none;
-                transition: all 0.3s;
-                border-left: 3px solid transparent;
-            ">
-                <span class="nav-icon">📝</span>
-                <span class="nav-text">System Logs</span>
             </a>
             
             <a href="{{ url_for('admin.clear_cache') }}" class="nav-item" style="
