@@ -42,8 +42,12 @@ document.addEventListener('DOMContentLoaded', function() {
 // ==================== Product Management ====================
 function deleteProduct(productId, productName) {
     if (!productId) return;
-    
-    showConfirm('Delete Product', `Are you sure you want to delete "${productName || 'this product'}"? This action cannot be undone.`, () => {
+
+    const _confirm = window.showConfirm || function(t, m, cb) { if (confirm(m)) cb(); };
+    const _success = window.showSuccess || function(m) { alert(m); };
+    const _error   = window.showError   || function(m) { alert(m); };
+
+    _confirm('Delete Product', `Are you sure you want to delete "${productName || 'this product'}"? This action cannot be undone.`, () => {
         showLoading(true);
         fetch(`/admin/products/delete/${productId}`, {
             method: 'POST',
@@ -53,10 +57,8 @@ function deleteProduct(productId, productName) {
             }
         })
         .then(response => {
-            if (response.redirected) {
-                window.location.href = response.url;
-            } else if (response.ok) {
-                showSuccess(`${productName || 'Product'} deleted successfully`);
+            if (response.ok) {
+                _success(`${productName || 'Product'} deleted successfully`);
                 setTimeout(() => location.reload(), 1500);
             } else {
                 throw new Error('Delete failed');
@@ -64,7 +66,7 @@ function deleteProduct(productId, productName) {
         })
         .catch(error => {
             console.error('Error:', error);
-            showError('Failed to delete product');
+            _error('Failed to delete product');
         })
         .finally(() => showLoading(false));
     });
@@ -72,8 +74,12 @@ function deleteProduct(productId, productName) {
 
 function deleteAd(adId) {
     if (!adId) return;
-    
-    showConfirm('Delete Advertisement', 'Are you sure you want to delete this advertisement?', () => {
+
+    const _confirm = window.showConfirm || function(t, m, cb) { if (confirm(m)) cb(); };
+    const _success = window.showSuccess || function(m) { alert(m); };
+    const _error   = window.showError   || function(m) { alert(m); };
+
+    _confirm('Delete Advertisement', 'Are you sure you want to delete this advertisement?', () => {
         showLoading(true);
         fetch(`/admin/ads/delete/${adId}`, {
             method: 'POST',
@@ -83,10 +89,8 @@ function deleteAd(adId) {
             }
         })
         .then(response => {
-            if (response.redirected) {
-                window.location.href = response.url;
-            } else if (response.ok) {
-                showSuccess('Advertisement deleted successfully');
+            if (response.ok) {
+                _success('Advertisement deleted successfully');
                 setTimeout(() => location.reload(), 1500);
             } else {
                 throw new Error('Delete failed');
@@ -94,7 +98,7 @@ function deleteAd(adId) {
         })
         .catch(error => {
             console.error('Error:', error);
-            showError('Failed to delete advertisement');
+            _error('Failed to delete advertisement');
         })
         .finally(() => showLoading(false));
     });
