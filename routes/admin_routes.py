@@ -269,30 +269,54 @@ def product_edit(pid):
             is_featured = 1 if request.form.get('is_featured') else 0
             is_new = 1 if request.form.get('is_new') else 0
 
+            from werkzeug.utils import secure_filename
+            import json as _json
+            upload_dir = 'static/uploads/products'
+            os.makedirs(upload_dir, exist_ok=True)
+
+            def save_upload(file_obj):
+                fname = secure_filename(file_obj.filename)
+                ext = fname.rsplit('.', 1)[1].lower() if '.' in fname else 'jpg'
+                unique = f"product_{uuid.uuid4().hex[:8]}.{ext}"
+                file_obj.save(os.path.join(upload_dir, unique))
+                return f'uploads/products/{unique}'
+
             image_filename = product['thumbnail']
             image = request.files.get('image')
             if image and image.filename:
-                from werkzeug.utils import secure_filename
-                filename = secure_filename(image.filename)
-                ext = filename.rsplit('.', 1)[1].lower() if '.' in filename else 'jpg'
-                unique_filename = f"product_{uuid.uuid4().hex[:8]}.{ext}"
-                upload_dir = 'static/uploads/products'
-                os.makedirs(upload_dir, exist_ok=True)
-                image.save(os.path.join(upload_dir, unique_filename))
-                image_filename = f'uploads/products/{unique_filename}'
+                image_filename = save_upload(image)
+
+            # Existing gallery images the user kept
+            keep_images_raw = request.form.get('keep_images', '')
+            try:
+                kept = _json.loads(keep_images_raw) if keep_images_raw else []
+                if not isinstance(kept, list):
+                    kept = []
+            except Exception:
+                kept = []
+
+            # New extra gallery images
+            extra_images = request.files.getlist('extra_images')
+            new_gallery = []
+            for extra in extra_images:
+                if extra and extra.filename:
+                    new_gallery.append(save_upload(extra))
+
+            all_gallery = kept + new_gallery
+            images_json = _json.dumps(all_gallery) if all_gallery else None
 
             cursor.execute("""
                 UPDATE products SET
                     name=?, name_am=?, name_ar=?, name_en=?,
                     description=?, description_am=?, description_ar=?, description_en=?,
                     price=?, compare_price=?, stock_quantity=?, category_id=?,
-                    material=?, color=?, sku=?, is_featured=?, is_new=?, thumbnail=?,
+                    material=?, color=?, sku=?, is_featured=?, is_new=?, thumbnail=?, images=?,
                     updated_at=CURRENT_TIMESTAMP
                 WHERE id=?
             """, (name, name_am, name_ar, name_en,
                   description, description_am, description_ar, description_en,
                   price, compare_price, stock_quantity, category_id,
-                  material, color, sku, is_featured, is_new, image_filename, pid))
+                  material, color, sku, is_featured, is_new, image_filename, images_json, pid))
             conn.commit()
             flash('Product updated successfully!', 'success')
             return redirect(url_for('admin.products'))
