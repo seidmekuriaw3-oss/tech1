@@ -46,7 +46,7 @@ function deleteProduct(productId, productName) {
     showConfirm('Delete Product', `Are you sure you want to delete "${productName || 'this product'}"? This action cannot be undone.`, () => {
         showLoading(true);
         fetch(`/admin/products/delete/${productId}`, {
-            method: 'DELETE',
+            method: 'POST',
             headers: {
                 'X-Requested-With': 'XMLHttpRequest',
                 'Content-Type': 'application/json'
@@ -76,7 +76,7 @@ function deleteAd(adId) {
     showConfirm('Delete Advertisement', 'Are you sure you want to delete this advertisement?', () => {
         showLoading(true);
         fetch(`/admin/ads/delete/${adId}`, {
-            method: 'DELETE',
+            method: 'POST',
             headers: {
                 'X-Requested-With': 'XMLHttpRequest',
                 'Content-Type': 'application/json'
