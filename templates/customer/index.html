@@ -308,56 +308,91 @@
         color: white;
         transform: translateY(-2px);
     }
+    /* ── COMPACT PRODUCT CARD ── */
     .product-card {
         cursor: pointer;
         background: var(--bg-white, white);
-        border-radius: 16px;
+        border-radius: 12px;
         overflow: hidden;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-        transition: all 0.3s;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        transition: transform 0.25s, box-shadow 0.25s;
         position: relative;
+        text-decoration: none !important;
+        color: inherit !important;
+        display: block;
     }
     .product-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        transform: translateY(-3px);
+        box-shadow: 0 6px 18px rgba(0,0,0,0.14);
     }
-    .btn-add-to-cart {
-        width: 100%;
-        background: #1a7a4a;
+    .pc-img {
+        position: relative;
+        height: 110px;
+        background: var(--bg-hover, #f5f5f5);
+        overflow: hidden;
+    }
+    .pc-img img {
+        width: 100%; height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s;
+        display: block;
+    }
+    .product-card:hover .pc-img img { transform: scale(1.06); }
+    .pc-badge {
+        position: absolute;
+        padding: 2px 5px;
+        border-radius: 6px;
+        font-size: 9px;
+        font-weight: 800;
         color: white;
-        border: none;
-        padding: 10px;
-        border-radius: 8px;
-        cursor: pointer;
-        font-weight: bold;
-        transition: all 0.3s;
-        position: relative;
+        line-height: 1.4;
         z-index: 2;
     }
-    .btn-add-to-cart:hover {
-        background: #0f5232;
-        transform: scale(1.02);
+    .pc-badge-sale { top: 5px; right: 5px; background: #f44336; }
+    .pc-badge-new  { top: 5px; left:  5px; background: #4caf50; }
+    .pc-cart-btn {
+        position: absolute; bottom: 5px; right: 5px;
+        background: #1a7a4a; color: white; border: none;
+        width: 26px; height: 26px; border-radius: 50%;
+        font-size: 12px; cursor: pointer;
+        display: flex; align-items: center; justify-content: center;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.25);
+        z-index: 3;
+        transition: background 0.2s, transform 0.2s;
     }
-    .product-card .price-row {
-        position: relative;
-        z-index: 2;
+    .pc-cart-btn:hover { background: #0f5232; transform: scale(1.1); }
+    .pc-body { padding: 6px 7px 8px; }
+    .pc-name {
+        font-size: 11px; margin: 0 0 3px;
+        color: var(--text-color, #333);
+        line-height: 1.3; font-weight: 600;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
     }
-    /* Dark mode support */
+    .pc-price { font-size: 12px; font-weight: 800; color: #1a7a4a; }
+    .pc-compare {
+        font-size: 10px; color: var(--text-muted, #999);
+        text-decoration: line-through; margin-left: 3px;
+    }
+    @media (min-width: 768px) {
+        .pc-img { height: 160px; }
+        .pc-name { font-size: 13px; }
+        .pc-price { font-size: 14px; }
+        .pc-badge { font-size: 10px; }
+        .pc-cart-btn { width: 32px; height: 32px; font-size: 14px; bottom: 8px; right: 8px; }
+        .pc-body { padding: 10px 12px 12px; }
+    }
+    /* Dark mode */
     @media (prefers-color-scheme: dark) {
-        .product-card {
-            background: #1e1e2e;
-        }
-        .product-card h3 {
-            color: #eee !important;
-        }
-        .about-section {
-            background: #16213e;
-        }
+        .product-card { background: #1e1e2e; }
+        .pc-name { color: #eee; }
+        .about-section { background: #16213e; }
     }
     @media (max-width: 768px) {
         .hero { padding: 40px 20px !important; }
         .hero h1 { font-size: 24px !important; }
-        .products-grid { gap: 16px !important; }
         .about-section { padding: 30px 20px; }
     }
 
@@ -622,41 +657,26 @@
 <h2>{{ t.featured_products }}</h2>
 <div class="products-grid">
     {% for product in featured_products %}
-    <div class="product-card" data-product-id="{{ product.id }}">
-        <div style="height: 200px; background: var(--bg-hover, #f5f5f5); display: flex; align-items: center; justify-content: center; position: relative;">
+    {% set disc = ((product.compare_price|float - product.price|float) / product.compare_price|float * 100)|round|int if (product.compare_price and product.compare_price|float > product.price|float) else 0 %}
+    <a href="{{ url_for('customer.product_detail', product_id=product.id) }}" class="product-card" data-product-id="{{ product.id }}">
+        <div class="pc-img">
             {% if product.thumbnail and product.thumbnail != '' %}
-                <img src="{{ url_for('static', filename=product.thumbnail) }}" alt="{{ product_name(product) }}" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy"
-                     onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'font-size:64px;\'>🪑</div>'">
+                <img src="{{ url_for('static', filename=product.thumbnail) }}" alt="{{ product_name(product) }}" loading="lazy"
+                     onerror="this.onerror=null;this.style.display='none';this.parentElement.querySelector('.pc-fallback').style.display='flex';">
+                <div class="pc-fallback" style="display:none;position:absolute;inset:0;align-items:center;justify-content:center;font-size:36px;">🪑</div>
             {% else %}
-                <div style="font-size: 64px;">🪑</div>
+                <div style="display:flex;align-items:center;justify-content:center;height:100%;font-size:36px;">🪑</div>
             {% endif %}
-            {% if product.compare_price and product.compare_price|float > product.price|float %}
-                {% set discount = ((product.compare_price|float - product.price|float) / product.compare_price|float * 100)|round|int %}
-                <span style="position: absolute; top: 10px; right: 10px; background: #f44336; color: white; padding: 5px 10px; border-radius: 20px; font-size: 12px; font-weight: bold;">
-                    -{{ discount }}%
-                </span>
-            {% endif %}
-            {% if product.is_new %}
-                <span style="position: absolute; top: 10px; left: 10px; background: #4caf50; color: white; padding: 5px 10px; border-radius: 20px; font-size: 11px; font-weight: bold;">
-                    🆕 NEW
-                </span>
-            {% endif %}
+            {% if disc > 0 %}<span class="pc-badge pc-badge-sale">-{{ disc }}%</span>{% endif %}
+            {% if product.is_new %}<span class="pc-badge pc-badge-new">NEW</span>{% endif %}
+            <button class="pc-cart-btn" onclick="event.preventDefault();event.stopPropagation();addToCart('{{ product.id }}',1,this)" title="{{ t.add_to_cart }}">🛒</button>
         </div>
-        <div style="padding: 15px;">
-            <h3 style="font-size: 16px; margin-bottom: 5px; color: var(--text-color, #333);">{{ product_name(product) }}</h3>
-            <div class="price-row" style="margin: 10px 0;">
-                <span style="font-size: 20px; font-weight: bold; color: #1a7a4a;">{{ format_price(product.price) }}</span>
-                {% if product.compare_price and product.compare_price|float > product.price|float %}
-                    <span style="text-decoration: line-through; color: var(--text-muted, #999); font-size: 14px; margin-left: 8px;">{{ format_price(product.compare_price) }}</span>
-                {% endif %}
-            </div>
-            <button onclick="event.stopPropagation(); addToCart('{{ product.id }}', 1, this)"
-                    class="btn-add-to-cart">
-                {{ t.add_to_cart }}
-            </button>
-            <a href="{{ url_for('customer.product_detail', product_id=product.id) }}" style="display: block; text-align: center; margin-top: 10px; color: var(--text-muted, #666); text-decoration: none; font-size: 14px; position: relative; z-index: 2;" onclick="event.stopPropagation();">{{ t.view_details }}</a>
+        <div class="pc-body">
+            <p class="pc-name">{{ product_name(product) }}</p>
+            <span class="pc-price">{{ format_price(product.price) }}</span>
+            {% if disc > 0 %}<span class="pc-compare">{{ format_price(product.compare_price) }}</span>{% endif %}
         </div>
-    </div>
+    </a>
     {% endfor %}
 </div>
 
@@ -665,39 +685,26 @@
 <h2 style="margin-top: 40px;">{{ t.new_arrivals }}</h2>
 <div class="products-grid">
     {% for product in new_products %}
-    <div class="product-card" data-product-id="{{ product.id }}">
-        <div style="height: 200px; background: var(--bg-hover, #f5f5f5); display: flex; align-items: center; justify-content: center; position: relative;">
+    {% set disc = ((product.compare_price|float - product.price|float) / product.compare_price|float * 100)|round|int if (product.compare_price and product.compare_price|float > product.price|float) else 0 %}
+    <a href="{{ url_for('customer.product_detail', product_id=product.id) }}" class="product-card" data-product-id="{{ product.id }}">
+        <div class="pc-img">
             {% if product.thumbnail and product.thumbnail != '' %}
-                <img src="{{ url_for('static', filename=product.thumbnail) }}" alt="{{ product_name(product) }}" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy"
-                     onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'font-size:64px;\'>🪑</div>'">
+                <img src="{{ url_for('static', filename=product.thumbnail) }}" alt="{{ product_name(product) }}" loading="lazy"
+                     onerror="this.onerror=null;this.style.display='none';this.parentElement.querySelector('.pc-fallback').style.display='flex';">
+                <div class="pc-fallback" style="display:none;position:absolute;inset:0;align-items:center;justify-content:center;font-size:36px;">🪑</div>
             {% else %}
-                <div style="font-size: 64px;">🪑</div>
+                <div style="display:flex;align-items:center;justify-content:center;height:100%;font-size:36px;">🪑</div>
             {% endif %}
-            {% if product.compare_price and product.compare_price|float > product.price|float %}
-                {% set discount = ((product.compare_price|float - product.price|float) / product.compare_price|float * 100)|round|int %}
-                <span style="position: absolute; top: 10px; right: 10px; background: #f44336; color: white; padding: 5px 10px; border-radius: 20px; font-size: 12px; font-weight: bold;">
-                    -{{ discount }}%
-                </span>
-            {% endif %}
-            <span style="position: absolute; top: 10px; left: 10px; background: #4caf50; color: white; padding: 5px 10px; border-radius: 20px; font-size: 11px; font-weight: bold;">
-                🆕 NEW
-            </span>
+            {% if disc > 0 %}<span class="pc-badge pc-badge-sale">-{{ disc }}%</span>{% endif %}
+            <span class="pc-badge pc-badge-new">NEW</span>
+            <button class="pc-cart-btn" onclick="event.preventDefault();event.stopPropagation();addToCart('{{ product.id }}',1,this)" title="{{ t.add_to_cart }}">🛒</button>
         </div>
-        <div style="padding: 15px;">
-            <h3 style="font-size: 16px; margin-bottom: 5px; color: var(--text-color, #333);">{{ product_name(product) }}</h3>
-            <div class="price-row" style="margin: 10px 0;">
-                <span style="font-size: 20px; font-weight: bold; color: #1a7a4a;">{{ format_price(product.price) }}</span>
-                {% if product.compare_price and product.compare_price|float > product.price|float %}
-                    <span style="text-decoration: line-through; color: var(--text-muted, #999); font-size: 14px; margin-left: 8px;">{{ format_price(product.compare_price) }}</span>
-                {% endif %}
-            </div>
-            <button onclick="event.stopPropagation(); addToCart('{{ product.id }}', 1, this)"
-                    class="btn-add-to-cart">
-                {{ t.add_to_cart }}
-            </button>
-            <a href="{{ url_for('customer.product_detail', product_id=product.id) }}" style="display: block; text-align: center; margin-top: 10px; color: var(--text-muted, #666); text-decoration: none; font-size: 14px; position: relative; z-index: 2;" onclick="event.stopPropagation();">{{ t.view_details }}</a>
+        <div class="pc-body">
+            <p class="pc-name">{{ product_name(product) }}</p>
+            <span class="pc-price">{{ format_price(product.price) }}</span>
+            {% if disc > 0 %}<span class="pc-compare">{{ format_price(product.compare_price) }}</span>{% endif %}
         </div>
-    </div>
+    </a>
     {% endfor %}
 </div>
 {% endif %}
@@ -836,40 +843,25 @@
     </h2>
     <div class="products-grid">
         {% for product in recently_viewed_products %}
-        <div class="product-card" data-product-id="{{ product.id }}"
-             onclick="if(!event.target.closest('button') && !event.target.closest('a')) window.location.href='{{ url_for('customer.product_detail', product_id=product.id) }}'">
-            <div style="height: 200px; background: var(--bg-hover, #f5f5f5); display:flex; align-items:center; justify-content:center; position:relative;">
+        {% set disc = ((product.compare_price|float - product.price|float) / product.compare_price|float * 100)|round|int if (product.compare_price and product.compare_price|float > product.price|float) else 0 %}
+        <a href="{{ url_for('customer.product_detail', product_id=product.id) }}" class="product-card" data-product-id="{{ product.id }}">
+            <div class="pc-img">
                 {% if product.thumbnail and product.thumbnail != '' %}
-                    <img src="{{ url_for('static', filename=product.thumbnail) }}" alt="{{ product_name(product) }}"
-                         style="width:100%; height:100%; object-fit:cover;" loading="lazy"
-                         onerror="this.onerror=null; this.parentElement.innerHTML='<div style=\'font-size:64px;\'>🪑</div>'">
+                    <img src="{{ url_for('static', filename=product.thumbnail) }}" alt="{{ product_name(product) }}" loading="lazy"
+                         onerror="this.onerror=null;this.style.display='none';this.parentElement.querySelector('.pc-fallback').style.display='flex';">
+                    <div class="pc-fallback" style="display:none;position:absolute;inset:0;align-items:center;justify-content:center;font-size:36px;">🪑</div>
                 {% else %}
-                    <div style="font-size:64px;">🪑</div>
+                    <div style="display:flex;align-items:center;justify-content:center;height:100%;font-size:36px;">🪑</div>
                 {% endif %}
-                {% if product.compare_price and product.compare_price|float > product.price|float %}
-                    {% set discount = ((product.compare_price|float - product.price|float) / product.compare_price|float * 100)|round|int %}
-                    <span style="position:absolute; top:10px; right:10px; background:#f44336; color:white; padding:5px 10px; border-radius:20px; font-size:12px; font-weight:bold;">
-                        -{{ discount }}%
-                    </span>
-                {% endif %}
+                {% if disc > 0 %}<span class="pc-badge pc-badge-sale">-{{ disc }}%</span>{% endif %}
+                <button class="pc-cart-btn" onclick="event.preventDefault();event.stopPropagation();addToCart('{{ product.id }}',1,this)" title="{{ t.add_to_cart }}">🛒</button>
             </div>
-            <div style="padding:15px;">
-                <h3 style="font-size:16px; margin-bottom:5px; color:var(--text-color,#333);">{{ product_name(product) }}</h3>
-                <div class="price-row" style="margin:10px 0;">
-                    <span style="font-size:20px; font-weight:bold; color:#1a7a4a;">{{ format_price(product.price) }}</span>
-                    {% if product.compare_price and product.compare_price|float > product.price|float %}
-                        <span style="text-decoration:line-through; color:var(--text-muted,#999); font-size:14px; margin-left:8px;">{{ format_price(product.compare_price) }}</span>
-                    {% endif %}
-                </div>
-                <button onclick="event.stopPropagation(); addToCart('{{ product.id }}', 1, this)"
-                        class="btn-add-to-cart">
-                    {{ t.add_to_cart }}
-                </button>
-                <a href="{{ url_for('customer.product_detail', product_id=product.id) }}"
-                   style="display:block; text-align:center; margin-top:10px; color:var(--text-muted,#666); text-decoration:none; font-size:14px;"
-                   onclick="event.stopPropagation();">{{ t.view_details }}</a>
+            <div class="pc-body">
+                <p class="pc-name">{{ product_name(product) }}</p>
+                <span class="pc-price">{{ format_price(product.price) }}</span>
+                {% if disc > 0 %}<span class="pc-compare">{{ format_price(product.compare_price) }}</span>{% endif %}
             </div>
-        </div>
+        </a>
         {% endfor %}
     </div>
 </div>
@@ -1003,16 +995,7 @@
         video.addEventListener('ended', () => fullscreenDiv.remove());
     }
     
-    // Product card click handler
-    document.querySelectorAll('.product-card').forEach(card => {
-        card.addEventListener('click', function(e) {
-            if (e.target.closest('.btn-add-to-cart') || e.target.closest('a')) {
-                return;
-            }
-            const link = this.querySelector('a[href^="/product/"]');
-            if (link) window.location.href = link.getAttribute('href');
-        });
-    });
+    // Product cards are now <a> tags — no custom click handler needed
     
     // Make playFullscreen globally available
     window.playFullscreen = playFullscreen;
