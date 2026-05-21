@@ -735,7 +735,7 @@
 {% endblock %}
 
 {% block extra_js %}
-<script src="https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.min.js"></script>
+<script src="https://unpkg.com/three@0.161.0/build/three.min.js" crossorigin="anonymous"></script>
 <script>
 const PI   = { Fajr:'🌙', Dhuhr:'☀️', Asr:'🌤️', Maghrib:'🌅', Isha:'🌙' };
 const PORD = ['Fajr','Dhuhr','Asr','Maghrib','Isha'];
@@ -991,7 +991,8 @@ function loadPrayerTimes(lat, lng) {
 
 function loadQibla(lat, lng) {
     fetch(`/api/islamic/qibla-direction?lat=${lat}&lng=${lng}`)
-        .then(r=>r.json())
+        .then(r=>{ if(!r.ok) throw new Error('HTTP '+r.status); return r.text(); })
+        .then(txt=>{ if(!txt||!txt.trim()) throw new Error('empty'); return JSON.parse(txt); })
         .then(data=>{
             if (!data.success) return;
             _qbear = data.bearing;
@@ -1160,6 +1161,11 @@ function playAzan(name) {
 
 let _scene,_cam,_rend,_cgrp,_ngrp;
 function initCompass() {
+    if (typeof THREE === 'undefined') {
+        document.getElementById('compass-wrapper').innerHTML =
+            '<div style="color:#c9a84c;font-size:13px;padding:40px 0;text-align:center">3D compass unavailable — script failed to load</div>';
+        return;
+    }
     const w=document.getElementById('compass-wrapper');
     const W=w.offsetWidth, H=w.offsetHeight;
     _scene=new THREE.Scene();
@@ -1236,8 +1242,10 @@ function loadCalendar() {
     document.getElementById('cal-mlbl').textContent=`${MN[_cMonth-1]} ${_cYear}`;
     document.getElementById('cdetail').classList.remove('vis');
     fetch(`/api/islamic/monthly-prayer-times?lat=${_lat}&lng=${_lng}&year=${_cYear}&month=${_cMonth}`)
-        .then(r=>r.json())
-        .then(data=>{ if(!data.success) return; _cData=data.days; renderGrid(data.days); document.getElementById('export-btn').disabled=false; });
+        .then(r=>{ if(!r.ok) throw new Error('HTTP '+r.status); return r.text(); })
+        .then(txt=>{ if(!txt||!txt.trim()) throw new Error('empty'); return JSON.parse(txt); })
+        .then(data=>{ if(!data.success) return; _cData=data.days; renderGrid(data.days); document.getElementById('export-btn').disabled=false; })
+        .catch(()=>{});
 }
 
 function renderGrid(days) {
@@ -1314,7 +1322,8 @@ function qFmtTime(s) {
 
 function qLoadSurahs() {
     fetch('/api/quran/surahs')
-        .then(r=>r.json())
+        .then(r=>{ if(!r.ok) throw new Error('HTTP '+r.status); return r.text(); })
+        .then(txt=>{ if(!txt||!txt.trim()) throw new Error('empty'); return JSON.parse(txt); })
         .then(data=>{
             if (!data.success) return;
             _qSurahs   = data.surahs;
@@ -1367,7 +1376,8 @@ function qOpenSurah(num) {
     document.getElementById('ayah-list').innerHTML='<div class="ayah-loading">Loading…</div>';
     _qCurrentSurah = num;
     fetch(`/api/quran/surah/${num}?reciter=${_qReciter}`)
-        .then(r=>r.json())
+        .then(r=>{ if(!r.ok) throw new Error('HTTP '+r.status); return r.text(); })
+        .then(txt=>{ if(!txt||!txt.trim()) throw new Error('empty'); return JSON.parse(txt); })
         .then(data=>{
             if (!data.success) throw new Error(data.error||'Failed');
             document.getElementById('qrt-arabic').textContent = data.arabic_name;
@@ -1400,7 +1410,8 @@ function qRenderAyahs(ayahs) {
 function qFetchAndRetryText(num) {
     setTimeout(()=>{
         fetch(`/api/quran/surah/${num}?reciter=${_qReciter}`)
-            .then(r=>r.json())
+            .then(r=>{ if(!r.ok) throw new Error('HTTP '+r.status); return r.text(); })
+            .then(txt=>{ if(!txt||!txt.trim()) throw new Error('empty'); return JSON.parse(txt); })
             .then(data=>{
                 if (data.success && data.has_text && data.ayahs.length) qRenderAyahs(data.ayahs);
             })
