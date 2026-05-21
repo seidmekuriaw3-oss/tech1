@@ -36,31 +36,32 @@
         box-shadow: 0 2px 8px rgba(0,0,0,0.4);
     }
 
-    /* ── VIDEO SLIDE: side-by-side layout ── */
+    /* ── VIDEO SLIDE: full-cover video with overlay text ── */
     .slider-slide.has-video {
-        flex-direction: column;
+        position: relative !important;
         padding: 0 !important;
-        align-items: stretch !important;
-        justify-content: flex-start !important;
-        min-height: 260px;
+        min-height: 300px;
+        overflow: hidden;
     }
-    /* Remove old full-slide overlay */
+    /* Remove old gradient bg for video slides */
     .slider-slide.has-video::before { display: none !important; }
 
-    /* Video column */
+    /* Video fills the whole slide */
     .ad-video-col {
-        position: relative;
-        flex: 1 1 auto;
-        min-height: 200px;
+        position: absolute !important;
+        inset: 0;
+        width: 100%;
+        height: 100%;
         overflow: hidden;
         background: #000;
+        z-index: 1;
     }
 
-    /* Play-zone covers the video column */
+    /* Play-zone covers the video */
     .video-click-zone {
         position: absolute;
         inset: 0;
-        z-index: 2;
+        z-index: 3;
         cursor: pointer;
         display: flex;
         align-items: center;
@@ -82,26 +83,32 @@
         background: rgba(255,255,255,0.38);
     }
 
-    /* Text column (next to video) */
+    /* Text overlay at the bottom of the video */
     .ad-text-col {
+        position: absolute;
+        bottom: 0; left: 0; right: 0;
+        z-index: 2;
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
+        justify-content: flex-end;
         text-align: center;
-        padding: 18px 20px;
-        background: linear-gradient(160deg, #0f5232, #0f5232);
+        padding: 40px 20px 18px;
+        background: linear-gradient(to top, rgba(0,0,0,0.72) 0%, transparent 100%);
         color: white;
-        gap: 10px;
+        gap: 6px;
+        pointer-events: none;
     }
+    .ad-text-col a { pointer-events: all; }
     .ad-text-col h3 {
         font-size: 18px; font-weight: 800; margin: 0;
-        text-shadow: 0 2px 6px rgba(0,0,0,0.35);
+        text-shadow: 0 2px 6px rgba(0,0,0,0.5);
         line-height: 1.3;
     }
     .ad-text-col p {
         font-size: 13px; opacity: 0.92; margin: 0;
         line-height: 1.5; max-width: 280px;
+        text-shadow: 0 1px 4px rgba(0,0,0,0.5);
     }
 
     /* ── ADS SHOW/HIDE (ID selectors = highest CSS specificity, beat all class rules) ── */
@@ -234,17 +241,18 @@
         box-shadow: 0 4px 14px rgba(0,0,0,0.2);
     }
     
-    /* Products Grid - Mobile: 2, Desktop: 6 */
+    /* Products Grid - Mobile: 4, Desktop: 6 */
     .products-grid {
         display: grid !important;
-        gap: 25px !important;
+        gap: 10px !important;
         margin-top: 20px !important;
-        grid-template-columns: repeat(2, 1fr) !important;
+        grid-template-columns: repeat(4, 1fr) !important;
     }
     
     /* Tablet and Desktop: 6 columns */
     @media (min-width: 768px) {
         .products-grid {
+            gap: 25px !important;
             grid-template-columns: repeat(6, 1fr) !important;
         }
     }

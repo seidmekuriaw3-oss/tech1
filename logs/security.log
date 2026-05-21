@@ -19070,3 +19070,9 @@ TypeError: Object of type Undefined is not JSON serializable
 2026-05-19 15:30:11,184 - app - WARNING - Slow request: GET /api/quran/surah/1 - 4.89s
 2026-05-20 16:33:20,933 - app - WARNING - 404 Error: http://5b931a64-c673-4e1d-b62a-5db29a9d5dcc-00-1wyh1217hsnxd.riker.replit.dev/favicon.ico
 2026-05-21 05:36:35,466 - app - WARNING - 404 Error: http://5b931a64-c673-4e1d-b62a-5db29a9d5dcc-00-1wyh1217hsnxd.riker.replit.dev/favicon.ico
+2026-05-21 09:44:48,224 - app - WARNING - 404 Error: http://020666b5-c488-4be7-8cb1-9714ff798901-00-258igdsekzo0w.kirk.replit.dev/favicon.ico
+2026-05-21 09:47:29,299 - app - WARNING - 404 Error: http://020666b5-c488-4be7-8cb1-9714ff798901-00-258igdsekzo0w.kirk.replit.dev/static/images/logo.svg
+2026-05-21 09:47:36,933 - app - WARNING - 404 Error: http://020666b5-c488-4be7-8cb1-9714ff798901-00-258igdsekzo0w.kirk.replit.dev/favicon.ico
+2026-05-21 09:53:33,244 - app - WARNING - Slow request: POST /admin/products/edit/1 - 10.69s
+2026-05-21 09:57:59,027 - app - WARNING - Slow request: POST /admin/ads/create - 45.08s
+2026-05-21 09:58:07,381 - app - WARNING - Slow request: POST /admin/ads/create - 48.84s
