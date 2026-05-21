@@ -38,6 +38,23 @@
             </div>
         {% endif %}
         
+        {% if product.is_new %}
+        <div class="na-ribbon-wrap">
+            <span class="na-ribbon">
+                {% if lang == 'am' %}✨ አዲስ{% elif lang == 'ar' %}✨ جديد{% else %}✨ NEW{% endif %}
+            </span>
+        </div>
+        {% endif %}
+
+        {% if product.is_new %}
+        <script>
+        (function(){
+            var c = document.currentScript.closest('.product-card');
+            if(c) c.classList.add('is-new-arrival');
+        })();
+        </script>
+        {% endif %}
+
         <!-- Discount Badge -->
         {% set price = product.price|float %}
         {% set compare_price = product.compare_price|float if product.compare_price else 0 %}
