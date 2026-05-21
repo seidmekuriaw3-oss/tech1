@@ -368,7 +368,7 @@
             if (window.showLoading) window.showLoading(true);
             
             fetch('{{ url_for('admin.ad_delete', aid=0) }}'.replace('/0', '/' + adId), {
-                method: 'DELETE',
+                method: 'POST',
                 headers: {
                     'X-Requested-With': 'XMLHttpRequest',
                     'Content-Type': 'application/json'

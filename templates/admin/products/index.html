@@ -518,7 +518,7 @@
         const callback = () => {
             showLoading(true);
             fetch('{{ url_for('admin.product_delete', pid=0) }}'.replace('/0', '/' + productId), {
-                method: 'DELETE',
+                method: 'POST',
                 headers: {
                     'X-Requested-With': 'XMLHttpRequest',
                     'Content-Type': 'application/json'

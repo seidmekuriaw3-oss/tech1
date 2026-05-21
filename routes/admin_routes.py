@@ -329,7 +329,7 @@ def product_edit(pid):
         return redirect(url_for('admin.products'))
 
 
-@admin_bp.route('/products/delete/<int:pid>', methods=['GET', 'DELETE'])
+@admin_bp.route('/products/delete/<int:pid>', methods=['GET', 'POST', 'DELETE'])
 @admin_required
 def product_delete(pid):
     try:
@@ -337,12 +337,12 @@ def product_delete(pid):
         cursor = conn.cursor()
         cursor.execute("UPDATE products SET is_active = 0 WHERE id = ?", (pid,))
         conn.commit()
-        if request.method == 'DELETE' or request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+        if request.method in ('DELETE', 'POST') or request.headers.get('X-Requested-With') == 'XMLHttpRequest':
             return jsonify({'success': True, 'message': 'Product deleted successfully'})
         flash('Product deleted successfully!', 'success')
     except Exception as e:
         print(f"Product delete error: {e}")
-        if request.method == 'DELETE' or request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+        if request.method in ('DELETE', 'POST') or request.headers.get('X-Requested-With') == 'XMLHttpRequest':
             return jsonify({'success': False, 'error': str(e)}), 500
         flash('Error deleting product.', 'error')
     return redirect(url_for('admin.products'))
@@ -815,7 +815,7 @@ def ad_toggle(aid):
     return redirect(url_for('admin.ads'))
 
 
-@admin_bp.route('/ads/delete/<int:aid>', methods=['GET', 'DELETE'])
+@admin_bp.route('/ads/delete/<int:aid>', methods=['GET', 'POST', 'DELETE'])
 @admin_required
 def ad_delete(aid):
     try:
@@ -823,12 +823,12 @@ def ad_delete(aid):
         cursor = conn.cursor()
         cursor.execute("DELETE FROM advertisements WHERE id = ?", (aid,))
         conn.commit()
-        if request.method == 'DELETE' or request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+        if request.method in ('DELETE', 'POST') or request.headers.get('X-Requested-With') == 'XMLHttpRequest':
             return jsonify({'success': True, 'message': 'Advertisement deleted successfully'})
         flash('Advertisement deleted successfully!', 'success')
     except Exception as e:
         print(f"Ad delete error: {e}")
-        if request.method == 'DELETE' or request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+        if request.method in ('DELETE', 'POST') or request.headers.get('X-Requested-With') == 'XMLHttpRequest':
             return jsonify({'success': False, 'error': str(e)}), 500
         flash('Error deleting ad.', 'error')
     return redirect(url_for('admin.ads'))
