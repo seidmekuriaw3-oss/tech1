@@ -370,26 +370,31 @@
         display:block; margin-bottom:5px;
     }
     .idc-head p { font-size:13px; color:#6a8f70; margin:0; }
-    .idc-grid {
-        display:grid; grid-template-columns:1fr 1fr;
-        gap:16px; max-width:880px; margin:0 auto 26px;
+    .idc-slider-outer {
+        position:relative; max-width:520px; margin:0 auto 24px;
+        overflow:hidden; border-radius:20px;
+    }
+    .idc-slider-track {
+        display:flex;
+        transition:transform .52s cubic-bezier(.4,0,.2,1);
+        will-change:transform;
     }
     .idc-card {
-        background:#fff; border-radius:18px; padding:20px 18px;
-        box-shadow:0 2px 18px rgba(26,122,74,.07);
-        border:1px solid rgba(26,122,74,.1);
+        min-width:100%; width:100%;
+        background:#fff; border-radius:20px; padding:26px 22px 20px;
+        box-shadow:0 4px 24px rgba(26,122,74,.1);
+        border:1px solid rgba(26,122,74,.12);
         display:flex; flex-direction:column;
-        transition:transform .22s,box-shadow .22s;
+        box-sizing:border-box;
     }
-    .idc-card:hover { transform:translateY(-3px); box-shadow:0 8px 28px rgba(26,122,74,.13); }
-    .idc-card-head { display:flex; align-items:center; gap:9px; margin-bottom:14px; }
+    .idc-card-head { display:flex; align-items:center; gap:9px; margin-bottom:16px; }
     .idc-card-icon {
-        width:36px; height:36px; border-radius:10px;
+        width:38px; height:38px; border-radius:11px;
         background:linear-gradient(135deg,#1a7a4a,#0f5232);
         display:flex; align-items:center; justify-content:center;
-        font-size:17px; flex-shrink:0;
+        font-size:18px; flex-shrink:0;
     }
-    .idc-card-lbl { font-size:11px; font-weight:700; color:#6a8f70; text-transform:uppercase; letter-spacing:1px; }
+    .idc-card-lbl { font-size:12px; font-weight:700; color:#6a8f70; text-transform:uppercase; letter-spacing:1px; }
     .idc-card-link {
         margin-top:auto; padding-top:12px;
         font-size:12px; color:#1a7a4a; font-weight:700;
@@ -397,6 +402,31 @@
         border-top:1px solid #edf6ef;
     }
     .idc-card-link:hover { color:#0f5232; }
+    .idc-slider-arr {
+        position:absolute; top:50%; transform:translateY(-50%);
+        width:34px; height:34px; border-radius:50%;
+        background:rgba(255,255,255,.92); border:1px solid rgba(26,122,74,.2);
+        color:#1a7a4a; font-size:18px; cursor:pointer;
+        display:flex; align-items:center; justify-content:center;
+        box-shadow:0 2px 10px rgba(0,0,0,.1); z-index:10;
+        transition:all .2s; user-select:none;
+    }
+    .idc-slider-arr:hover { background:#1a7a4a; color:#fff; }
+    .idc-slider-arr.left  { left:10px; }
+    .idc-slider-arr.right { right:10px; }
+    .idc-slider-dots {
+        display:flex; align-items:center; justify-content:center;
+        gap:8px; margin-bottom:20px;
+    }
+    .idc-slider-dot {
+        width:8px; height:8px; border-radius:50%;
+        background:rgba(26,122,74,.2); border:1px solid rgba(26,122,74,.2);
+        cursor:pointer; transition:all .25s;
+    }
+    .idc-slider-dot.on {
+        background:#1a7a4a; border-color:#1a7a4a;
+        transform:scale(1.3); box-shadow:0 0 6px rgba(26,122,74,.4);
+    }
 
     .idc-prayer-list { display:flex; flex-direction:column; gap:6px; flex:1; }
     .idc-prayer-row {
@@ -447,7 +477,6 @@
 
     @media (max-width:640px) {
         .idc-wrap { padding:28px 14px 24px; }
-        .idc-grid { grid-template-columns:1fr; }
         .idc-hijri-day { font-size:48px; }
         .idc-compass-svg { width:88px; height:88px; }
     }
@@ -673,102 +702,114 @@
         <p>Prayer times, Hijri calendar, Qibla direction & daily Qur'an — for our Muslim customers</p>
     </div>
 
-    <div class="idc-grid">
+    <div class="idc-slider-outer" id="idc-slider-outer">
+        <button class="idc-slider-arr left" onclick="idcNav(-1)">&#8249;</button>
+        <button class="idc-slider-arr right" onclick="idcNav(1)">&#8250;</button>
 
-        <div class="idc-card">
-            <div class="idc-card-head">
-                <div class="idc-card-icon">🕐</div>
-                <span class="idc-card-lbl">Prayer Times</span>
-            </div>
-            <div class="idc-prayer-list" id="idc-prayer-list">
-                <div style="font-size:12px;color:#a0b8a4;text-align:center;padding:14px 0;">Loading…</div>
-            </div>
-            <a href="{{ url_for('islamic.islamic_suite') }}#prayer" class="idc-card-link">
-                Full Prayer Schedule →
-            </a>
-        </div>
+        <div class="idc-slider-track" id="idc-track">
 
-        <div class="idc-card">
-            <div class="idc-card-head">
-                <div class="idc-card-icon">📅</div>
-                <span class="idc-card-lbl">Hijri Calendar</span>
+            <div class="idc-card">
+                <div class="idc-card-head">
+                    <div class="idc-card-icon">🕐</div>
+                    <span class="idc-card-lbl">Prayer Times</span>
+                </div>
+                <div class="idc-prayer-list" id="idc-prayer-list">
+                    <div style="font-size:12px;color:#a0b8a4;text-align:center;padding:14px 0;">Loading…</div>
+                </div>
+                <a href="{{ url_for('islamic.islamic_suite') }}#prayer" class="idc-card-link">
+                    Full Prayer Schedule →
+                </a>
             </div>
-            <div class="idc-hijri-body">
-                <div class="idc-hijri-day">{{ hijri_home.day }}</div>
-                <div class="idc-hijri-month">{{ hijri_home.month }}</div>
-                <div class="idc-hijri-year">{{ hijri_home.year }} AH</div>
-                {% if next_event %}
-                <div class="idc-next-event">
-                    {{ next_event.icon }}
-                    {% if next_event.is_today %}
-                        <strong>{{ next_event.name }}</strong> — Today!
-                    {% elif next_event.days_away == 1 %}
-                        <strong>{{ next_event.name }}</strong> — Tomorrow
-                    {% else %}
-                        <strong>{{ next_event.name }}</strong> in {{ next_event.days_away }} days
+
+            <div class="idc-card">
+                <div class="idc-card-head">
+                    <div class="idc-card-icon">📅</div>
+                    <span class="idc-card-lbl">Hijri Calendar</span>
+                </div>
+                <div class="idc-hijri-body">
+                    <div class="idc-hijri-day">{{ hijri_home.day }}</div>
+                    <div class="idc-hijri-month">{{ hijri_home.month }}</div>
+                    <div class="idc-hijri-year">{{ hijri_home.year }} AH</div>
+                    {% if next_event %}
+                    <div class="idc-next-event">
+                        {{ next_event.icon }}
+                        {% if next_event.is_today %}
+                            <strong>{{ next_event.name }}</strong> — Today!
+                        {% elif next_event.days_away == 1 %}
+                            <strong>{{ next_event.name }}</strong> — Tomorrow
+                        {% else %}
+                            <strong>{{ next_event.name }}</strong> in {{ next_event.days_away }} days
+                        {% endif %}
+                    </div>
                     {% endif %}
                 </div>
-                {% endif %}
+                <a href="{{ url_for('islamic.islamic_suite') }}#calendar" class="idc-card-link">
+                    Full Hijri Calendar →
+                </a>
             </div>
-            <a href="{{ url_for('islamic.islamic_suite') }}#calendar" class="idc-card-link">
-                Full Hijri Calendar →
-            </a>
-        </div>
 
-        <div class="idc-card">
-            <div class="idc-card-head">
-                <div class="idc-card-icon">🧭</div>
-                <span class="idc-card-lbl">Qibla Direction</span>
-            </div>
-            <div class="idc-compass-body">
-                <svg class="idc-compass-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="50" cy="50" r="47" fill="#f7fbf8" stroke="#d4ead8" stroke-width="1.5"/>
-                    <circle cx="50" cy="50" r="38" fill="none" stroke="#edf6ef" stroke-width="1"/>
-                    <line x1="50" y1="12" x2="50" y2="18" stroke="#d4ead8" stroke-width="1.5"/>
-                    <line x1="88" y1="50" x2="82" y2="50" stroke="#d4ead8" stroke-width="1"/>
-                    <line x1="50" y1="88" x2="50" y2="82" stroke="#d4ead8" stroke-width="1"/>
-                    <line x1="12" y1="50" x2="18" y2="50" stroke="#d4ead8" stroke-width="1"/>
-                    <text x="50" y="11" text-anchor="middle" font-size="9" font-weight="700" fill="#1a7a4a" font-family="system-ui,sans-serif">N</text>
-                    <text x="91" y="53" text-anchor="middle" font-size="7" fill="#a0c0a8" font-family="system-ui,sans-serif">E</text>
-                    <text x="50" y="97" text-anchor="middle" font-size="7" fill="#a0c0a8" font-family="system-ui,sans-serif">S</text>
-                    <text x="9" y="53" text-anchor="middle" font-size="7" fill="#a0c0a8" font-family="system-ui,sans-serif">W</text>
-                    <g id="idc-compass-needle" style="transform-origin:50px 50px;transform:rotate(4.6deg)">
-                        <polygon points="50,14 46,50 54,50" fill="#1a7a4a"/>
-                        <polygon points="50,86 46,50 54,50" fill="#d4ead8"/>
-                        <circle cx="50" cy="50" r="4" fill="white" stroke="#1a7a4a" stroke-width="1.5"/>
-                    </g>
-                </svg>
-                <div class="idc-bearing" id="idc-bearing-val">4.6°</div>
-                <div class="idc-bearing-sub" id="idc-bearing-sub">from Addis Ababa · North</div>
-            </div>
-            <a href="{{ url_for('islamic.islamic_suite') }}#qibla" class="idc-card-link">
-                Interactive Compass →
-            </a>
-        </div>
-
-        <div class="idc-card">
-            <div class="idc-card-head">
-                <div class="idc-card-icon">📖</div>
-                <span class="idc-card-lbl">Daily Ayah</span>
-            </div>
-            <div class="idc-ayah-body">
-                {% if daily_ayah and daily_ayah.text %}
-                <div class="idc-ayah-text">{{ daily_ayah.text }}</div>
-                <div class="idc-ayah-ref">
-                    <span>📖</span>
-                    <span>{{ daily_ayah.surah_name }} — {{ daily_ayah.surah_num }}:{{ daily_ayah.ayah_num }}</span>
+            <div class="idc-card">
+                <div class="idc-card-head">
+                    <div class="idc-card-icon">🧭</div>
+                    <span class="idc-card-lbl">Qibla Direction</span>
                 </div>
-                {% else %}
-                <div style="font-size:13px;color:#a0b8a4;text-align:center;padding:20px 0;flex:1;">
-                    بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ
+                <div class="idc-compass-body">
+                    <svg class="idc-compass-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="50" cy="50" r="47" fill="#f7fbf8" stroke="#d4ead8" stroke-width="1.5"/>
+                        <circle cx="50" cy="50" r="38" fill="none" stroke="#edf6ef" stroke-width="1"/>
+                        <line x1="50" y1="12" x2="50" y2="18" stroke="#d4ead8" stroke-width="1.5"/>
+                        <line x1="88" y1="50" x2="82" y2="50" stroke="#d4ead8" stroke-width="1"/>
+                        <line x1="50" y1="88" x2="50" y2="82" stroke="#d4ead8" stroke-width="1"/>
+                        <line x1="12" y1="50" x2="18" y2="50" stroke="#d4ead8" stroke-width="1"/>
+                        <text x="50" y="11" text-anchor="middle" font-size="9" font-weight="700" fill="#1a7a4a" font-family="system-ui,sans-serif">N</text>
+                        <text x="91" y="53" text-anchor="middle" font-size="7" fill="#a0c0a8" font-family="system-ui,sans-serif">E</text>
+                        <text x="50" y="97" text-anchor="middle" font-size="7" fill="#a0c0a8" font-family="system-ui,sans-serif">S</text>
+                        <text x="9" y="53" text-anchor="middle" font-size="7" fill="#a0c0a8" font-family="system-ui,sans-serif">W</text>
+                        <g id="idc-compass-needle" style="transform-origin:50px 50px;transform:rotate(4.6deg)">
+                            <polygon points="50,14 46,50 54,50" fill="#1a7a4a"/>
+                            <polygon points="50,86 46,50 54,50" fill="#d4ead8"/>
+                            <circle cx="50" cy="50" r="4" fill="white" stroke="#1a7a4a" stroke-width="1.5"/>
+                        </g>
+                    </svg>
+                    <div class="idc-bearing" id="idc-bearing-val">4.6°</div>
+                    <div class="idc-bearing-sub" id="idc-bearing-sub">from Addis Ababa · North</div>
                 </div>
-                {% endif %}
+                <a href="{{ url_for('islamic.islamic_suite') }}#qibla" class="idc-card-link">
+                    Interactive Compass →
+                </a>
             </div>
-            <a href="{{ url_for('islamic.islamic_suite') }}#quran" class="idc-card-link">
-                Read Full Qur'an →
-            </a>
-        </div>
 
+            <div class="idc-card">
+                <div class="idc-card-head">
+                    <div class="idc-card-icon">📖</div>
+                    <span class="idc-card-lbl">Daily Ayah</span>
+                </div>
+                <div class="idc-ayah-body">
+                    {% if daily_ayah and daily_ayah.text %}
+                    <div class="idc-ayah-text">{{ daily_ayah.text }}</div>
+                    <div class="idc-ayah-ref">
+                        <span>📖</span>
+                        <span>{{ daily_ayah.surah_name }} — {{ daily_ayah.surah_num }}:{{ daily_ayah.ayah_num }}</span>
+                    </div>
+                    {% else %}
+                    <div style="font-size:13px;color:#a0b8a4;text-align:center;padding:20px 0;flex:1;">
+                        بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ
+                    </div>
+                    {% endif %}
+                </div>
+                <a href="{{ url_for('islamic.islamic_suite') }}#quran" class="idc-card-link">
+                    Read Full Qur'an →
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="idc-slider-dots" id="idc-dots">
+        <div class="idc-slider-dot on" onclick="idcGoTo(0)"></div>
+        <div class="idc-slider-dot" onclick="idcGoTo(1)"></div>
+        <div class="idc-slider-dot" onclick="idcGoTo(2)"></div>
+        <div class="idc-slider-dot" onclick="idcGoTo(3)"></div>
     </div>
 
     <div class="idc-cta">
@@ -908,11 +949,36 @@
             })
             .catch(function(){});
     }
+    var idcIdx = 0;
+    var idcTotal = 4;
+    var idcTimer;
+    function idcGoTo(n) {
+        idcIdx = (n + idcTotal) % idcTotal;
+        var track = document.getElementById('idc-track');
+        if (track) track.style.transform = 'translateX(-' + (idcIdx * 100) + '%)';
+        var dots = document.querySelectorAll('.idc-slider-dot');
+        dots.forEach(function(d, i) { d.classList.toggle('on', i === idcIdx); });
+    }
+    window.idcGoTo = idcGoTo;
+    window.idcNav = function(dir) {
+        clearInterval(idcTimer);
+        idcGoTo(idcIdx + dir);
+        idcTimer = setInterval(function(){ idcGoTo(idcIdx + 1); }, 3500);
+    };
     document.addEventListener('DOMContentLoaded', function() {
         if (document.getElementById('idc-prayer-list')) {
             loadPrayers();
             loadQibla();
         }
+        var outer = document.getElementById('idc-slider-outer');
+        if (!outer) return;
+        idcTimer = setInterval(function(){ idcGoTo(idcIdx + 1); }, 3500);
+        var tsx = 0;
+        outer.addEventListener('touchstart', function(e){ tsx = e.touches[0].clientX; }, {passive:true});
+        outer.addEventListener('touchend', function(e){
+            var dx = tsx - e.changedTouches[0].clientX;
+            if (Math.abs(dx) > 40) { clearInterval(idcTimer); idcGoTo(idcIdx + (dx > 0 ? 1 : -1)); idcTimer = setInterval(function(){ idcGoTo(idcIdx + 1); }, 3500); }
+        }, {passive:true});
     });
 })();
 
