@@ -3,15 +3,15 @@
 
 /* CSS Variables */
 :root {
-    --bottom-nav-bg: rgba(255, 255, 255, 0.98);
-    --bottom-nav-border: rgba(0, 0, 0, 0.05);
-    --bottom-nav-shadow: 0 -2px 20px rgba(0, 0, 0, 0.1);
-    --bottom-nav-active: linear-gradient(135deg, #1a7a4a, #0f5232);
-    --bottom-nav-hover-bg: rgba(26, 115, 232, 0.1);
-    --bottom-nav-text: #333;
-    --bottom-nav-text-light: #999;
-    --bottom-nav-badge: #f44336;
-    --bottom-nav-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --bottom-nav-bg: rgba(8,26,13,0.97);
+    --bottom-nav-border: rgba(201,168,76,0.25);
+    --bottom-nav-shadow: 0 -4px 30px rgba(0,0,0,0.5);
+    --bottom-nav-active: linear-gradient(135deg, #c9a84c, #a07832);
+    --bottom-nav-hover-bg: rgba(201,168,76,0.12);
+    --bottom-nav-text: rgba(255,255,255,0.6);
+    --bottom-nav-text-light: rgba(255,255,255,0.38);
+    --bottom-nav-badge: #ef4444;
+    --bottom-nav-transition: all 0.28s cubic-bezier(0.34,1.56,0.64,1);
 }
 
 /* Dark Mode Variables */

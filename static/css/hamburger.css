@@ -3,17 +3,17 @@
 
 /* CSS Variables */
 :root {
-    --menu-primary: #1a7a4a;
-    --menu-primary-dark: #0f5232;
-    --menu-primary-light: #2d9966;
-    --menu-bg: #ffffff;
-    --menu-text: #333333;
-    --menu-text-light: #666666;
-    --menu-hover: #f5f5f5;
-    --menu-border: #e0e0e0;
-    --menu-shadow: rgba(0, 0, 0, 0.15);
-    --menu-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --menu-overlay: rgba(0, 0, 0, 0.5);
+    --menu-primary: #145c2e;
+    --menu-primary-dark: #0a3d1f;
+    --menu-primary-light: #1f8045;
+    --menu-bg: #081a0d;
+    --menu-text: rgba(255,255,255,0.88);
+    --menu-text-light: rgba(255,255,255,0.55);
+    --menu-hover: rgba(201,168,76,0.12);
+    --menu-border: rgba(201,168,76,0.15);
+    --menu-shadow: rgba(0,0,0,0.6);
+    --menu-transition: all 0.28s cubic-bezier(0.34,1.56,0.64,1);
+    --menu-overlay: rgba(0,0,0,0.65);
 }
 
 /* Dark Mode */
