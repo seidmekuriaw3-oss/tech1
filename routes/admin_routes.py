@@ -185,29 +185,43 @@ def product_create():
             is_featured = 1 if request.form.get('is_featured') else 0
             is_new = 1 if request.form.get('is_new') else 0
 
+            from werkzeug.utils import secure_filename
+            upload_dir = 'static/uploads/products'
+            os.makedirs(upload_dir, exist_ok=True)
+
+            def save_upload(file_obj):
+                fname = secure_filename(file_obj.filename)
+                ext = fname.rsplit('.', 1)[1].lower() if '.' in fname else 'jpg'
+                unique = f"product_{uuid.uuid4().hex[:8]}.{ext}"
+                file_obj.save(os.path.join(upload_dir, unique))
+                return f'uploads/products/{unique}'
+
             image_filename = ''
             image = request.files.get('image')
             if image and image.filename:
-                from werkzeug.utils import secure_filename
-                filename = secure_filename(image.filename)
-                ext = filename.rsplit('.', 1)[1].lower() if '.' in filename else 'jpg'
-                unique_filename = f"product_{uuid.uuid4().hex[:8]}.{ext}"
-                upload_dir = 'static/uploads/products'
-                os.makedirs(upload_dir, exist_ok=True)
-                image.save(os.path.join(upload_dir, unique_filename))
-                image_filename = f'uploads/products/{unique_filename}'
+                image_filename = save_upload(image)
+
+            # Handle multiple extra gallery images
+            extra_images = request.files.getlist('extra_images')
+            gallery_paths = []
+            for extra in extra_images:
+                if extra and extra.filename:
+                    gallery_paths.append(save_upload(extra))
+
+            import json as _json
+            images_json = _json.dumps(gallery_paths) if gallery_paths else None
 
             cursor.execute("""
                 INSERT INTO products (
                     name, name_am, name_ar, name_en,
                     description, description_am, description_ar, description_en,
                     price, compare_price, stock_quantity, category_id,
-                    material, color, sku, is_featured, is_new, thumbnail, is_active
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)
+                    material, color, sku, is_featured, is_new, thumbnail, images, is_active
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)
             """, (name, name_am, name_ar, name_en,
                   description, description_am, description_ar, description_en,
                   price, compare_price, stock_quantity, category_id,
-                  material, color, sku, is_featured, is_new, image_filename))
+                  material, color, sku, is_featured, is_new, image_filename, images_json))
             conn.commit()
             flash('Product created successfully!', 'success')
             return redirect(url_for('admin.products'))

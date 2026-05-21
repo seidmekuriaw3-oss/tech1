@@ -19076,3 +19076,4 @@ TypeError: Object of type Undefined is not JSON serializable
 2026-05-21 09:53:33,244 - app - WARNING - Slow request: POST /admin/products/edit/1 - 10.69s
 2026-05-21 09:57:59,027 - app - WARNING - Slow request: POST /admin/ads/create - 45.08s
 2026-05-21 09:58:07,381 - app - WARNING - Slow request: POST /admin/ads/create - 48.84s
+2026-05-21 10:33:36,589 - app - WARNING - 404 Error: http://localhost:5000/favicon.ico
