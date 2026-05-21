@@ -321,8 +321,8 @@ class Ad:
             return db.execute(
                 """SELECT * FROM advertisements 
                    WHERE is_active = 1 
-                   AND (end_date IS NULL OR end_date > datetime('now'))
-                   AND (start_date IS NULL OR start_date <= datetime('now'))
+                   AND (end_date IS NULL OR end_date > NOW())
+                   AND (start_date IS NULL OR start_date <= NOW())
                    ORDER BY sort_order ASC, id DESC"""
             ).fetchall()
         except Exception as e:

@@ -804,12 +804,12 @@ def api_contact():
     cursor = db.cursor()
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS contacts (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            id SERIAL PRIMARY KEY,
             name TEXT NOT NULL,
             email TEXT NOT NULL,
             phone TEXT,
             message TEXT NOT NULL,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            created_at TIMESTAMP DEFAULT NOW()
         )
     """)
     
